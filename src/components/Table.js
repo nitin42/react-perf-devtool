@@ -1,7 +1,7 @@
-const React = require('../../extension/dependencies/react')
+const React = require("react");
 
-const TableHeader = require('./TableHeader')
-const TableData = require('./TableData')
+const TableHeader = require("./TableHeader");
+const TableData = require("./TableData");
 
 /**
  This component renders the table that contains the performance measures of React components.
@@ -10,10 +10,9 @@ function Table(props) {
   return (
     <table id="measures">
       <TableHeader />
-      {/* Use context here instead of passing props from Parent*/}
-      <TableData measures={props.perfData} />
+      <TableData measures={props.measures} />
     </table>
-  )
+  );
 }
 
-module.exports = Table
+module.exports = Table;

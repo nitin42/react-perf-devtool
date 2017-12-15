@@ -1,4 +1,4 @@
-const React = require('../../extension/dependencies/react')
+const React = require("react");
 
 /**
   This component renders the data (measures of each component)
@@ -25,10 +25,10 @@ function TableData(props) {
             <td>{measure.componentDidUpdate.totalTimeSpentMs}</td>
             <td>{measure.componentWillUnmount.totalTimeSpentMs}</td>
           </tr>
-        )
+        );
       })}
     </React.Fragment>
-  )
+  );
 }
 
-module.exports = TableData
+module.exports = TableData;

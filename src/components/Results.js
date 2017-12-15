@@ -1,27 +1,27 @@
-const React = require('../../extension/dependencies/react')
+const React = require("react");
 
-const getCommitChangesTime = require('../utils/commitChanges')
+const getCommitChangesTime = require("../utils/commitChanges");
 const {
   getCommitHostEffectsTime,
-  getTotalEffects,
-} = require('../utils/hostEffects')
-const { getLifecycleTime, getTotalMethods } = require('../utils/lifecycle')
+  getTotalEffects
+} = require("../utils/hostEffects");
+const { getLifecycleTime, getTotalMethods } = require("../utils/lifecycle");
 
-const getTotalTime = require('../utils/totalTime')
+const getTotalTime = require("../utils/totalTime");
 
 // Compute the total time
 function computeTotalTime(measures, componentTotalTime) {
-  let total = 0
+  let total = 0;
 
   {
-    total = total || 0
-    total += getTotalTime(getCommitChangesTime(measures))
-    total += getTotalTime(getCommitHostEffectsTime(measures))
-    total += getTotalTime(getLifecycleTime(measures))
-    total += Number(componentTotalTime)
+    total = total || 0;
+    total += getTotalTime(getCommitChangesTime(measures));
+    total += getTotalTime(getCommitHostEffectsTime(measures));
+    total += getTotalTime(getLifecycleTime(measures));
+    total += Number(componentTotalTime);
   }
 
-  return total
+  return total;
 }
 
 // Compute the results (host effects, lifecycle and committing change time)
@@ -33,8 +33,8 @@ function getResults(measures) {
       2
     ),
     totalLifecycleMethods: getTotalMethods(getLifecycleTime(measures)),
-    lifecycleTime: getTotalTime(getLifecycleTime(measures)).toFixed(2),
-  }
+    lifecycleTime: getTotalTime(getLifecycleTime(measures)).toFixed(2)
+  };
 }
 
 /**
@@ -47,44 +47,51 @@ function Results(props) {
       {props.loading ? (
         <h1
           style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: '20px',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "20px"
           }}
         >
           Collecting measures...
         </h1>
       ) : (
         <div>
-          <h4>Time taken by all the components: {props.totalTime} ms</h4>
-          <h4>
-            Committing changes took:{' '}
-            {getResults(props.rawMeasures).commitChangesTime} ms
-          </h4>
-          <h4>
-            Committing {getResults(props.rawMeasures).totalEffects} host
-            effects took: {getResults(props.rawMeasures).hostEffectsTime}{' '}
-            ms
-          </h4>
-          <h4>
-            Calling {getResults(props.rawMeasures).totalLifecycleMethods}{' '}
-            lifecycle methods took:{' '}
-            {getResults(props.rawMeasures).lifecycleTime}
-            ms
-          </h4>
-          <h4>
-            Total time:{' '}
-            {computeTotalTime(
-              props.rawMeasures,
-              props.totalTime
-            ).toFixed(2)}{' '}
-            ms
-          </h4>
+          <p>
+            Time taken by all the components:{" "}
+            <strong>{props.totalTime} ms</strong>
+          </p>
+          <p>
+            Committing changes took:{" "}
+            <strong>
+              {getResults(props.rawMeasures).commitChangesTime} ms
+            </strong>
+          </p>
+          <p>
+            Committing{" "}
+            <strong>{getResults(props.rawMeasures).totalEffects}</strong> host
+            effects took:{" "}
+            <strong>{getResults(props.rawMeasures).hostEffectsTime} ms</strong>
+          </p>
+          <p>
+            Calling{" "}
+            <strong>
+              {getResults(props.rawMeasures).totalLifecycleMethods}
+            </strong>{" "}
+            lifecycle methods took:{" "}
+            <strong>{getResults(props.rawMeasures).lifecycleTime} ms</strong>
+          </p>
+          <p>
+            Total time:{" "}
+            <strong>
+              {computeTotalTime(props.rawMeasures, props.totalTime).toFixed(2)}{" "}
+              ms
+            </strong>
+          </p>
         </div>
       )}
     </div>
-  )
+  );
 }
 
-module.exports = Results
+module.exports = Results;
