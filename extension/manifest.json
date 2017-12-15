@@ -1,21 +1,19 @@
 {
   "manifest_version": 2,
 
-  "name": "React Perf Tools",
-  "description": "Perf prototype",
+  "name": "React Performance Devtool",
+  "description": "Inspect performance of your React components.",
   "version": "1.0",
   "devtools_page": "devtools.html",
 
   "icons": {
-    "16": "./React-Perf.png",
-    "48": "./React-Perf.png",
-    "128": "./React-Perf.png"
+    "16": "./16.png",
+    "48": "./48.png",
+    "128": "./128.png"
   },
 
-  "permissions": [
-    "file:///*",
-    "http://*/*",
-    "https://*/*"
-  ],
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  "permissions": ["file:///*", "http://*/*", "https://*/*"],
+
+  "content_security_policy":
+    "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
