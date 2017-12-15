@@ -1,6 +1,6 @@
 chrome.devtools.panels.create(
   "React Performance",
-  "./icon/16.png",
+  "./icon/RP48.png",
   "load.html",
   function(panel) {
     console.log("Started!");
