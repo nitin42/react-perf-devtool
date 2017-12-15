@@ -7,9 +7,9 @@
   "devtools_page": "devtools.html",
 
   "icons": {
-    "16": "./16.png",
-    "48": "./48.png",
-    "128": "./128.png"
+    "16": "./icon/16.png",
+    "48": "./icon/48.png",
+    "128": "./icon/128.png"
   },
 
   "permissions": ["file:///*", "http://*/*", "https://*/*"],
