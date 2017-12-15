@@ -1,11 +1,10 @@
 {
   "name": "react-perf-panel",
   "version": "1.0.0",
-  "description": "A performance panel devtool for React",
-  "main": "index.js",
-  "files": [
-    "extension/build/react-perf-panel.production.js"
-  ],
+  "description":
+    "A performance panel chrome devtool extension for inspecting performance of React Components",
+  "main": "src/index.js",
+  "files": ["src", "extension/build/ReactPerfDevtool.js"],
   "author": "Nitin Tulswani",
   "license": "MIT",
   "dependencies": {
@@ -16,15 +15,22 @@
     "babel-core": "^6.26.0",
     "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
     "babel-preset-react-app": "^3.1.0",
+    "husky": "^0.14.3",
     "jest": "^21.2.1",
+    "lint-staged": "^6.0.0",
+    "prettier": "^1.9.2",
     "prop-types": "^15.6.0",
     "uglifyjs-webpack-plugin": "^1.1.2",
     "webpack": "^3.10.0"
   },
   "scripts": {
     "test": "jest --watch",
-    "build": "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack --config ./webpack.config.js --progress"
+    "build":
+      "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack --watch --config ./webpack.config.js --progress",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json}": ["./node_modules/.bin/prettier --write", "git add"]
   }
 }
