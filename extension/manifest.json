@@ -6,6 +6,12 @@
   "version": "1.0",
   "devtools_page": "devtools.html",
 
+  "icons": {
+    "16": "./React-Perf.png",
+    "48": "./React-Perf.png",
+    "128": "./React-Perf.png"
+  },
+
   "permissions": [
     "file:///*",
     "http://*/*",

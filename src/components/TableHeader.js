@@ -1,57 +1,78 @@
 const React = require('../../extension/third_party/react')
 
-const MetricHeader = require('./MetricHeader');
-
-const width = 70;
-const componentNameWidth = 200;
-
-const HeaderStyle = {
-  width,
-  display: "inline-block",
-  textAlign: "center",
-  fontWeight: "bold",
-  whiteSpace: "pre-wrap"
-};
-
-const ComponentNameStyle = {
-  ...HeaderStyle,
-  width: componentNameWidth
-};
-
-const ComponentTimingStyle = {
-  width,
-  display: "inline-block",
-  textAlign: "center"
-};
+let HEADERS = [
+  {
+    name: 'Components',
+    popup: 'Name of your React component',
+  },
+  {
+    name: 'Total time (ms)',
+    popup: 'Total time taken combining all the phases (ms)',
+  },
+  {
+    name: 'Count',
+    popup: 'Component instances',
+  },
+  {
+    name: 'Total time (%)',
+    popup: 'Total time taken combining all the phases (%)',
+  },
+  {
+    name: 'Mount (ms)',
+    popup: 'Component mount time',
+  },
+  {
+    name: 'Update (ms)',
+    popup: 'Component update time',
+  },
+  {
+    name: 'Render (ms)',
+    popup: 'Component render time',
+  },
+  {
+    name: 'Unmount (ms)',
+    popup: 'Component unmount time',
+  },
+  {
+    name: 'componentWillMount',
+  },
+  {
+    name: 'componentDidMount',
+  },
+  {
+    name: 'componentWillUpdate',
+  },
+  {
+    name: 'componentDidUpdate',
+  },
+  {
+    name: 'componentWillReceiveProps',
+  },
+  {
+    name: 'componentWillUnmount',
+  },
+  {
+    name: 'shouldComponentUpdate',
+  },
+]
 
 class TableHeader extends React.Component {
+  renderHeaders = () => {
+    return HEADERS.map((header, index) => {
+      return (
+        <th key={index}>
+          {header.name}
+          {header.popup !== undefined ? (
+            <div className="tooltiptext">{header.popup}</div>
+          ) : null}
+        </th>
+      )
+    })
+  }
+
   render() {
-    return (
-      <div
-        style={{
-          flexDirection: "row",
-          borderBottom: "1px solid #e1e1e1",
-          display: "inline-block",
-          whiteSpace: "nowrap"
-        }}
-      >
-        <span style={ComponentNameStyle}>Component Name</span>
-        <span style={HeaderStyle}>Total time (ms)</span>
-        <span style={HeaderStyle}>% of time</span>
-        <MetricHeader name={"Mount"} />
-        <MetricHeader name={"Update"} />
-        <MetricHeader name={"Unmount"} />
-        <MetricHeader name={"render"} />
-        <MetricHeader name={"componentWillMount"} />
-        <MetricHeader name={"componentDidMount"} />
-        <MetricHeader name={"componentWillReceiveProps"} />
-        <MetricHeader name={"shouldComponentUpdate"} />
-        <MetricHeader name={"componentWillUpdate"} />
-        <MetricHeader name={"componentDidUpdate"} />
-        <MetricHeader name={"componentWillUnmount"} />
-      </div>
-    )
+    return <tr>{this.renderHeaders()}</tr>
   }
 }
 
-module.exports = TableHeader;
+module.exports = TableHeader

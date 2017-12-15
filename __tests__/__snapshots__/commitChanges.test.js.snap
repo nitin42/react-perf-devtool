@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Committing changes time duration Committing changes with and without warning for cascading updates in earlier commits 1`] = `
+Object {
+  "Committing Changes": Object {
+    "timeSpent": Array [
+      4.32,
+      1.88,
+    ],
+  },
+}
+`;
+
+exports[`Committing changes time duration Returns total time taken in committing changes 1`] = `6.2`;

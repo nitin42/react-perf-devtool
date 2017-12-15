@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`React Performance Data Parse component name and phase name 1`] = `
+Object {
+  "": Object {},
+  "App": Object {
+    "componentDidMount": Object {
+      "timeSpent": Array [
+        0.40999999999996817,
+      ],
+    },
+    "componentDidUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillMount": Object {
+      "timeSpent": Array [
+        3.409999999999968,
+      ],
+    },
+    "componentWillReceiveProps": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillUnmount": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "mount": Object {
+      "timeSpent": Array [
+        17.795000000000016,
+      ],
+    },
+    "render": Object {
+      "timeSpent": Array [],
+    },
+    "shouldComponentUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "unmount": Object {
+      "timeSpent": Array [],
+    },
+    "update": Object {
+      "timeSpent": Array [
+        335.51000000000005,
+      ],
+    },
+  },
+  "Name": Object {
+    "componentDidMount": Object {
+      "timeSpent": Array [],
+    },
+    "componentDidUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillMount": Object {
+      "timeSpent": Array [
+        1.1800000000000068,
+      ],
+    },
+    "componentWillReceiveProps": Object {
+      "timeSpent": Array [
+        332.3750000000001,
+      ],
+    },
+    "componentWillUnmount": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "mount": Object {
+      "timeSpent": Array [
+        1.7200000000000273,
+      ],
+    },
+    "render": Object {
+      "timeSpent": Array [],
+    },
+    "shouldComponentUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "unmount": Object {
+      "timeSpent": Array [],
+    },
+    "update": Object {
+      "timeSpent": Array [
+        332.96000000000004,
+      ],
+    },
+  },
+}
+`;

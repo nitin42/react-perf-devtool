@@ -1,43 +1,112 @@
-// This function parses the React performance data and returns a store object
-// which contains the time spent during the mount, unmount, render and updating of a React component.
+const getComponentAndPhaseName = require('./parseMeasures')
 
-function parseReactPerformanceData(measures) {
-  // Stores the mount, unmount, render and update time of a React component
+// Schema for storing the time duration of each phase of a React component
+function createSchema() {
+  return {
+    // Phases
+    mount: {
+      timeSpent: [],
+    },
+    unmount: {
+      timeSpent: [],
+    },
+    update: {
+      timeSpent: [],
+    },
+    render: {
+      timeSpent: [],
+    },
+
+    // Lifecycle hooks
+    componentWillMount: {
+      timeSpent: [],
+    },
+    componentDidMount: {
+      timeSpent: [],
+    },
+    componentWillReceiveProps: {
+      timeSpent: [],
+    },
+    shouldComponentUpdate: {
+      timeSpent: [],
+    },
+    componentWillUpdate: {
+      timeSpent: [],
+    },
+    componentDidUpdate: {
+      timeSpent: [],
+    },
+    componentWillUnmount: {
+      timeSpent: [],
+    },
+  }
+}
+
+// Update the time duration of each phase
+function updateTime(store, componentName, phase, measure) {
+  if (phase === '[mount]') {
+    store[componentName].mount.timeSpent.push(measure.duration)
+  }
+
+  if (phase === '[unmount]') {
+    store[componentName].unmount.timeSpent.push(measure.duration)
+  }
+
+  if (phase === '[update]') {
+    store[componentName].update.timeSpent.push(measure.duration)
+  }
+
+  if (phase === '[render]') {
+    store[componentName].render.timeSpent.push(measure.duration)
+  }
+
+  if (phase === 'componentWillMount') {
+    store[componentName].componentWillMount.timeSpent.push(measure.duration)
+  }
+
+  if (phase === 'componentWillUnmount') {
+    store[componentName].componentWillUnmount.timeSpent.push(measure.duration)
+  }
+
+  if (phase === 'componentDidMount') {
+    store[componentName].componentDidMount.timeSpent.push(measure.duration)
+  }
+
+  if (phase === 'componentWillReceiveProps') {
+    store[componentName].componentWillReceiveProps.timeSpent.push(
+      measure.duration
+    )
+  }
+
+  if (phase === 'shouldComponentUpdate') {
+    store[componentName].shouldComponentUpdate.timeSpent.push(measure.duration)
+  }
+
+  if (phase === 'componentWillUpdate') {
+    store[componentName].componentWillUpdate.timeSpent.push(measure.duration)
+  }
+
+  if (phase === 'componentDidUpdate') {
+    store[componentName].componentDidUpdate.timeSpent.push(measure.duration)
+  }
+}
+
+// Get data from the performance measures
+function getReactPerformanceData(measures) {
   const store = {}
 
-  for (const measure in measures) {
-    const [componentName, stage] = measure.name.split(" ")
-
-    // Create a new component property
-    if (!store[componentName]) {
-      store[componentName] = {
-        mount: { time: [] },
-        unmount: { time: [] },
-        render: { time: [] },
-        update: { time: [] }
+  for (let measure of measures) {
+    if (getComponentAndPhaseName(measure) !== null) {
+      const { componentName, phase } = getComponentAndPhaseName(measure)
+      if (!store[componentName]) {
+        store[componentName] = createSchema()
       }
-    }
 
-    // Update the time duration
-
-    if (stage === "[mount]") {
-      store[componentName].mount.time.push(measure.duration)
-    }
-
-    if (stage === "[unmount]") {
-      store[componentName].unmount.time.push(measure.duration)
-    }
-
-    if (stage === "[render]") {
-      store[componentName].render.time.push(measure.duration)
-    }
-
-    if (stage === "[update]") {
-      store[componentName].update.time.push(measure.duration)
+      updateTime(store, componentName, phase, measure)
     }
   }
 
   return store
 }
 
-module.exports = parseReactPerformanceData
+module.exports = getReactPerformanceData

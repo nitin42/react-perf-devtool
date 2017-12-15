@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.tooltip {}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 2px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+table, td, th {
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
+}
+
+#customers tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+#customers tr:hover {background-color: #ddd;}
+
+/* #customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+} */
+
+button {
+  margin: 5px;
+  padding: 6px;
+  border: none;
+  border: 0.5px solid black;
+  font-size: 10px;
+  font-weight: bolder;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
+}
+
+</style>
+</head>
+<body>
+
+<div style="display: inline-block;">
+  <button>Update</button>
+  <button>Clear</button>
+  <button>Reload the inspected page</button>
+</div>
+
+<div style="font-weight: bolder; padding: 10px">Pending Events: 10</div>
+
+<table id="customers" style="margin-bottom: 5px;">
+  <tr>
+    <th>Components</th>
+    <th>Total time</th>
+    <th>Count</th>
+    <th>Total time (%)</th>
+    <th>Mount</th>
+    <th>Update</th>
+    <th>Render</th>
+    <th>Unmount</th>
+    <th>componentWillMount</th>
+    <th>componentDidMount</th>
+    <th>componentWillUpdate</th>
+    <th>componentDidUpdate</th>
+    <th>componentWillReceiveProps</th>
+    <th>componentWillUnmount</th>
+    <th>shouldComponentUpdate</th>
+  </tr>
+  <tr>
+    <td class="tooltip">App<div class="tooltiptext">App component</div></td>
+    <td>5ms</td>
+    <td>2</td>
+    <td>40%</td>
+    <td>2ms</td>
+    <td>3ms</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td class="tooltip">App<div class="tooltiptext">App component</div></td>
+    <td>5ms</td>
+    <td>2</td>
+    <td>40%</td>
+    <td>2ms</td>
+    <td>3ms</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td class="tooltip">App<div class="tooltiptext">App component</div></td>
+    <td>5ms</td>
+    <td>2</td>
+    <td>40%</td>
+    <td>2ms</td>
+    <td>3ms</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td class="tooltip">App<div class="tooltiptext">App component</div></td>
+    <td>5ms</td>
+    <td>2</td>
+    <td>40%</td>
+    <td>2ms</td>
+    <td>3ms</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td class="tooltip">App<div class="tooltiptext">App component</div></td>
+    <td>5ms</td>
+    <td>2</td>
+    <td>40%</td>
+    <td>2ms</td>
+    <td>3ms</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td class="tooltip">App<div class="tooltiptext">App component</div></td>
+    <td>5ms</td>
+    <td>2</td>
+    <td>40%</td>
+    <td>2ms</td>
+    <td>3ms</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td class="tooltip">App<div class="tooltiptext">App component</div></td>
+    <td>5ms</td>
+    <td>2</td>
+    <td>40%</td>
+    <td>2ms</td>
+    <td>3ms</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td class="tooltip">App<div class="tooltiptext">App component</div></td>
+    <td>5ms</td>
+    <td>2</td>
+    <td>40%</td>
+    <td>2ms</td>
+    <td>3ms</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td class="tooltip">App<div class="tooltiptext">App component</div></td>
+    <td>5ms</td>
+    <td>2</td>
+    <td>40%</td>
+    <td>2ms</td>
+    <td>3ms</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td class="tooltip">App<div class="tooltiptext">App component</div></td>
+    <td>5ms</td>
+    <td>2</td>
+    <td>40%</td>
+    <td>2ms</td>
+    <td>3ms</td>
+    <td>-</td>
+  </tr>
+
+</table>
+
+<h4>Total Time Taken: </h4>
+
+
+</body>
+</html>
