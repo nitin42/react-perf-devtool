@@ -1,1 +1,1 @@
-module.exports = require('./components/ReactPerfPanel')
+module.exports = require("./components/ReactPerfDevtool");
