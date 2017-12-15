@@ -1,8 +1,8 @@
 {
-  "name": "react-perf-panel",
+  "name": "react-perf-devtool",
   "version": "1.0.0",
   "description":
-    "A performance panel chrome devtool extension for inspecting performance of React Components",
+    "A chrome devtool extension for inspecting performance of React Components",
   "main": "src/index.js",
   "files": ["src", "extension/build/ReactPerfDevtool.js"],
   "author": "Nitin Tulswani",
