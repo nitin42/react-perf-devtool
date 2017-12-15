@@ -1,5 +1,6 @@
 const { add } = require('./math')
 
+// Computes the total time of each measure (commit changes, host effects and lifecycle methods)
 function getTotalTime(store) {
   let totalTime = 0
 

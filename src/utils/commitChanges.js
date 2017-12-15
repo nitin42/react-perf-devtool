@@ -1,5 +1,6 @@
 const { add } = require('./math')
 
+// Update the store with the time spent while committing the changes
 function updateStore(store, measure, delimiter) {
   if (measure.name.includes(delimiter)) {
     const measureName = measure.name.split(delimiter).join('')

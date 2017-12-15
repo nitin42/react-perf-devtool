@@ -1,4 +1,4 @@
-const React = require('../../extension/third_party/react')
+const React = require('../../extension/dependencies/react')
 
 const getReactPerformanceData = require('../utils/parse')
 const generateDataFromMeasures = require('../utils/generate')
@@ -6,29 +6,39 @@ const generateDataFromMeasures = require('../utils/generate')
 const Table = require('./Table')
 const Results = require('./Results')
 
+// Cache for performance measures
 let cache = []
 
+/**
+  This is the main component that renders the panel containing information about
+  the component mount/render/update/unmount time and also lifecycle time.
+  It also renders the total time taken while committing the changes, host effects
+  and calling all the lifecycle methods.
+*/
 class ReactPerfPanel extends React.Component {
   timer = null
 
   constructor(props) {
     super(props)
     this.state = {
-      perfData: [],
-      totalTime: 0,
-      pendingEvents: 0,
-      rawMeasures: [],
-      loading: false,
+      perfData: [], // Contains the React performance data.
+      totalTime: 0, // Total time taken combining all the phases.
+      pendingEvents: 0, // Pending event count.
+      rawMeasures: [], // Raw measures output. It is used for rendering the overall results.
+      loading: false, // To show the loading output while collecting the results.
     }
   }
 
   componentDidMount() {
+    // We are collecting the results,
     this.setState({ loading: true })
 
+    // Set the timer, and get the total measures and flush them if the cache is empty.
     this.timer = setInterval(() => this.getMeasuresLength(), 2000)
   }
 
   componentWillUnmount() {
+    // Clear the timer.
     clearInterval(this.timer)
   }
 
@@ -41,6 +51,7 @@ class ReactPerfPanel extends React.Component {
           return
         }
 
+        // Update the event count.
         this.updateEventsCount(JSON.parse(count))
       }
     )
@@ -52,11 +63,13 @@ class ReactPerfPanel extends React.Component {
       loading: false,
     })
 
+    // Render the measures if the cache is empty.
     this.shouldRenderMeasures()
   }
 
   shouldRenderMeasures = () => {
     if (this.state.perfData.length === 0) {
+      // Get the performance measures.
       this.getMeasures()
     }
   }
@@ -69,6 +82,7 @@ class ReactPerfPanel extends React.Component {
           console.error('Error', error)
           return
         }
+        // Update the state.
         this.updateMeasures(JSON.parse(measures))
       }
     )
@@ -77,6 +91,7 @@ class ReactPerfPanel extends React.Component {
   updateMeasures = measures => {
     cache = cache.concat(measures)
 
+    // Parse the performance data.
     const data = generateDataFromMeasures(getReactPerformanceData(cache))
 
     this.setState({
@@ -90,11 +105,13 @@ class ReactPerfPanel extends React.Component {
     this.clearMeasures()
   }
 
+  // Clear the measures.
   clearMeasures = () =>
     chrome.devtools.inspectedWindow.eval(
       'JSON.stringify(performance.clearMeasures())'
     )
 
+  // Clear the panel content.
   clear = () => {
     cache = []
 
@@ -106,10 +123,13 @@ class ReactPerfPanel extends React.Component {
     this.clearMeasures()
   }
 
+  // Reload.
   reload = () => {
     this.clear()
 
     this.setState({ loading: true })
+
+    window !== undefined ? window.location.reload() : null
 
     chrome.devtools.inspectedWindow.reload()
   }

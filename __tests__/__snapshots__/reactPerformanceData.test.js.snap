@@ -2,7 +2,6 @@
 
 exports[`React Performance Data Parse component name and phase name 1`] = `
 Object {
-  "": Object {},
   "App": Object {
     "componentDidMount": Object {
       "timeSpent": Array [

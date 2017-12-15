@@ -1,12 +1,12 @@
 require.config({
   paths: {
-    react: "./third_party/react",
-    "react-dom": "./third_party/react-dom",
+    react: "./dependencies/react",
+    "react-dom": "./dependencies/react-dom",
   }
 });
 
 requirejs(
-  ["react", "react-dom", "../build/ReactPerfPanel"],
+  ["react", "react-dom", "../build/react-perf-panel.production"],
   function(React, ReactDOM, ReactPerfPanel) {
     const root = document.getElementById("root");
     ReactDOM.render(React.createElement(ReactPerfPanel), root);

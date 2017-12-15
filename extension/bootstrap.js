@@ -1,8 +1,8 @@
 chrome.devtools.panels.create(
   'React Perf',
-  'React-Perf.png', // should be an icon image
+  'React-Perf.png',
   'load.html',
   function(panel) {
-    console.log('Started React Perf')
+    console.log('Started!)
   }
 )

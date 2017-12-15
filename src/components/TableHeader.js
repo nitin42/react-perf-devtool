@@ -1,4 +1,4 @@
-const React = require('../../extension/third_party/react')
+const React = require('../../extension/dependencies/react')
 
 let HEADERS = [
   {
@@ -40,39 +40,40 @@ let HEADERS = [
     name: 'componentDidMount',
   },
   {
+    name: 'componentWillReceiveProps',
+  },
+  {
+    name: 'shouldComponentUpdate',
+  },
+  {
     name: 'componentWillUpdate',
   },
   {
     name: 'componentDidUpdate',
   },
   {
-    name: 'componentWillReceiveProps',
-  },
-  {
     name: 'componentWillUnmount',
-  },
-  {
-    name: 'shouldComponentUpdate',
-  },
+  }
 ]
 
-class TableHeader extends React.Component {
-  renderHeaders = () => {
-    return HEADERS.map((header, index) => {
-      return (
-        <th key={index}>
-          {header.name}
-          {header.popup !== undefined ? (
-            <div className="tooltiptext">{header.popup}</div>
-          ) : null}
-        </th>
-      )
-    })
-  }
-
-  render() {
-    return <tr>{this.renderHeaders()}</tr>
-  }
+/**
+  This component renders the table headers (and popups for some phases!)
+*/
+function TableHeader() {
+  return (
+    <tr>
+      {HEADERS.map((header, index) => {
+        return (
+          <th key={index}>
+            {header.name}
+            {header.popup !== undefined ? (
+              <div className="popup">{header.popup}</div>
+            ) : null}
+          </th>
+        )
+      })}
+    </tr>
+  )
 }
 
 module.exports = TableHeader

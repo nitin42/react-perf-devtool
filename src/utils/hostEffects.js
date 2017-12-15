@@ -1,5 +1,6 @@
 const { add } = require('./math')
 
+// Update the store with the time spent while committing host effects
 function updateStore(store, measure) {
   if (measure.name.includes('⚛')) {
     const measureName = measure.name.split('⚛ ').join('')
@@ -31,6 +32,7 @@ function getCommitHostEffectsTime(measures) {
   return store
 }
 
+// Get total number of host effects
 function getTotalEffects(store) {
   let totalEffects = 0
 

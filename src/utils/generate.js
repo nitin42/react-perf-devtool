@@ -1,9 +1,11 @@
 const { add, average, percent } = require('./math')
 
+// Sort the all components by total time
 function sortComponents(components) {
   return components.sort((a, b) => b.totalTime - a.totalTime)
 }
 
+// Align the components by their name and total time
 function alignComponents(totalTime) {
   return Object.keys(totalTime).reduce((acc, name) => {
     acc.push({ name, totalTime: totalTime[name] })
@@ -11,10 +13,12 @@ function alignComponents(totalTime) {
   }, [])
 }
 
+// Get the total time taken combining all the phases
 function getTotalTime(components) {
   return components.reduce((acc, component) => (acc += component.totalTime), 0)
 }
 
+// Plot the timings (average time in ms, component instances, total time in ms)
 function plotTimings(nums) {
   return {
     averageTimeSpentMs: average(nums),
@@ -23,6 +27,7 @@ function plotTimings(nums) {
   }
 }
 
+// Create a schema for each component
 function createSchema(store, component, totalTime) {
   return {
     componentName: component.name,
@@ -59,23 +64,36 @@ function createSchema(store, component, totalTime) {
   }
 }
 
+// Generate the data from React performance measures
 function generateDataFromMeasures(store) {
   const componentsByTotalTime = {}
 
   for (let componentName in store) {
+    // Default
     componentsByTotalTime[componentName] = componentsByTotalTime[componentName] || 0
 
+    // mount time
     componentsByTotalTime[componentName] += add(store[componentName].mount.timeSpent)
+    // unmount time
     componentsByTotalTime[componentName] += add(store[componentName].unmount.timeSpent)
+    // update time
     componentsByTotalTime[componentName] += add(store[componentName].update.timeSpent)
+    // render time
     componentsByTotalTime[componentName] += add(store[componentName].render.timeSpent)
+    // time spent in componentWillMount
     componentsByTotalTime[componentName] += add(store[componentName].componentWillMount.timeSpent)
+    // time spent in componentDidMount
     componentsByTotalTime[componentName] += add(store[componentName].componentDidMount.timeSpent)
-    componentsByTotalTime[componentName] += add(store[componentName].componentWillUnmount.timeSpent)
-    componentsByTotalTime[componentName] += add(store[componentName].componentDidUpdate.timeSpent)
-    componentsByTotalTime[componentName] += add(store[componentName].componentWillUpdate.timeSpent)
+    // time spent in componentWillReceiveProps
     componentsByTotalTime[componentName] += add(store[componentName].componentWillReceiveProps.timeSpent)
+    // time spent in shouldComponentUpdate
     componentsByTotalTime[componentName] += add(store[componentName].shouldComponentUpdate.timeSpent)
+    // time spent in componentWillUpdate
+    componentsByTotalTime[componentName] += add(store[componentName].componentWillUpdate.timeSpent)
+    // time spent in componentDidUpdate
+    componentsByTotalTime[componentName] += add(store[componentName].componentDidUpdate.timeSpent)
+    // time spent in componentWillUnmount
+    componentsByTotalTime[componentName] += add(store[componentName].componentWillUnmount.timeSpent)
   }
 
   const components = alignComponents(componentsByTotalTime)

@@ -1,5 +1,6 @@
 const { add } = require('./math')
 
+// Update the time spent while calling all the lifcycle methods
 function updateStore(store, measure) {
   if (measure.name.includes('⚛')) {
     const measureName = measure.name.split('⚛ ').join('')
@@ -31,6 +32,7 @@ function getLifecycleTime(measures) {
   return store
 }
 
+// Get the total number of lifecycle methods that were called
 function getTotalMethods(store) {
   let totalMethods = 0
 

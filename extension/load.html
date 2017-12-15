@@ -5,8 +5,7 @@
     border: 1px solid #ddd;
   }
 
-  /* Tooltip text */
-  th .tooltiptext {
+  th .popup {
     visibility: hidden;
     width: 120px;
     background-color: black;
@@ -15,12 +14,11 @@
     padding: 5px 0;
     border-radius: 2px;
 
-    /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
   }
 
-  th:hover .tooltiptext {
+  th:hover .popup {
     visibility: visible;
   }
 
@@ -70,7 +68,7 @@
 </head>
 <body>
   <div id="root"/>
-  <script src="./third_party/require.js"></script>
+  <script src="./dependencies/require.js"></script>
   <script src="./load.js"></script>
 </body>
 </html>

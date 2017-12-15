@@ -1,3 +1,8 @@
+/**
+ This function returns the component name and phase name from the measure name (returned from React performance data)
+ This may break if React changes the name of the mark in react-dom package
+ TODO: Refactor this function
+*/
 function getComponentAndPhaseName(measure) {
   if (measure.name.includes('⚛')) {
     const index = measure.name.split('⚛ ').join('')
