@@ -4,11 +4,11 @@ exports[`Committing changes time duration Committing changes with and without wa
 Object {
   "Committing Changes": Object {
     "timeSpent": Array [
-      4.32,
-      1.88,
+      10.63,
+      1.54,
     ],
   },
 }
 `;
 
-exports[`Committing changes time duration Returns total time taken in committing changes 1`] = `6.2`;
+exports[`Committing changes time duration Returns total time taken in committing changes 1`] = `12.17`;

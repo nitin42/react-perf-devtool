@@ -4,70 +4,9 @@ exports[`Map Data from React Performance Data Returns an object containing infor
 Array [
   Object {
     "componentDidMount": Object {
-      "averageTimeSpentMs": "-",
-      "numberOfTimes": 0,
-      "totalTimeSpentMs": 0,
-    },
-    "componentDidUpdate": Object {
-      "averageTimeSpentMs": "-",
-      "numberOfTimes": 0,
-      "totalTimeSpentMs": 0,
-    },
-    "componentName": "Name",
-    "componentWillMount": Object {
-      "averageTimeSpentMs": "1.18",
+      "averageTimeSpentMs": "1.22",
       "numberOfTimes": 1,
-      "totalTimeSpentMs": 1.18,
-    },
-    "componentWillReceiveProps": Object {
-      "averageTimeSpentMs": "332.38",
-      "numberOfTimes": 1,
-      "totalTimeSpentMs": 332.38,
-    },
-    "componentWillUnmount": Object {
-      "averageTimeSpentMs": "-",
-      "numberOfTimes": 0,
-      "totalTimeSpentMs": 0,
-    },
-    "componentWillUpdate": Object {
-      "averageTimeSpentMs": "-",
-      "numberOfTimes": 0,
-      "totalTimeSpentMs": 0,
-    },
-    "mount": Object {
-      "averageTimeSpentMs": "1.72",
-      "numberOfTimes": 1,
-      "totalTimeSpentMs": 1.72,
-    },
-    "numberOfInstances": 1,
-    "percentTimeSpent": "65%",
-    "render": Object {
-      "averageTimeSpentMs": "-",
-      "numberOfTimes": 0,
-      "totalTimeSpentMs": 0,
-    },
-    "shouldComponentUpdate": Object {
-      "averageTimeSpentMs": "-",
-      "numberOfTimes": 0,
-      "totalTimeSpentMs": 0,
-    },
-    "totalTimeSpent": 668.24,
-    "unmount": Object {
-      "averageTimeSpentMs": "-",
-      "numberOfTimes": 0,
-      "totalTimeSpentMs": 0,
-    },
-    "update": Object {
-      "averageTimeSpentMs": "332.96",
-      "numberOfTimes": 1,
-      "totalTimeSpentMs": 332.96,
-    },
-  },
-  Object {
-    "componentDidMount": Object {
-      "averageTimeSpentMs": "0.41",
-      "numberOfTimes": 1,
-      "totalTimeSpentMs": 0.41,
+      "totalTimeSpentMs": 1.22,
     },
     "componentDidUpdate": Object {
       "averageTimeSpentMs": "-",
@@ -76,9 +15,9 @@ Array [
     },
     "componentName": "App",
     "componentWillMount": Object {
-      "averageTimeSpentMs": "3.41",
+      "averageTimeSpentMs": "3.15",
       "numberOfTimes": 1,
-      "totalTimeSpentMs": 3.41,
+      "totalTimeSpentMs": 3.15,
     },
     "componentWillReceiveProps": Object {
       "averageTimeSpentMs": "-",
@@ -96,12 +35,12 @@ Array [
       "totalTimeSpentMs": 0,
     },
     "mount": Object {
-      "averageTimeSpentMs": "17.80",
+      "averageTimeSpentMs": "58.60",
       "numberOfTimes": 1,
-      "totalTimeSpentMs": 17.8,
+      "totalTimeSpentMs": 58.6,
     },
     "numberOfInstances": 1,
-    "percentTimeSpent": "35%",
+    "percentTimeSpent": "34%",
     "render": Object {
       "averageTimeSpentMs": "-",
       "numberOfTimes": 0,
@@ -112,16 +51,321 @@ Array [
       "numberOfTimes": 0,
       "totalTimeSpentMs": 0,
     },
-    "totalTimeSpent": 357.13000000000005,
+    "totalTimeSpent": 62.97,
     "unmount": Object {
       "averageTimeSpentMs": "-",
       "numberOfTimes": 0,
       "totalTimeSpentMs": 0,
     },
     "update": Object {
-      "averageTimeSpentMs": "335.51",
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+  },
+  Object {
+    "componentDidMount": Object {
+      "averageTimeSpentMs": "1.67",
       "numberOfTimes": 1,
-      "totalTimeSpentMs": 335.51,
+      "totalTimeSpentMs": 1.67,
+    },
+    "componentDidUpdate": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "componentName": "Main",
+    "componentWillMount": Object {
+      "averageTimeSpentMs": "2.20",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 2.2,
+    },
+    "componentWillReceiveProps": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "componentWillUnmount": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "componentWillUpdate": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "mount": Object {
+      "averageTimeSpentMs": "53.05",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 53.05,
+    },
+    "numberOfInstances": 1,
+    "percentTimeSpent": "30%",
+    "render": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "shouldComponentUpdate": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "totalTimeSpent": 56.92,
+    "unmount": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "update": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+  },
+  Object {
+    "componentDidMount": Object {
+      "averageTimeSpentMs": "0.20",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 0.2,
+    },
+    "componentDidUpdate": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "componentName": "Projects",
+    "componentWillMount": Object {
+      "averageTimeSpentMs": "4.04",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 4.04,
+    },
+    "componentWillReceiveProps": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "componentWillUnmount": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "componentWillUpdate": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "mount": Object {
+      "averageTimeSpentMs": "17.34",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 17.34,
+    },
+    "numberOfInstances": 1,
+    "percentTimeSpent": "15%",
+    "render": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "shouldComponentUpdate": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "totalTimeSpent": 28.679999999999996,
+    "unmount": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "update": Object {
+      "averageTimeSpentMs": "7.10",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 7.1,
+    },
+  },
+  Object {
+    "componentDidMount": Object {
+      "averageTimeSpentMs": "0.51",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 0.51,
+    },
+    "componentDidUpdate": Object {
+      "averageTimeSpentMs": "0.85",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 0.85,
+    },
+    "componentName": "Introduction",
+    "componentWillMount": Object {
+      "averageTimeSpentMs": "0.80",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 0.8,
+    },
+    "componentWillReceiveProps": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "componentWillUnmount": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "componentWillUpdate": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "mount": Object {
+      "averageTimeSpentMs": "14.26",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 14.26,
+    },
+    "numberOfInstances": 1,
+    "percentTimeSpent": "10%",
+    "render": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "shouldComponentUpdate": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "totalTimeSpent": 18.330000000000002,
+    "unmount": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "update": Object {
+      "averageTimeSpentMs": "1.91",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 1.91,
+    },
+  },
+  Object {
+    "componentDidMount": Object {
+      "averageTimeSpentMs": "0.89",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 0.89,
+    },
+    "componentDidUpdate": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "componentName": "Message",
+    "componentWillMount": Object {
+      "averageTimeSpentMs": "1.23",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 1.23,
+    },
+    "componentWillReceiveProps": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "componentWillUnmount": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "componentWillUpdate": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "mount": Object {
+      "averageTimeSpentMs": "8.74",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 8.74,
+    },
+    "numberOfInstances": 1,
+    "percentTimeSpent": "6%",
+    "render": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "shouldComponentUpdate": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "totalTimeSpent": 10.860000000000001,
+    "unmount": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "update": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+  },
+  Object {
+    "componentDidMount": Object {
+      "averageTimeSpentMs": "2.07",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 2.07,
+    },
+    "componentDidUpdate": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "componentName": "Posts",
+    "componentWillMount": Object {
+      "averageTimeSpentMs": "1.60",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 1.6,
+    },
+    "componentWillReceiveProps": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "componentWillUnmount": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "componentWillUpdate": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "mount": Object {
+      "averageTimeSpentMs": "6.54",
+      "numberOfTimes": 1,
+      "totalTimeSpentMs": 6.54,
+    },
+    "numberOfInstances": 1,
+    "percentTimeSpent": "5%",
+    "render": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "shouldComponentUpdate": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "totalTimeSpent": 10.21,
+    "unmount": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
+    },
+    "update": Object {
+      "averageTimeSpentMs": "-",
+      "numberOfTimes": 0,
+      "totalTimeSpentMs": 0,
     },
   },
 ]

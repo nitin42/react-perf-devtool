@@ -5,7 +5,7 @@ Object {
   "App": Object {
     "componentDidMount": Object {
       "timeSpent": Array [
-        0.40999999999996817,
+        1.2199999999999136,
       ],
     },
     "componentDidUpdate": Object {
@@ -13,7 +13,7 @@ Object {
     },
     "componentWillMount": Object {
       "timeSpent": Array [
-        3.409999999999968,
+        3.1499999999999773,
       ],
     },
     "componentWillReceiveProps": Object {
@@ -27,7 +27,50 @@ Object {
     },
     "mount": Object {
       "timeSpent": Array [
-        17.795000000000016,
+        58.59999999999991,
+      ],
+    },
+    "render": Object {
+      "timeSpent": Array [],
+    },
+    "shouldComponentUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "unmount": Object {
+      "timeSpent": Array [],
+    },
+    "update": Object {
+      "timeSpent": Array [],
+    },
+  },
+  "Introduction": Object {
+    "componentDidMount": Object {
+      "timeSpent": Array [
+        0.5099999999999909,
+      ],
+    },
+    "componentDidUpdate": Object {
+      "timeSpent": Array [
+        0.849999999999909,
+      ],
+    },
+    "componentWillMount": Object {
+      "timeSpent": Array [
+        0.8000000000000114,
+      ],
+    },
+    "componentWillReceiveProps": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillUnmount": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "mount": Object {
+      "timeSpent": Array [
+        14.260000000000048,
       ],
     },
     "render": Object {
@@ -41,26 +84,26 @@ Object {
     },
     "update": Object {
       "timeSpent": Array [
-        335.51000000000005,
+        1.9149999999999636,
       ],
     },
   },
-  "Name": Object {
+  "Main": Object {
     "componentDidMount": Object {
-      "timeSpent": Array [],
+      "timeSpent": Array [
+        1.6650000000000773,
+      ],
     },
     "componentDidUpdate": Object {
       "timeSpent": Array [],
     },
     "componentWillMount": Object {
       "timeSpent": Array [
-        1.1800000000000068,
+        2.1999999999999886,
       ],
     },
     "componentWillReceiveProps": Object {
-      "timeSpent": Array [
-        332.3750000000001,
-      ],
+      "timeSpent": Array [],
     },
     "componentWillUnmount": Object {
       "timeSpent": Array [],
@@ -70,7 +113,130 @@ Object {
     },
     "mount": Object {
       "timeSpent": Array [
-        1.7200000000000273,
+        53.05000000000001,
+      ],
+    },
+    "render": Object {
+      "timeSpent": Array [],
+    },
+    "shouldComponentUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "unmount": Object {
+      "timeSpent": Array [],
+    },
+    "update": Object {
+      "timeSpent": Array [],
+    },
+  },
+  "Message": Object {
+    "componentDidMount": Object {
+      "timeSpent": Array [
+        0.8949999999999818,
+      ],
+    },
+    "componentDidUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillMount": Object {
+      "timeSpent": Array [
+        1.2250000000000227,
+      ],
+    },
+    "componentWillReceiveProps": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillUnmount": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "mount": Object {
+      "timeSpent": Array [
+        8.740000000000066,
+      ],
+    },
+    "render": Object {
+      "timeSpent": Array [],
+    },
+    "shouldComponentUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "unmount": Object {
+      "timeSpent": Array [],
+    },
+    "update": Object {
+      "timeSpent": Array [],
+    },
+  },
+  "Posts": Object {
+    "componentDidMount": Object {
+      "timeSpent": Array [
+        2.07000000000005,
+      ],
+    },
+    "componentDidUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillMount": Object {
+      "timeSpent": Array [
+        1.6000000000000227,
+      ],
+    },
+    "componentWillReceiveProps": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillUnmount": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "mount": Object {
+      "timeSpent": Array [
+        6.535000000000025,
+      ],
+    },
+    "render": Object {
+      "timeSpent": Array [],
+    },
+    "shouldComponentUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "unmount": Object {
+      "timeSpent": Array [],
+    },
+    "update": Object {
+      "timeSpent": Array [],
+    },
+  },
+  "Projects": Object {
+    "componentDidMount": Object {
+      "timeSpent": Array [
+        0.20000000000004547,
+      ],
+    },
+    "componentDidUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillMount": Object {
+      "timeSpent": Array [
+        4.044999999999959,
+      ],
+    },
+    "componentWillReceiveProps": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillUnmount": Object {
+      "timeSpent": Array [],
+    },
+    "componentWillUpdate": Object {
+      "timeSpent": Array [],
+    },
+    "mount": Object {
+      "timeSpent": Array [
+        17.335000000000036,
       ],
     },
     "render": Object {
@@ -84,7 +250,7 @@ Object {
     },
     "update": Object {
       "timeSpent": Array [
-        332.96000000000004,
+        7.100000000000023,
       ],
     },
   },
