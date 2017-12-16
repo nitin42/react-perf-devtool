@@ -5,7 +5,7 @@
 <br/>
 
 <p align="center">
-  <img src="./RPLogo.png" height="200" width="200">
+  <img src="./art/RPLogo.png" height="200" width="200">
 </p>
 
 <br/>
@@ -39,7 +39,7 @@ This project started with a purpose of extending the work done by [Will Chen](ht
 
 A demo of the extension being used to examine the performance of React components on my website.
 
-<img src="./Demo.gif">
+<img src="./art/Demo.gif">
 
 ## Uses
 
@@ -61,7 +61,7 @@ The below extensions represent the current stable release.
 
 ## Usage
 
-To use this tool in development mode, you'll need to comment one line in `react-dom` package so that the performance measures can be apprehended by this tool. To do this, go to `node_modules/react-dom/cjs/react-dom.development.js` inside your project folder and comment this line, 
+To use this tool in development mode, you'll need to comment one line in `react-dom` package so that the performance measures can be apprehended by this tool. To do this, go to `node_modules/react-dom/cjs/react-dom.development.js` inside your project folder and comment this line,
 
 ```
 performance.clearMeasures(measurementName);
@@ -75,12 +75,12 @@ The query parameter `react_perf` is required so that React can measure the perfo
 
 After you've installed the extension successfully, you'll see a tab called **React Performance** in Chrome Developer Tools.
 
-<img src="./tab.png">
+<img src="./art/tab.png">
 
 ### Description
 
 <p align="center">
-  <img src="./Tool.png">
+  <img src="./art/Tool.png">
 </p>
 
 **clear** - The clear button clears the measures from the tables and also wipes the results.
