@@ -1,4 +1,5 @@
 # React Performance Devtool
+[![Build Status](https://travis-ci.org/nitin42/react-perf-devtool.svg?branch=master)](https://travis-ci.org/nitin42/react-perf-devtool)
 
 > A chrome devtool extension for inspecting the performance of React Components
 
@@ -66,6 +67,7 @@ To use this tool in development mode, you'll need to comment one line in `react-
 ```
 performance.clearMeasures(measurementName);
 ```
+> You can find this line inside the `markEnd` function.
 
 Next, start your local development server and go to `http://localhost:3000/?react_perf`.
 
@@ -115,6 +117,13 @@ Given below are the different phases for which React measures the performance:
 
 * **Commit lifecycle** - When the first pass was completed while committing the host effects, the work in progress tree became the current tree. So work in progress is current during **componentDidMount/update**. In this phase, all the lifecycles and ref callbacks are committed. **Committing lifecycles happen as a separate pass so that all the placements, updates and deletions in the entire tree have already been invoked**.
 
+## Todo
+
+- [ ] New UI
+
+- [ ] Compatibility with older versions of React
+
+- [ ] Styling (may be themes!?)
 
 ## Contributing
 
