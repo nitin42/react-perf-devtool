@@ -2,9 +2,13 @@
 
 > A chrome devtool extension for inspecting the performance of React Components
 
+<br/>
+
 <p align="center">
-  <img src="./RPLogo.png">
+  <img src="./RPLogo.png" height="200" width="200">
 </p>
+
+<br/>
 
 ## Table of contents
 
