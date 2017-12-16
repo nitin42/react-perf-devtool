@@ -84,7 +84,7 @@ Given below are the different phases for which React measures the performance:
 
 ## Contributing
 
-[Read the contributing guide]()
+[Read the contributing guide](./CONTRIBUTING.md)
 
 ## License
 
