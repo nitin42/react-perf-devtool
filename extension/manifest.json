@@ -2,6 +2,7 @@
   "manifest_version": 2,
 
   "name": "React Performance Devtool",
+  "short_name": "react-perf-devtool",
   "description":
     "A Chrome devtool extension for inspecting performance of React components.",
   "version": "1.0",
