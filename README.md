@@ -59,9 +59,13 @@ A demo of the extension being used to examine the performance of React component
 
 ## Usage
 
-To use this tool in development mode, you'll need to comment one line in `react-dom` package so that the performance measures can be apprehended by this tool. To do this, go to `node_modules/react-dom/cjs/react-dom.development.js` inside your project folder and comment this line `performance.clearMeasures(measurementName);`.
+To use this tool in development mode, you'll need to comment one line in `react-dom` package so that the performance measures can be apprehended by this tool. To do this, go to `node_modules/react-dom/cjs/react-dom.development.js` inside your project folder and comment this line, 
 
-Next, start your local development server and go to http://127.0.0.1:3000/?react_perf.
+```
+performance.clearMeasures(measurementName);
+```
+
+Next, start your local development server and go to `http://localhost:3000/?react_perf`.
 
 The query parameter `react_perf` is required so that React can measure the performance timings.
 
@@ -79,12 +83,12 @@ Given below are the different phases for which React measures the performance:
 
 * **Commit host effects** - Host effects are committed whenever a new tree is inserted. With every new update that is scheduled, total host effects are calculated. This process is done in two phases, the first phase performs all the host node insertions, deletion, update and ref unmounts and the other phase performs all the lifecycle and ref callbacks.
 
-* **Commit lifecycle** - When the first pass was completed while committing the host effects, the work in progress tree became the current tree. So work in progress is current during componentDidMount/update. Inside this phase, all the lifecycles and ref callbacks are committed. Committing lifecycles happen as a separate pass so that all the placements, updates and deletions in the entire tree have already been invoked.
+* **Commit lifecycle** - When the first pass was completed while committing the host effects, the work in progress tree became the current tree. So work in progress is current during **componentDidMount/update**. In this phase, all the lifecycles and ref callbacks are committed. **Committing lifecycles happen as a separate pass so that all the placements, updates and deletions in the entire tree have already been invoked**.
 
 
 ## Contributing
 
-[Read the contributing guide]()
+[Read the contributing guide](./CONTRIBUTING.md)
 
 ## License
 
