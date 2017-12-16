@@ -83,25 +83,15 @@ After you've installed the extension successfully, you'll see a tab called **Rea
   <img src="./Tool.png">
 </p>
 
-**clear**
+**clear** - The clear button clears the measures from the tables and also wipes the results.
 
-The clear button clears the measures from the tables and also wipes the results.
+**Reload the inspected window** - This button reloads the inspected window and displays the new measures.
 
-**Reload the inspected window**
+**Pending events** - This indicates the pending measures (React performance data).
 
-This button reloads the inspected window and displays the new measures.
+**Table** - The table shows the time taken by a component in a phase, number of instances of a component and total time combining all the phases in **ms** and **%**.
 
-**Pending events**
-
-This indicates the pending measures (React performance data).
-
-**Table**
-
-The table shows the time taken by a component in a phase, number of instances of a component and total time combining all the phases in **ms** and **%**.
-
-**Results**
-
-This shows the following stats:
+**Results** - This shows the following stats:
 
 * Time taken by all the components:
 
