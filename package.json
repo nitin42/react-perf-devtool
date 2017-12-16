@@ -27,7 +27,7 @@
   "scripts": {
     "test": "jest",
     "build":
-      "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack --watch --config ./webpack.config.js --progress",
+      "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack --watch --config ./webpack/webpack.config.js --progress",
     "precommit": "lint-staged"
   },
   "lint-staged": {
