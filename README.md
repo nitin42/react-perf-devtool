@@ -39,9 +39,7 @@ This project started with a purpose of extending the work done by [Will Chen](ht
 
 A demo of the extension being used to examine the performance of React components on my website.
 
-<p align="center">
-  <img src="./Demo.gif">
-</p>
+<img src="./Demo.gif">
 
 ## Uses
 
@@ -55,7 +53,11 @@ A demo of the extension being used to examine the performance of React component
 
 ## Install
 
-**YET TO BE RELEASED!**
+The below extensions represent the current stable release.
+
+* [Chrome extension](https://chrome.google.com/webstore/detail/react-performance-devtool/fcombecpigkkfcbfaeikoeegkmkjfbfm)
+* **Firefox extension coming soon**
+* **Standalone app coming soon**
 
 ## Usage
 
@@ -69,9 +71,47 @@ Next, start your local development server and go to `http://localhost:3000/?reac
 
 The query parameter `react_perf` is required so that React can measure the performance timings.
 
-Now open this extension (reload if it doesn't display the measures) and it should display the performance measures for your components.
+> Note - This extension works only for React 16 or above versions of it.
 
-> Note - This extension works only for React 16 or above versions of it.  
+After you've installed the extension successfully, you'll see a tab called **React Performance** in Chrome Developer Tools.
+
+<img src="./tab.png">
+
+### Description
+
+<p align="center">
+  <img src="./Tool.png">
+</p>
+
+**clear**
+
+The clear button clears the measures from the tables and also wipes the results.
+
+**Reload the inspected window**
+
+This button reloads the inspected window and displays the new measures.
+
+**Pending events**
+
+This indicates the pending measures (React performance data).
+
+**Table**
+
+The table shows the time taken by a component in a phase, number of instances of a component and total time combining all the phases in **ms** and **%**.
+
+**Results**
+
+This shows the following stats:
+
+* Time taken by all the components:
+
+* Time duration for committing changes
+
+* Time duration for committing host effects
+
+* Time duration for calling lifecycle methods
+
+* Total time
 
 ## Phases
 
