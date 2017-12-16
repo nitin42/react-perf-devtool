@@ -1,6 +1,10 @@
 # React Performance Devtool
 
-> A chrome devtool extension for inspecting performance of React Components
+> A chrome devtool extension for inspecting the performance of React Components
+
+<p align="center">
+  <img src="./RPLogo.png">
+</p>
 
 ## Table of contents
 
@@ -11,6 +15,8 @@
 * [Uses](#uses)
 
 * [Install](#install)
+
+* [Usage](#usage)
 
 * [Phases](#phases)
 
@@ -46,5 +52,15 @@ A demo of the extension being used to examine the performance of React component
 ### Install
 
 **YET TO BE RELEASED!**
+
+### Usage
+
+To use this tool in development mode, you'll need to comment one line in `react-dom` package so that the performance measures can be apprehended by this tool. To do this, go to `node_modules/react-dom/cjs/react-dom.development.js` inside your project folder and comment this line `performance.clearMeasures(measurementName);`.
+
+Start your local development server and go to http://127.0.0.1:3000/?react_perf. Query parameter `react_perf` is required so that React can measure the performance timings.
+
+Now open this extension and it should display the measures for your components.
+
+> Note - This extension works only for React 16 or above versions of it.  
 
 ### Phases
