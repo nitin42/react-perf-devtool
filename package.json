@@ -25,7 +25,7 @@
     "webpack": "^3.10.0"
   },
   "scripts": {
-    "test": "jest --watch",
+    "test": "jest",
     "build":
       "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack --watch --config ./webpack.config.js --progress",
     "precommit": "lint-staged"
