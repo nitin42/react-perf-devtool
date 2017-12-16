@@ -75,12 +75,12 @@ The query parameter `react_perf` is required so that React can measure the perfo
 
 After you've installed the extension successfully, you'll see a tab called **React Performance** in Chrome Developer Tools.
 
-<img src="./tab">
+<img src="./tab.png">
 
 ### Description
 
 <p align="center">
-  <img src="./Tool">
+  <img src="./Tool.png">
 </p>
 
 **clear**
