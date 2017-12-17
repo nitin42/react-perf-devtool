@@ -1,5 +1,7 @@
 # React Performance Devtool
 [![Build Status](https://travis-ci.org/nitin42/react-perf-devtool.svg?branch=master)](https://travis-ci.org/nitin42/react-perf-devtool)
+![Release Status](https://img.shields.io/badge/status-stable-brightgreen.svg)
+![Author](https://img.shields.io/badge/author-Nitin%20Tulswani-lightgrey.svg)
 
 > A chrome devtool extension for inspecting the performance of React Components
 
