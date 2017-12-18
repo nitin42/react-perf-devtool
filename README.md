@@ -81,7 +81,7 @@ After you've installed the extension successfully, you'll see a tab called **Rea
 
 <img src="./art/tab.png">
 
-**Note**
+**Note - **
 
 This is a rudimentary tool and still needs a lot of work internally. Right now, this will only work with React 16 plus it may break later when there is a new update (async rendering in React). Displayed stats and results for async rendered components will be completely different when compared to what is shown currently. Also, I think it would be waste of time if I work on adding cosmetic features (not saying that it's useless but, time is a big constraint). I've plans to improve this tool further which includes :
 
