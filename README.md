@@ -69,7 +69,7 @@ To use this tool in development mode, you'll need to comment one line in `react-
 ```
 performance.clearMeasures(measurementName);
 ```
-> You can find this line inside the `markEnd` function.
+> You can find this line inside the `endMark` function.
 
 Next, start your local development server and go to `http://localhost:3000/?react_perf`.
 
