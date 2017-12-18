@@ -135,8 +135,13 @@ class ReactPerfDevtool extends React.Component {
   };
 
   render() {
+    console.log(chrome.devtools);
     return (
-      <div>
+      <div
+        style={{
+          color: chrome.devtools.panels.themeName === "dark" ? "white" : "black"
+        }}
+      >
         <div style={{ display: "inlineBlock" }}>
           <button onClick={this.clear}>Clear</button>
           <button onClick={this.reload}>Reload the inspected page</button>
