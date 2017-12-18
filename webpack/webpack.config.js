@@ -1,24 +1,24 @@
-const path = require("path");
-const webpack = require("webpack");
-const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+const path = require('path')
+const webpack = require('webpack')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 const output = () => ({
-  filename: "ReactPerfDevtool.js",
-  path: path.resolve(__dirname, "../extension/build"),
-  publicPath: "/",
-  libraryTarget: "umd"
-});
+  filename: 'ReactPerfDevtool.js',
+  path: path.resolve(__dirname, '../extension/build'),
+  publicPath: '/',
+  libraryTarget: 'umd'
+})
 
 const externals = () => ({
-  react: "react"
-});
+  react: 'react'
+})
 
 const jsLoader = () => ({
   test: /\.js$/,
-  include: path.resolve(__dirname, "../src"),
-  exclude: ["node_modules"],
-  use: "babel-loader"
-});
+  include: path.resolve(__dirname, '../src'),
+  exclude: ['node_modules'],
+  use: 'babel-loader'
+})
 
 const plugins = () => [
   new webpack.LoaderOptionsPlugin({
@@ -26,19 +26,19 @@ const plugins = () => [
     debug: false
   }),
   new webpack.DefinePlugin({
-    "process.env.NODE_ENV": "production"
+    'process.env.NODE_ENV': 'production'
   }),
   new webpack.optimize.ModuleConcatenationPlugin(),
   new UglifyJSPlugin()
-];
+]
 
 module.exports = {
-  entry: path.resolve(__dirname, "../src/index.js"),
+  entry: path.resolve(__dirname, '../src/index.js'),
   output: output(),
-  target: "web",
+  target: 'web',
   externals: externals(),
   module: {
     rules: [jsLoader()]
   },
   plugins: plugins()
-};
+}
