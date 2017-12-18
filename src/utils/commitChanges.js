@@ -8,11 +8,13 @@ function updateStore(store, measure, delimiter) {
     if (measureName.includes('(Committing Changes)')) {
       if (!store['Committing Changes']) {
         store['Committing Changes'] = {
-          timeSpent: [],
+          timeSpent: []
         }
       }
 
-      store['Committing Changes'].timeSpent.push(Number((measure.duration).toFixed(2)))
+      store['Committing Changes'].timeSpent.push(
+        Number(measure.duration.toFixed(2))
+      )
     }
   }
 }

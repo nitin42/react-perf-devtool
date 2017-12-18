@@ -6,7 +6,7 @@ function updateStore(store, measure) {
     const measureName = measure.name.split('⚛ ').join('')
 
     if (measureName.includes('Calling Lifecycle Methods')) {
-      const totalMethods = Number(measureName.split(":")[1].split(" ")[1])
+      const totalMethods = Number(measureName.split(':')[1].split(' ')[1])
       if (!store['Calling Lifecycle Methods']) {
         store['Calling Lifecycle Methods'] = {
           timeSpent: [],
@@ -14,7 +14,9 @@ function updateStore(store, measure) {
         }
       }
 
-      store['Calling Lifecycle Methods'].timeSpent.push(Number((measure.duration).toFixed(2)))
+      store['Calling Lifecycle Methods'].timeSpent.push(
+        Number(measure.duration.toFixed(2))
+      )
       store['Calling Lifecycle Methods'].totalMethods.push(totalMethods)
     }
   }

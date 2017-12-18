@@ -16,5 +16,5 @@ function percent(num) {
 module.exports = {
   add,
   average,
-  percent,
+  percent
 }

@@ -5,40 +5,40 @@ function createSchema() {
   return {
     // Phases
     mount: {
-      timeSpent: [],
+      timeSpent: []
     },
     unmount: {
-      timeSpent: [],
+      timeSpent: []
     },
     update: {
-      timeSpent: [],
+      timeSpent: []
     },
     render: {
-      timeSpent: [],
+      timeSpent: []
     },
 
     // Lifecycle hooks
     componentWillMount: {
-      timeSpent: [],
+      timeSpent: []
     },
     componentDidMount: {
-      timeSpent: [],
+      timeSpent: []
     },
     componentWillReceiveProps: {
-      timeSpent: [],
+      timeSpent: []
     },
     shouldComponentUpdate: {
-      timeSpent: [],
+      timeSpent: []
     },
     componentWillUpdate: {
-      timeSpent: [],
+      timeSpent: []
     },
     componentDidUpdate: {
-      timeSpent: [],
+      timeSpent: []
     },
     componentWillUnmount: {
-      timeSpent: [],
-    },
+      timeSpent: []
+    }
   }
 }
 

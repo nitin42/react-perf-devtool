@@ -6,7 +6,7 @@ function updateStore(store, measure) {
     const measureName = measure.name.split('⚛ ').join('')
 
     if (measureName.includes('Committing Host Effects')) {
-      const totalEffects = Number(measureName.split(":")[1].split(" ")[1])
+      const totalEffects = Number(measureName.split(':')[1].split(' ')[1])
       if (!store['Committing Host Effects']) {
         store['Committing Host Effects'] = {
           timeSpent: [],
@@ -14,7 +14,9 @@ function updateStore(store, measure) {
         }
       }
 
-      store['Committing Host Effects'].timeSpent.push(Number((measure.duration).toFixed(2)))
+      store['Committing Host Effects'].timeSpent.push(
+        Number(measure.duration.toFixed(2))
+      )
       store['Committing Host Effects'].totalEffects.push(totalEffects)
     }
   }
@@ -46,5 +48,5 @@ function getTotalEffects(store) {
 
 module.exports = {
   getTotalEffects,
-  getCommitHostEffectsTime,
+  getCommitHostEffectsTime
 }

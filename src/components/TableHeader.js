@@ -1,60 +1,60 @@
-const React = require("react");
+const React = require('react')
 
 let HEADERS = [
   {
-    name: "Components",
-    popup: "Name of your React component"
+    name: 'Components',
+    popup: 'Name of your React component'
   },
   {
-    name: "Total time (ms)",
-    popup: "Total time taken combining all the phases (ms)"
+    name: 'Total time (ms)',
+    popup: 'Total time taken combining all the phases (ms)'
   },
   {
-    name: "Count",
-    popup: "Component instances"
+    name: 'Count',
+    popup: 'Component instances'
   },
   {
-    name: "Total time (%)",
-    popup: "Total time taken combining all the phases (%)"
+    name: 'Total time (%)',
+    popup: 'Total time taken combining all the phases (%)'
   },
   {
-    name: "Mount (ms)",
-    popup: "Component mount time"
+    name: 'Mount (ms)',
+    popup: 'Component mount time'
   },
   {
-    name: "Update (ms)",
-    popup: "Component update time"
+    name: 'Update (ms)',
+    popup: 'Component update time'
   },
   {
-    name: "Render (ms)",
-    popup: "Component render time"
+    name: 'Render (ms)',
+    popup: 'Component render time'
   },
   {
-    name: "Unmount (ms)",
-    popup: "Component unmount time"
+    name: 'Unmount (ms)',
+    popup: 'Component unmount time'
   },
   {
-    name: "componentWillMount"
+    name: 'componentWillMount'
   },
   {
-    name: "componentDidMount"
+    name: 'componentDidMount'
   },
   {
-    name: "componentWillReceiveProps"
+    name: 'componentWillReceiveProps'
   },
   {
-    name: "shouldComponentUpdate"
+    name: 'shouldComponentUpdate'
   },
   {
-    name: "componentWillUpdate"
+    name: 'componentWillUpdate'
   },
   {
-    name: "componentDidUpdate"
+    name: 'componentDidUpdate'
   },
   {
-    name: "componentWillUnmount"
+    name: 'componentWillUnmount'
   }
-];
+]
 
 /**
   This component renders the table headers (and popups for some phases!)
@@ -70,10 +70,10 @@ function TableHeader() {
               <div className="popup">{header.popup}</div>
             ) : null}
           </th>
-        );
+        )
       })}
     </tr>
-  );
+  )
 }
 
-module.exports = TableHeader;
+module.exports = TableHeader

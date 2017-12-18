@@ -1,12 +1,12 @@
-const React = require("react");
+const React = require('react')
 
-const getReactPerformanceData = require("../utils/parse");
-const generateDataFromMeasures = require("../utils/generate");
+const getReactPerformanceData = require('../utils/parse')
+const generateDataFromMeasures = require('../utils/generate')
 
-const Table = require("./Table");
-const Results = require("./Results");
+const Table = require('./Table')
+const Results = require('./Results')
 
-let store = [];
+let store = []
 
 /**
   This is the main component that renders the table, containing information about
@@ -15,10 +15,10 @@ let store = [];
   and calling all the lifecycle methods.
 */
 class ReactPerfDevtool extends React.Component {
-  timer = null;
+  timer = null
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       // Contains the React performance data. This value flows indirectly to TableData component instead of relying on context.
       perfData: [],
@@ -26,20 +26,20 @@ class ReactPerfDevtool extends React.Component {
       pendingEvents: 0, // Pending event count.
       rawMeasures: [], // Raw measures output. It is used for rendering the overall results.
       loading: false // To show the loading output while collecting the results.
-    };
+    }
   }
 
   componentDidMount() {
     // We are collecting the results,
-    this.setState({ loading: true });
+    this.setState({ loading: true })
 
     // Set the timer, and get the total measures and flush them if the store is empty.
-    this.timer = setInterval(() => this.getMeasuresLength(), 2000);
+    this.timer = setInterval(() => this.getMeasuresLength(), 2000)
   }
 
   componentWillUnmount() {
     // Clear the timer.
-    clearInterval(this.timer);
+    clearInterval(this.timer)
   }
 
   getMeasuresLength = () => {
@@ -47,52 +47,52 @@ class ReactPerfDevtool extends React.Component {
       "performance.getEntriesByType('measure').length",
       (count, error) => {
         if (error) {
-          console.error("Error", error);
-          return;
+          console.error('Error', error)
+          return
         }
 
         // Update the event count.
-        this.updateEventsCount(JSON.parse(count));
+        this.updateEventsCount(JSON.parse(count))
       }
-    );
-  };
+    )
+  }
 
   updateEventsCount = count => {
     this.setState({
       pendingEvents: count,
       loading: false
-    });
+    })
 
     // Render the measures if the store is empty.
-    this.shouldRenderMeasures();
-  };
+    this.shouldRenderMeasures()
+  }
 
   shouldRenderMeasures = () => {
     if (this.state.perfData.length === 0) {
       // Get the performance measures.
-      this.getMeasures();
+      this.getMeasures()
     }
-  };
+  }
 
   getMeasures = () => {
     chrome.devtools.inspectedWindow.eval(
       "JSON.stringify(performance.getEntriesByType('measure'))",
       (measures, error) => {
         if (error) {
-          console.error("Error", error);
-          return;
+          console.error('Error', error)
+          return
         }
         // Update the state.
-        this.updateMeasures(JSON.parse(measures));
+        this.updateMeasures(JSON.parse(measures))
       }
-    );
-  };
+    )
+  }
 
   updateMeasures = measures => {
-    store = store.concat(measures);
+    store = store.concat(measures)
 
     // Parse the performance data.
-    const data = generateDataFromMeasures(getReactPerformanceData(store));
+    const data = generateDataFromMeasures(getReactPerformanceData(store))
 
     this.setState({
       perfData: data,
@@ -100,49 +100,49 @@ class ReactPerfDevtool extends React.Component {
         .reduce((acc, comp) => acc + comp.totalTimeSpent, 0)
         .toFixed(2),
       rawMeasures: store
-    });
+    })
 
-    this.clearMeasures();
-  };
+    this.clearMeasures()
+  }
 
   // Clear the measures.
   clearMeasures = () =>
     chrome.devtools.inspectedWindow.eval(
-      "JSON.stringify(performance.clearMeasures())"
-    );
+      'JSON.stringify(performance.clearMeasures())'
+    )
 
   // Clear the panel content.
   clear = () => {
-    store = [];
+    store = []
 
     this.setState({
       perfData: generateDataFromMeasures(getReactPerformanceData(store)),
       totalTime: 0
-    });
+    })
 
-    this.clearMeasures();
-  };
+    this.clearMeasures()
+  }
 
   // Reload.
   reload = () => {
-    this.clear();
+    this.clear()
 
-    this.setState({ loading: true });
+    this.setState({ loading: true })
 
-    window !== undefined ? window.location.reload() : null;
+    typeof window !== undefined ? window.location.reload() : null
 
-    chrome.devtools.inspectedWindow.reload();
-  };
+    chrome.devtools.inspectedWindow.reload()
+  }
 
   render() {
     return (
       <div>
-        <div style={{ display: "inlineBlock" }}>
+        <div style={{ display: 'inlineBlock' }}>
           <button onClick={this.clear}>Clear</button>
           <button onClick={this.reload}>Reload the inspected page</button>
         </div>
 
-        <div style={{ fontWeight: 500, padding: "8px" }}>
+        <div style={{ fontWeight: 500, padding: '8px' }}>
           Pending Events: {this.state.pendingEvents}
         </div>
         <Table measures={this.state.perfData} />
@@ -152,8 +152,8 @@ class ReactPerfDevtool extends React.Component {
           loading={this.state.loading}
         />
       </div>
-    );
+    )
   }
 }
 
-module.exports = ReactPerfDevtool;
+module.exports = ReactPerfDevtool

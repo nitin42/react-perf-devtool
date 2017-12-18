@@ -23,7 +23,7 @@ function plotTimings(nums) {
   return {
     averageTimeSpentMs: average(nums),
     numberOfTimes: nums.length,
-    totalTimeSpentMs: add(nums),
+    totalTimeSpentMs: add(nums)
   }
 }
 
@@ -60,7 +60,7 @@ function createSchema(store, component, totalTime) {
     ),
     componentWillUnmount: plotTimings(
       store[component.name].componentWillUnmount.timeSpent
-    ),
+    )
   }
 }
 
@@ -70,37 +70,62 @@ function generateDataFromMeasures(store) {
 
   for (let componentName in store) {
     // Default
-    componentsByTotalTime[componentName] = componentsByTotalTime[componentName] || 0
+    componentsByTotalTime[componentName] =
+      componentsByTotalTime[componentName] || 0
 
     // mount time
-    componentsByTotalTime[componentName] += add(store[componentName].mount.timeSpent)
+    componentsByTotalTime[componentName] += add(
+      store[componentName].mount.timeSpent
+    )
     // unmount time
-    componentsByTotalTime[componentName] += add(store[componentName].unmount.timeSpent)
+    componentsByTotalTime[componentName] += add(
+      store[componentName].unmount.timeSpent
+    )
     // update time
-    componentsByTotalTime[componentName] += add(store[componentName].update.timeSpent)
+    componentsByTotalTime[componentName] += add(
+      store[componentName].update.timeSpent
+    )
     // render time
-    componentsByTotalTime[componentName] += add(store[componentName].render.timeSpent)
+    componentsByTotalTime[componentName] += add(
+      store[componentName].render.timeSpent
+    )
     // time spent in componentWillMount
-    componentsByTotalTime[componentName] += add(store[componentName].componentWillMount.timeSpent)
+    componentsByTotalTime[componentName] += add(
+      store[componentName].componentWillMount.timeSpent
+    )
     // time spent in componentDidMount
-    componentsByTotalTime[componentName] += add(store[componentName].componentDidMount.timeSpent)
+    componentsByTotalTime[componentName] += add(
+      store[componentName].componentDidMount.timeSpent
+    )
     // time spent in componentWillReceiveProps
-    componentsByTotalTime[componentName] += add(store[componentName].componentWillReceiveProps.timeSpent)
+    componentsByTotalTime[componentName] += add(
+      store[componentName].componentWillReceiveProps.timeSpent
+    )
     // time spent in shouldComponentUpdate
-    componentsByTotalTime[componentName] += add(store[componentName].shouldComponentUpdate.timeSpent)
+    componentsByTotalTime[componentName] += add(
+      store[componentName].shouldComponentUpdate.timeSpent
+    )
     // time spent in componentWillUpdate
-    componentsByTotalTime[componentName] += add(store[componentName].componentWillUpdate.timeSpent)
+    componentsByTotalTime[componentName] += add(
+      store[componentName].componentWillUpdate.timeSpent
+    )
     // time spent in componentDidUpdate
-    componentsByTotalTime[componentName] += add(store[componentName].componentDidUpdate.timeSpent)
+    componentsByTotalTime[componentName] += add(
+      store[componentName].componentDidUpdate.timeSpent
+    )
     // time spent in componentWillUnmount
-    componentsByTotalTime[componentName] += add(store[componentName].componentWillUnmount.timeSpent)
+    componentsByTotalTime[componentName] += add(
+      store[componentName].componentWillUnmount.timeSpent
+    )
   }
 
   const components = alignComponents(componentsByTotalTime)
 
   const totalTime = getTotalTime(components)
 
-  return sortComponents(components).map(component => createSchema(store, component, totalTime))
+  return sortComponents(components).map(component =>
+    createSchema(store, component, totalTime)
+  )
 }
 
 module.exports = generateDataFromMeasures

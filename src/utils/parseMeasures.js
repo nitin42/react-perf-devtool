@@ -12,14 +12,14 @@ function getComponentAndPhaseName(measure) {
       const [componentName, phase] = index.split(' ')
       return {
         componentName,
-        phase,
+        phase
       }
     } else if (/\w+\.\w+/.test(index)) {
       // App.componentWillMount
       const [componentName, lifecycle] = index.split('.')
       return {
         componentName,
-        phase: lifecycle,
+        phase: lifecycle
       }
     } else {
       return null
@@ -30,7 +30,7 @@ function getComponentAndPhaseName(measure) {
     if (/\w+\.\w+/.test(index)) {
       return {
         componentName: index.split('.')[0],
-        phase: index.split('.')[1].split(' Warning:')[0],
+        phase: index.split('.')[1].split(' Warning:')[0]
       }
     } else {
       return null
