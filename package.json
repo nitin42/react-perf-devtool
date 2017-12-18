@@ -28,9 +28,14 @@
     "test": "jest",
     "build":
       "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack --watch --config ./webpack/webpack.config.js --progress",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "format":
+      "find src -name '*.js' | xargs ./node_modules/.bin/prettier --write --no-semi --single-quote"
   },
   "lint-staged": {
-    "*.{js,json}": ["./node_modules/.bin/prettier --write", "git add"]
+    "*.{js,json}": [
+      "./node_modules/.bin/prettier --write --no-semi --single-quote",
+      "git add"
+    ]
   }
 }
