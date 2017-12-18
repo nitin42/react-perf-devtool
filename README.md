@@ -1,5 +1,7 @@
 # React Performance Devtool
 [![Build Status](https://travis-ci.org/nitin42/react-perf-devtool.svg?branch=master)](https://travis-ci.org/nitin42/react-perf-devtool)
+![Release Status](https://img.shields.io/badge/status-stable-brightgreen.svg)
+![Author](https://img.shields.io/badge/author-Nitin%20Tulswani-lightgrey.svg)
 
 > A chrome devtool extension for inspecting the performance of React Components
 
@@ -67,7 +69,7 @@ To use this tool in development mode, you'll need to comment one line in `react-
 ```
 performance.clearMeasures(measurementName);
 ```
-> You can find this line inside the `markEnd` function.
+> You can find this line inside the `endMark` function.
 
 Next, start your local development server and go to `http://localhost:3000/?react_perf`.
 
@@ -78,6 +80,19 @@ The query parameter `react_perf` is required so that React can measure the perfo
 After you've installed the extension successfully, you'll see a tab called **React Performance** in Chrome Developer Tools.
 
 <img src="./art/tab.png">
+
+**Note -**
+
+This is a rudimentary tool and still needs a lot of work internally. Right now, this will only work with React 16 plus it may break later when there is a new update (async rendering in React). Displayed stats and results for async rendered components will be completely different when compared to what is shown currently. Also, I think it would be waste of time if I work on adding cosmetic features (not saying that it's useless but, time is a big constraint). I've plans to improve this tool further which includes :
+
+- [ ] New UI
+
+- [ ] Compatibility with older versions of React
+
+- [ ] Custom themes
+
+- [ ] Accessibility
+
 
 ### Description
 
@@ -116,14 +131,6 @@ Given below are the different phases for which React measures the performance:
 * **Commit host effects** - Host effects are committed whenever a new tree is inserted. With every new update that is scheduled, total host effects are calculated. This process is done in two phases, the first phase performs all the host node insertions, deletion, update and ref unmounts and the other phase performs all the lifecycle and ref callbacks.
 
 * **Commit lifecycle** - When the first pass was completed while committing the host effects, the work in progress tree became the current tree. So work in progress is current during **componentDidMount/update**. In this phase, all the lifecycles and ref callbacks are committed. **Committing lifecycles happen as a separate pass so that all the placements, updates and deletions in the entire tree have already been invoked**.
-
-## Todo
-
-- [ ] New UI
-
-- [ ] Compatibility with older versions of React
-
-- [ ] Styling (may be themes!?)
 
 ## Contributing
 
