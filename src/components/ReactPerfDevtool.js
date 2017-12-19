@@ -123,19 +123,21 @@ class ReactPerfDevtool extends React.Component {
     this.clearMeasures()
   }
 
+  browserReload = () =>
+    typeof window !== undefined ? window.location.reload() : null
+
   // Reload.
   reload = () => {
     this.clear()
 
     this.setState({ loading: true })
 
-    typeof window !== undefined ? window.location.reload() : null
+    this.browserReload()
 
     chrome.devtools.inspectedWindow.reload()
   }
 
   render() {
-    console.log(chrome.devtools)
     return (
       <div
         style={{
