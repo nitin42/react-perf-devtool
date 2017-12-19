@@ -17,6 +17,10 @@ let store = []
 class ReactPerfDevtool extends React.Component {
   timer = null
 
+  ERROR_MSG = `
+    An error occurred while collecting the measures. Please try again by reloading the inspected window or refresh the page.
+  `
+
   constructor(props) {
     super(props)
     this.state = {
@@ -25,7 +29,9 @@ class ReactPerfDevtool extends React.Component {
       totalTime: 0, // Total time taken combining all the phases.
       pendingEvents: 0, // Pending event count.
       rawMeasures: [], // Raw measures output. It is used for rendering the overall results.
-      loading: false // To show the loading output while collecting the results.
+      loading: false, // To show the loading output while collecting the results.
+      hasError: false, // Track errors, occurred when collecting the measures.
+      errorMsg: null
     }
   }
 
@@ -42,12 +48,15 @@ class ReactPerfDevtool extends React.Component {
     clearInterval(this.timer)
   }
 
+  updateErrorState = () =>
+    this.setState({ hasError: true, errorMsg: this.ERROR_MSG })
+
   getMeasuresLength = () => {
     chrome.devtools.inspectedWindow.eval(
       "performance.getEntriesByType('measure').length",
-      (count, error) => {
-        if (error) {
-          console.error('Error', error)
+      (count, err) => {
+        if (err) {
+          this.updateErrorState()
           return
         }
 
@@ -77,9 +86,9 @@ class ReactPerfDevtool extends React.Component {
   getMeasures = () => {
     chrome.devtools.inspectedWindow.eval(
       "JSON.stringify(performance.getEntriesByType('measure'))",
-      (measures, error) => {
-        if (error) {
-          console.error('Error', error)
+      (measures, err) => {
+        if (err) {
+          this.updateErrorState()
           return
         }
         // Update the state.
@@ -153,11 +162,15 @@ class ReactPerfDevtool extends React.Component {
           Pending Events: {this.state.pendingEvents}
         </div>
         <Table measures={this.state.perfData} />
-        <Results
-          rawMeasures={this.state.rawMeasures}
-          totalTime={this.state.totalTime}
-          loading={this.state.loading}
-        />
+        {this.state.hasError ? (
+          this.state.errorMsg
+        ) : (
+          <Results
+            rawMeasures={this.state.rawMeasures}
+            totalTime={this.state.totalTime}
+            loading={this.state.loading}
+          />
+        )}
       </div>
     )
   }
