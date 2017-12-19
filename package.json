@@ -1,6 +1,6 @@
 {
   "name": "react-perf-devtool",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description":
     "A chrome devtool extension for inspecting performance of React Components",
   "main": "src/index.js",
@@ -32,7 +32,8 @@
       "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack --config ./webpack/webpack.config.js --progress",
     "precommit": "lint-staged",
     "format":
-      "find src -name '*.js' | xargs ./node_modules/.bin/prettier --write --no-semi --single-quote"
+      "find src -name '*.js' | xargs ./node_modules/.bin/prettier --write --no-semi --single-quote",
+    "generate": "yarn build && zip -r extension.zip ./extension"
   },
   "lint-staged": {
     "*.{js,json}": [
