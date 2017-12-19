@@ -56,7 +56,7 @@ function Results(props) {
           Collecting measures...
         </h1>
       ) : (
-        <div>
+        <div style={{ padding: '8px' }}>
           <p>
             Time taken by all the components:{' '}
             <strong>{props.totalTime} ms</strong>
