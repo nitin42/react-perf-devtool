@@ -4,15 +4,16 @@ I'm excited to have you helping out. Thank you so much for your time 😄
 
 ## Contributing
 
-
-**Understanding the codebase**
+### Understanding the codebase
 
 The source code for the table and results lives in [`src`](./src) folder. There are two sub folders inside `src`, [`components`](./src/components) and [`utils`](./src/utils). The `components` folder contains the devtool UI components
 and `utils` contains the code which is responsible for parsing the React performance data and generating an output which is easier to work with.
 
 [`extension`](./extension) folder contains the dependencies used by `react-perf-devtool` and a [`load.js`](./extension/load.js) script to load the devtool.
 
-**Setting up the environment**
+### Setting up the development environment
+
+**Installation**
 
 Considering you've forked and cloned the repo on your system, switch to the directory and install the dependencies.
 
@@ -21,7 +22,56 @@ cd react-perf-devtool
 yarn install
 ```
 
-**Submitting pull requests**
+**Build**
+
+After you've made changes to the project, you'll need to load the unpacked extension in Chrome to test whether its working or not. For this, you'll first need to generate a build.
+
+```
+yarn build
+```
+
+Running this command will create a build directory in `./extension` folder.
+
+**Test**
+
+To test your changes, simply run `jest --watch` if you've installed Jest globally on your system or run `yarn test`.
+
+> [Read the documentation about Jest](https://facebook.github.io/jest/)
+
+**Format**
+
+To format all the files in `./src` directory, run `yarn format`. This will format all the files using [Prettier](https://prettier.io/).
+
+**Generate**
+
+To generate a `.zip` extension (required when uploading the extension), run `yarn generate`. This will create a `.zip` for the extension and will also generate a build directory.
+
+**Uploading the extension on Chrome and Firefox**
+
+This extension is cross-browser compatible because it uses the [Web Extension API](https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API) but with few changes to `manifest.json` file.
+
+To upload the extension on Google Chrome:
+
+* Generate a build using `yarn build`.
+* Go to `chrome://extensions`.
+* Load the unpacked extension by loading the `./extension` directory.
+* Start your development server (eg - localhost:3000?react_perf) and open the extension using Chrome devtools.
+* Reload the inspected window if necessary and you should see the performance measures of your React components.
+
+To upload the extension on Firefox:
+
+* Follow the same procedure for generating the build.
+* Go to `about:debugging` and check the box for *Enable add-on debugging*.
+* Then click the button **Load Temporary Add-on** and select any file from the extension directory.
+* Open the devtools and you should see the extension loaded.
+
+**Inspecting the measures**
+
+After uploading the extension in the browser, you will see that it will collect the measures using `window.performance` API and will display the performance stats in a table. Below the table, you'll see some more results which includes commit host effects time, commit changes time, lifecycle methods and total time.
+
+To learn more about these stats and different phases, see [this](https://github.com/nitin42/react-perf-devtool#description) guide.
+
+### Submitting pull requests
 
 * Create a new branch for the new feature: git checkout -b new-feature
 * Make your changes.
