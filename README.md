@@ -59,7 +59,7 @@ A demo of the extension being used to examine the performance of React component
 The below extensions represent the current stable release.
 
 * [Chrome extension](https://chrome.google.com/webstore/detail/react-performance-devtool/fcombecpigkkfcbfaeikoeegkmkjfbfm)
-* **Firefox extension coming soon**
+* [Firefox extension](https://addons.mozilla.org/en-US/firefox/addon/nitin-tulswani/)
 * **Standalone app coming soon**
 
 ## Usage
