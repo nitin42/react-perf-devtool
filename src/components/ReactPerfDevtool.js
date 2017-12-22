@@ -40,7 +40,7 @@ class ReactPerfDevtool extends React.Component {
     this.setState({ loading: true })
 
     // Set the timer, and get the total measures and flush them if the store is empty.
-    this.timer = setInterval(() => this.getMeasuresLength(), 2000)
+    this.timer = setInterval(() => this.getMeasuresLength(), 2300)
   }
 
   componentWillUnmount() {
@@ -147,6 +147,8 @@ class ReactPerfDevtool extends React.Component {
   }
 
   render() {
+    const commonStyles = { fontWeight: 500, padding: '8px' }
+
     return (
       <div
         style={{
@@ -158,18 +160,20 @@ class ReactPerfDevtool extends React.Component {
           <button onClick={this.reload}>Reload the inspected page</button>
         </div>
 
-        <div style={{ fontWeight: 500, padding: '8px' }}>
+        <div style={commonStyles}>
           Pending Events: {this.state.pendingEvents}
         </div>
-        <Table measures={this.state.perfData} />
         {this.state.hasError ? (
-          this.state.errorMsg
+          <div style={commonStyles}>{this.state.errorMsg}</div>
         ) : (
-          <Results
-            rawMeasures={this.state.rawMeasures}
-            totalTime={this.state.totalTime}
-            loading={this.state.loading}
-          />
+          <React.Fragment>
+            <Table measures={this.state.perfData} />
+            <Results
+              rawMeasures={this.state.rawMeasures}
+              totalTime={this.state.totalTime}
+              loading={this.state.loading}
+            />
+          </React.Fragment>
         )}
       </div>
     )
