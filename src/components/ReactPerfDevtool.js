@@ -149,6 +149,13 @@ class ReactPerfDevtool extends React.Component {
   render() {
     const commonStyles = { fontWeight: 500, padding: '8px' }
 
+    const buttonStyle = {
+      backgroundColor: '#3F51B5',
+      color: 'white',
+      border: '1px solid white',
+      padding: '10px'
+    }
+
     return (
       <div
         style={{
@@ -156,8 +163,12 @@ class ReactPerfDevtool extends React.Component {
         }}
       >
         <div style={{ display: 'inlineBlock' }}>
-          <button onClick={this.clear}>Clear</button>
-          <button onClick={this.reload}>Reload the inspected page</button>
+          <button style={buttonStyle} onClick={this.clear}>
+            Clear
+          </button>
+          <button style={buttonStyle} onClick={this.reload}>
+            Reload the inspected page
+          </button>
         </div>
 
         <div style={commonStyles}>
