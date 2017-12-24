@@ -83,7 +83,7 @@ After you've installed the extension successfully, you'll see a tab called **Rea
 
 <img src="./art/tab.png">
 
-> The below usage is subjected to change in V2. In V2, you'll no longer need to comment the line and restart the extension. It will use the performance observer API to listen to the perf. measurement event. Plus, it will also support logging the measures to console for inspection.
+> This usage is subjected to change in V2. In V2, you'll no longer need to comment the line and restart the extension. It will use the performance observer API to listen to the perf. measurement event. Plus, it will also support logging the measures to console for inspection.
 
 **Note -**
 
