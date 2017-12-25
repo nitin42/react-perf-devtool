@@ -12,22 +12,22 @@ var generateDataFromMeasures = require('../shared/generate')
   Calculating and aggregating the results happens inside the app frame and not in the devtool. It has its own benefits.
     * These measures can be send to a server for analyses
     * Measures can be logged to a console
-    * Particular measures can be inspected in the console with the help of configuration object
+    * Particular measures can be inspected in the console with the help of configuration object (not done with the API for it yet)
     * This also gives control to the developer on how to manage and inspect the measures apart from using the extension
 
   Trade-offs of previous version:
-    * Need to update the commonjs react-dom development bundle
+    * Need to update the commonjs react-dom development bundle (commenting the line)
     * No way of sending the measures from the app frame to the console
     * Need to query measures rather than listening to an event once
     * No control on how to inspect the measures for a particular use case (for eg - render and update performance of a component)
 
-  Options to passed to listener:
+  Options, passed to listener:
     * log (log to console)
     * port (port number to send the data to console)
 
   Callback (optional): A callback can also be passed. The callback receives the parsed and aggregated results of the performance measures.
 
-  This should only be used in development mode.
+  NOTE: This should only be used in development mode.
 */
 function registerListener({ shouldLog, port }, callback) {
   var observer = new window.PerformanceObserver(list => {
