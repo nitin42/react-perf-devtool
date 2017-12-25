@@ -126,6 +126,9 @@ class ReactPerfDevtool extends React.Component {
     this.clearMeasures()
   }
 
+  // TODO: This is not an accurate way to clear the shared state (store on the window object).
+  // When the task from the queue is executed (this.getMeasures), it checks for the internal state (perf. measures)
+  // For documents that use React, measures are rendered immediately but in other cases, this will cause an error.
   clearMeasures = () => this.evaluate(queries['clear'])
 
   // Clear the panel content.
