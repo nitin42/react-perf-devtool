@@ -11,13 +11,13 @@ function ErrorComponent() {
           <a href="#" style={{ textDecoration: 'none' }}>
             See the detailed documentation
           </a>{' '}
-          on how to register a top level listener in your React app.
+          on how to register a top level listener (an observer) in your React
+          app.
         </li>
         <br />
         <li>
           Refresh the the page or reload the inspected window if you've
-          registered the observer. This may be due to a bug in{' '}
-          <b>react-perf-devtool</b>.
+          registered the observer.
         </li>
       </ul>
     </div>
