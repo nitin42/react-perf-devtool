@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Results component should output the calculated results 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "padding": "8px",
+      }
+    }
+  >
+    <p>
+      Time taken by all the components:
+       
+      <strong>
+        124.45
+         ms
+      </strong>
+    </p>
+    <p>
+      Committing changes took:
+       
+      <strong>
+        7.35
+         ms
+      </strong>
+    </p>
+    <p>
+      Committing
+       
+      <strong>
+        8
+      </strong>
+       host effects took:
+       
+      <strong>
+        1.23
+         ms
+      </strong>
+    </p>
+    <p>
+      Calling
+       
+      <strong>
+        7
+      </strong>
+       
+      lifecycle methods took:
+       
+      <strong>
+        5.27
+         ms
+      </strong>
+    </p>
+    <p>
+      Total time:
+       
+      <strong>
+        138.30
+         
+        ms
+      </strong>
+    </p>
+  </div>
+</div>
+`;

@@ -5,7 +5,7 @@ Object {
   "App": Object {
     "componentDidMount": Object {
       "timeSpent": Array [
-        1.2199999999999136,
+        0.9200000000000159,
       ],
     },
     "componentDidUpdate": Object {
@@ -13,7 +13,7 @@ Object {
     },
     "componentWillMount": Object {
       "timeSpent": Array [
-        3.1499999999999773,
+        3.0249999999999773,
       ],
     },
     "componentWillReceiveProps": Object {
@@ -27,7 +27,7 @@ Object {
     },
     "mount": Object {
       "timeSpent": Array [
-        58.59999999999991,
+        36.875,
       ],
     },
     "render": Object {
@@ -46,17 +46,17 @@ Object {
   "Introduction": Object {
     "componentDidMount": Object {
       "timeSpent": Array [
-        0.5099999999999909,
+        0.4600000000000364,
       ],
     },
     "componentDidUpdate": Object {
       "timeSpent": Array [
-        0.849999999999909,
+        0.8100000000000023,
       ],
     },
     "componentWillMount": Object {
       "timeSpent": Array [
-        0.8000000000000114,
+        0.8350000000000364,
       ],
     },
     "componentWillReceiveProps": Object {
@@ -70,7 +70,7 @@ Object {
     },
     "mount": Object {
       "timeSpent": Array [
-        14.260000000000048,
+        11.33499999999998,
       ],
     },
     "render": Object {
@@ -84,14 +84,14 @@ Object {
     },
     "update": Object {
       "timeSpent": Array [
-        1.9149999999999636,
+        2.8349999999999795,
       ],
     },
   },
   "Main": Object {
     "componentDidMount": Object {
       "timeSpent": Array [
-        1.6650000000000773,
+        0.8099999999999454,
       ],
     },
     "componentDidUpdate": Object {
@@ -99,7 +99,7 @@ Object {
     },
     "componentWillMount": Object {
       "timeSpent": Array [
-        2.1999999999999886,
+        0.875,
       ],
     },
     "componentWillReceiveProps": Object {
@@ -113,7 +113,7 @@ Object {
     },
     "mount": Object {
       "timeSpent": Array [
-        53.05000000000001,
+        31.350000000000023,
       ],
     },
     "render": Object {
@@ -132,7 +132,7 @@ Object {
   "Message": Object {
     "componentDidMount": Object {
       "timeSpent": Array [
-        0.8949999999999818,
+        0.55499999999995,
       ],
     },
     "componentDidUpdate": Object {
@@ -140,7 +140,7 @@ Object {
     },
     "componentWillMount": Object {
       "timeSpent": Array [
-        1.2250000000000227,
+        0.6700000000000159,
       ],
     },
     "componentWillReceiveProps": Object {
@@ -154,7 +154,7 @@ Object {
     },
     "mount": Object {
       "timeSpent": Array [
-        8.740000000000066,
+        3.4149999999999636,
       ],
     },
     "render": Object {
@@ -173,7 +173,7 @@ Object {
   "Posts": Object {
     "componentDidMount": Object {
       "timeSpent": Array [
-        2.07000000000005,
+        0.8250000000000455,
       ],
     },
     "componentDidUpdate": Object {
@@ -181,7 +181,7 @@ Object {
     },
     "componentWillMount": Object {
       "timeSpent": Array [
-        1.6000000000000227,
+        1.1050000000000182,
       ],
     },
     "componentWillReceiveProps": Object {
@@ -195,7 +195,7 @@ Object {
     },
     "mount": Object {
       "timeSpent": Array [
-        6.535000000000025,
+        4.045000000000016,
       ],
     },
     "render": Object {
@@ -214,7 +214,7 @@ Object {
   "Projects": Object {
     "componentDidMount": Object {
       "timeSpent": Array [
-        0.20000000000004547,
+        0.07999999999998408,
       ],
     },
     "componentDidUpdate": Object {
@@ -222,7 +222,7 @@ Object {
     },
     "componentWillMount": Object {
       "timeSpent": Array [
-        4.044999999999959,
+        1.8450000000000273,
       ],
     },
     "componentWillReceiveProps": Object {
@@ -236,7 +236,7 @@ Object {
     },
     "mount": Object {
       "timeSpent": Array [
-        17.335000000000036,
+        9.435000000000002,
       ],
     },
     "render": Object {
@@ -250,7 +250,7 @@ Object {
     },
     "update": Object {
       "timeSpent": Array [
-        7.100000000000023,
+        3.025000000000034,
       ],
     },
   },
