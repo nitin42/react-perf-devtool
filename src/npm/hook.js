@@ -39,7 +39,6 @@ function registerListener({ shouldLog, port }, callback) {
       callback(measures)
     }
 
-    // React Perf Devtool hook
     window.__REACT_PERF_DEVTOOL_GLOBAL_STORE__ = {
       measures,
       length: list.getEntries().length,
