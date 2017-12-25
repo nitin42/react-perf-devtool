@@ -1,5 +1,5 @@
-const getReactPerformanceData = require('../src/utils/parse')
-const MEASURES = require('../samples/measures')
+var getReactPerformanceData = require('../src/shared/parse')
+var MEASURES = require('../samples/measures')
 
 describe('React Performance Data', () => {
   test('Parse component name and phase name', () => {

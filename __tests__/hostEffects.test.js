@@ -1,7 +1,10 @@
-const MEASURES = require('../samples/measures')
+var MEASURES = require('../samples/measures')
 
-const { getCommitHostEffectsTime, getTotalEffects } = require('../src/utils/hostEffects')
-const getTotalTime = require('../src/utils/totalTime')
+var {
+  getCommitHostEffectsTime,
+  getTotalEffects
+} = require('../src/shared/hostEffects')
+var getTotalTime = require('../src/shared/totalTime')
 
 describe('Committing Host Effects', () => {
   test('Sanity', () => {

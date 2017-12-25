@@ -1,7 +1,7 @@
-const MEASURES = require('../samples/measures')
+var MEASURES = require('../samples/measures')
 
-const { getLifecycleTime, getTotalMethods } = require('../src/utils/lifecycle')
-const getTotalTime = require('../src/utils/totalTime')
+var { getLifecycleTime, getTotalMethods } = require('../src/shared/lifecycle')
+var getTotalTime = require('../src/shared/totalTime')
 
 describe('Calling Lifecycle Methods', () => {
   test('Sanity', () => {
