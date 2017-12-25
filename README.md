@@ -195,6 +195,76 @@ module.exports = async req => {
 
 <img src="http://g.recordit.co/YX44uaVr3I.gif">
 
+**Schema of the measures**
+
+Below is the schema for the measures that are logged to the console.
+
+```js
+{
+  component, // Name of the component
+  mount: { // Mount time
+    averageTimeSpentMs,
+    numberOfTimes,
+    totalTimeSpentMs,
+  },
+  render: { // Render time
+    averageTimeSpentMs,
+    numberOfTimes,
+    totalTimeSpentMs,
+  },
+  update: { // Update time
+    averageTimeSpentMs,
+    numberOfTimes,
+    totalTimeSpentMs,
+  },
+  unmount: { // Unmount time
+    averageTimeSpentMs,
+    numberOfTimes,
+    totalTimeSpentMs,
+  },
+  totalTimeSpent, // Total time taken by the component combining all the phases
+  percentTimeSpent, // Percent time
+  numberOfInstances, // Number of instances of the component
+
+  // Time taken in lifecycle hooks
+  componentWillMount: {
+    averageTimeSpentMs,
+    numberOfTimes,
+    totalTimeSpentMs,
+  }
+  componentDidMount: {
+    averageTimeSpentMs,
+    numberOfTimes,
+    totalTimeSpentMs,
+  }
+  componentWillReceiveProps: {
+    averageTimeSpentMs,
+    numberOfTimes,
+    totalTimeSpentMs,
+  },
+  shouldComponentUpdate: {
+    averageTimeSpentMs,
+    numberOfTimes,
+    totalTimeSpentMs,
+  },
+  componentWillUpdate: {
+    averageTimeSpentMs,
+    numberOfTimes,
+    totalTimeSpentMs,
+  },
+  componentDidUpdate: {
+    averageTimeSpentMs,
+    numberOfTimes,
+    totalTimeSpentMs,
+  },
+  componentWillUnmount: {
+    averageTimeSpentMs,
+    numberOfTimes,
+    totalTimeSpentMs,
+  }
+}
+```
+
 ## Description
 
 <p align="center">
