@@ -1,10 +1,9 @@
 {
   "name": "react-perf-devtool",
-  "version": "2.0.0",
-  "description":
-    "A chrome devtool extension for inspecting performance of React Components",
-  "main": "src/index.js",
-  "files": ["src", "extension/build/ReactPerfDevtool.js"],
+  "version": "3.0.0-beta11",
+  "description": "A devtool for inspecting the performance of React Components",
+  "main": "src/npm/index.js",
+  "files": ["src"],
   "author": "Nitin Tulswani",
   "license": "MIT",
   "dependencies": {
@@ -21,6 +20,7 @@
     "lint-staged": "^6.0.0",
     "prettier": "^1.9.2",
     "prop-types": "^15.6.0",
+    "react-test-renderer": "^16.2.0",
     "uglifyjs-webpack-plugin": "^1.1.2",
     "webpack": "^3.10.0"
   },
