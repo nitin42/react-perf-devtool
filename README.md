@@ -3,7 +3,7 @@
 ![Release Status](https://img.shields.io/badge/status-stable-brightgreen.svg)
 ![Author](https://img.shields.io/badge/author-Nitin%20Tulswani-lightgrey.svg)
 
-> A chrome devtool extension for inspecting the performance of React Components
+> A devtool for inspecting the performance of React Components
 
 <br/>
 
@@ -13,38 +13,27 @@
 
 <br/>
 
-## Table of contents
-
-* [Introduction](#introduction)
-
-* [Demo](#demo)
-
-* [Uses](#uses)
-
-* [Install](#install)
-
-* [Usage](#usage)
-
-* [Phases](#phases)
-
-* [Contributing](#contributing)
-
-* [Closure](#closure)
-
-* [License](#license)
-
-
 ## Introduction
 
-**React Performance Devtool** is a Chrome extension for inspecting the performance of React Components. It statistically examines the performance of React components based on the measures which are collected by React using `window.performance` API.
+**React Performance Devtool** is a browser extension for inspecting the performance of React Components. It statistically examines the performance of React components based on the measures which are collected by React using `window.performance` API.
+
+Along with the browser extension, the measures can also be inspected in a console. See the [usage]() section for more details.
 
 This project started with a purpose of extending the work done by [Will Chen](https://github.com/wwwillchen) on a proposal for React performance table. You can read more about it [here](https://github.com/facebook/react-devtools/issues/801#issuecomment-350919145).
 
 ## Demo
 
+**Browser extension**
+
 A demo of the extension being used to examine the performance of React components on my website.
 
 <img src="./art/Demo.gif">
+
+**Log the measures to a console**
+
+This prints the performance measures to a console. With every re-render, measures are updated and logged to the console.
+
+<img src="http://g.recordit.co/lL4TUknQBH.gif">
 
 ## Uses
 
@@ -58,22 +47,74 @@ A demo of the extension being used to examine the performance of React component
 
 ## Install
 
+To use this devtool, you'll need to install a npm module which will register a listener (read more about this in [usage](#usage) section) and the browser extension.
+
+**Installing the extension**
+
 The below extensions represent the current stable release.
 
 * [Chrome extension](https://chrome.google.com/webstore/detail/react-performance-devtool/fcombecpigkkfcbfaeikoeegkmkjfbfm)
 * [Firefox extension](https://addons.mozilla.org/en-US/firefox/addon/nitin-tulswani/)
 * **Standalone app coming soon**
 
+**Installing the npm module**
+
+```
+npm install react-perf-devtool
+```
+
+> Note - The npm module is important and required to use the devtool. So make sure you've installed it before using the browser extension.
+
 ## Usage
 
-To use this tool in development mode, you'll need to comment one line in `react-dom` package so that the performance measures can be apprehended by this tool. To do this, go to `node_modules/react-dom/cjs/react-dom.development.js` inside your project folder and comment this line,
+This section of the documentation explain the usage of devtool and the API for registering an observer in a React app.
 
-```
-performance.clearMeasures(measurementName);
-```
-> You can find this line inside the `endMark` function.
+### Using the browser extension
 
-Next, start your local development server and go to `http://localhost:3000/?react_perf`.
+To use this devtool extension, you'll need to register an observer in your app which will observe a collection of data (performance measures) over a time.
+
+**Register observer**
+
+Registering an observer is very simple and is only one function call away. Let's see how!
+
+```js
+var registerObserver = require('react-perf-devtool')
+
+// Simple, no?
+registerObserver()
+```
+
+You can place this code inside your `index.js` file (recommended) or any other file in your app.
+
+> Note - This should only be used in development mode when you need to inspect the performance of React components. Make sure to remove it when building for production.
+
+Registering an observer hooks an object containing information about the **events** and **performance measures** of React components to the
+[window](https://developer.mozilla.org/en-US/docs/Web/API/Window/window) object, which can then be accessed inside the inspected window using [eval()](https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/devtools.inspectedWindow/eval).
+
+With every re-render, this object is updated with new measures and events count.
+The extension takes care of clearing up the memory (required to store this object) and also the cache.
+
+You can also pass an **`option`** object and an optional **`callback`** which receives an argument containing the parsed and aggregated measures
+
+**Using the callback**
+
+An optional callback can also be passed to `registerObserver` which receives parsed measures as its argument.
+
+You can use this callback to inspect the parsed and aggregated measures, or you can integrate it with any other use case. You can also leverage these performance metrics using Google Analytics by sending these measures to analytics dashboard . This process is documented [here](https://developers.google.com/web/updates/2017/06/user-centric-performance-metrics).
+
+Example -
+
+```js
+const registerObserver = require('react-perf-devtool')
+
+function callback(measures) {
+  // do something with the measures
+}
+
+registerObserver({}, callback)
+```
+
+After you've registered the observer, start your local development server and go to `http://localhost:3000/?react_perf`.
 
 The query parameter `react_perf` is required so that React can measure the performance timings.
 
@@ -83,20 +124,78 @@ After you've installed the extension successfully, you'll see a tab called **Rea
 
 <img src="./art/tab.png">
 
-**Note -**
+You can also log and inspect the measures in the console. However, the process of logging the measures is not direct as you'll need to set a server to listen for performance measures.
 
-This is a rudimentary tool and still needs a lot of work internally. Right now, this will only work with React 16 plus it may break later when there is a new update (async rendering in React). Displayed stats and results for async rendered components will be completely different when compared to what is shown currently. Also, I think it would be waste of time if I work on adding cosmetic features (not saying that it's useless but, time is a big constraint). I've plans to improve this tool further which includes :
+### Printing the measures to the console
 
-- [ ] New UI
+The performance measures can also be logged to the console. However, the process of printing the measures is not direct. You'll need to set up a server which will listen the measures. For this, you can use [micro](https://github.com/zeit/micro) by [Zeit](https://zeit.co/) which is a HTTP microservice.
 
-- [ ] Compatibility with older versions of React
-
-- [ ] Custom themes
-
-- [ ] Accessibility
+```
+npm install --save micro
+```
 
 
-### Description
+Use **option** object which is an argument to `registerObserver` to enable logging and setting up a port number.
+
+**Using the option object**
+
+```js
+{
+  shouldLog: boolean, // default value: false
+  port: number // default value: 8080
+}
+```
+
+You can pass two properties to the **`option`** object, `shouldLog` and `port`.
+
+* `shouldLog` - It takes a **boolean** value. If set to true, measures will be logged to the console.
+
+* `port` - Port number for the server where the measures will be send
+
+**Example**
+
+```js
+// index.js file in your React App
+
+var registerObserver = require('react-perf-devtool')
+
+var options = {
+  shouldLog: true,
+  port: 8080
+}
+
+function callback(measures) {
+  // do something with the measures
+}
+
+registerObserver(options, callback)
+```
+
+```js
+// server.js
+const { json } = require('micro')
+
+module.exports = async req => {
+  console.log(await json(req))
+  return 200
+}
+```
+
+```js
+// package.json
+
+{
+  "main": "server.js",
+  "scripts": {
+    "start-micro": "micro -p 8080"
+  }
+}
+
+```
+
+<img src="http://g.recordit.co/YX44uaVr3I.gif">
+
+## Description
 
 <p align="center">
   <img src="./art/Tool.png">
@@ -147,3 +246,24 @@ You can read more about optimizing performance and profiling React components at
 ## License
 
 MIT
+
+
+## Table of contents
+
+* [Introduction](#introduction)
+
+* [Demo](#demo)
+
+* [Uses](#uses)
+
+* [Install](#install)
+
+* [Usage](#usage)
+
+* [Phases](#phases)
+
+* [Contributing](#contributing)
+
+* [Closure](#closure)
+
+* [License](#license)
