@@ -56,38 +56,42 @@ function Results(props) {
           Collecting measures...
         </h1>
       ) : (
-        <div style={{ padding: '8px' }}>
-          <p>
-            Time taken by all the components:{' '}
-            <strong>{props.totalTime} ms</strong>
-          </p>
-          <p>
-            Committing changes took:{' '}
-            <strong>
-              {getResults(props.rawMeasures).commitChangesTime} ms
-            </strong>
-          </p>
-          <p>
-            Committing{' '}
-            <strong>{getResults(props.rawMeasures).totalEffects}</strong> host
-            effects took:{' '}
-            <strong>{getResults(props.rawMeasures).hostEffectsTime} ms</strong>
-          </p>
-          <p>
-            Calling{' '}
-            <strong>
-              {getResults(props.rawMeasures).totalLifecycleMethods}
-            </strong>{' '}
-            lifecycle methods took:{' '}
-            <strong>{getResults(props.rawMeasures).lifecycleTime} ms</strong>
-          </p>
-          <p>
-            Total time:{' '}
-            <strong>
-              {computeTotalTime(props.rawMeasures, props.totalTime).toFixed(2)}{' '}
-              ms
-            </strong>
-          </p>
+        <div>
+          <table className="table" style={{ width: '550', marginTop: '10' }}>
+            <tbody>
+              <tr>
+                <th>Time taken by all the components</th>
+                <td>{props.totalTime} ms</td>
+              </tr>
+              <tr>
+                <th>Committing changes took</th>
+                <td>{getResults(props.rawMeasures).commitChangesTime} ms</td>
+              </tr>
+              <tr>
+                <th>
+                  Committing {getResults(props.rawMeasures).totalEffects} host
+                  effects took
+                </th>
+                <td>{getResults(props.rawMeasures).hostEffectsTime} ms</td>
+              </tr>
+              <tr>
+                <th>
+                  Calling {getResults(props.rawMeasures).totalLifecycleMethods}{' '}
+                  lifecycle methods took
+                </th>
+                <td>{getResults(props.rawMeasures).lifecycleTime} ms</td>
+              </tr>
+              <tr>
+                <th>Total time</th>
+                <td>
+                  {computeTotalTime(props.rawMeasures, props.totalTime).toFixed(
+                    2
+                  )}{' '}
+                  ms
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       )}
     </div>
