@@ -4,8 +4,8 @@
   "name": "React Performance Devtool",
   "short_name": "react-perf-devtool",
   "description":
-    "A Chrome devtool extension for inspecting performance of React components.",
-  "version": "2.2",
+    "A devtool extension for inspecting the performance of React components.",
+  "version": "2.3",
   "devtools_page": "devtools.html",
 
   "icons": {
