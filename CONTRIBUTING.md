@@ -6,10 +6,10 @@ I'm excited to have you helping out. Thank you so much for your time 😄
 
 ### Understanding the codebase
 
-The source code for the table and results lives in [`src`](./src) folder. There are two sub folders inside `src`, [`components`](./src/components) and [`utils`](./src/utils). The `components` folder contains the devtool UI components
-and `utils` contains the code which is responsible for parsing the React performance data and generating an output which is easier to work with.
+The source code for the table and results lives in [`src`](./src) folder.
+There are three folders inside `src`, [extension](./src/extension), [npm](./src/npm), and [shared](./src/shared). The `extension` folder contains the devtool UI components, `npm` folder contains the code for registering the observer and `shared` contains the code that which is shared by both `extension` and `npm`, and is responsible for parsing the React performance data and generating an output which is easier to work with.
 
-[`extension`](./extension) folder contains the dependencies used by `react-perf-devtool` and a [`load.js`](./extension/load.js) script to load the devtool.
+In the root directory, [`extension`](./extension) folder contains the dependencies used by `react-perf-devtool` and a [`load.js`](./extension/load.js) script to load the devtool.
 
 ### Setting up the development environment
 
