@@ -29,7 +29,7 @@ var generateDataFromMeasures = require('../shared/generate')
 
   NOTE: This should only be used in development mode.
 */
-function registerListener({ shouldLog, port }, callback) {
+function registerObserver({ shouldLog, port }, callback) {
   var observer = new window.PerformanceObserver(list => {
     var measures = generateDataFromMeasures(
       getReactPerformanceData(list.getEntries())
@@ -114,4 +114,4 @@ function send(data, port) {
   )
 }
 
-module.exports = registerListener
+module.exports = registerObserver
