@@ -60,7 +60,7 @@ A demo of the extension being used to examine the performance of React component
 
 This prints the performance measures to a console. With every re-render, measures are updated and logged to the console.
 
-<img src="http://g.recordit.co/lL4TUknQBH.gif">
+<img src="http://g.recordit.co/YX44uaVr3I.gif">
 
 ## Uses
 
@@ -217,8 +217,6 @@ module.exports = async req => {
 }
 
 ```
-
-<img src="http://g.recordit.co/YX44uaVr3I.gif">
 
 **Schema of the measures**
 
