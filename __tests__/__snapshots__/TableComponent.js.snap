@@ -7,88 +7,48 @@ exports[`Table component should output the calculated results in a table 1`] = `
   <tr>
     <th>
       Components
-      <div
-        className="popup"
-      >
-        Name of your React component
-      </div>
     </th>
     <th>
       Total time (ms)
-      <div
-        className="popup"
-      >
-        Total time taken combining all the phases (ms)
-      </div>
     </th>
     <th>
       Count
-      <div
-        className="popup"
-      >
-        Component instances
-      </div>
     </th>
     <th>
       Total time (%)
-      <div
-        className="popup"
-      >
-        Total time taken combining all the phases (%)
-      </div>
     </th>
     <th>
       Mount (ms)
-      <div
-        className="popup"
-      >
-        Component mount time
-      </div>
     </th>
     <th>
       Update (ms)
-      <div
-        className="popup"
-      >
-        Component update time
-      </div>
     </th>
     <th>
       Render (ms)
-      <div
-        className="popup"
-      >
-        Component render time
-      </div>
     </th>
     <th>
       Unmount (ms)
-      <div
-        className="popup"
-      >
-        Component unmount time
-      </div>
     </th>
     <th>
-      componentWillMount
+      componentWillMount (ms)
     </th>
     <th>
-      componentDidMount
+      componentDidMount (ms)
     </th>
     <th>
-      componentWillReceiveProps
+      componentWillReceiveProps (ms)
     </th>
     <th>
-      shouldComponentUpdate
+      shouldComponentUpdate (ms)
     </th>
     <th>
-      componentWillUpdate
+      componentWillUpdate (ms)
     </th>
     <th>
-      componentDidUpdate
+      componentDidUpdate (ms)
     </th>
     <th>
-      componentWillUnmount
+      componentWillUnmount (ms)
     </th>
   </tr>
   <tr>
