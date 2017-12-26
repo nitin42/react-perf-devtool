@@ -13,6 +13,33 @@
 
 <br/>
 
+## Table of contents
+
+* [Introduction](#introduction)
+
+* [Demo](#demo)
+ * [Browser extension]()
+ * [Log the measures to console]()
+
+* [Uses](#uses)
+
+* [Install](#install)
+
+* [Usage](#usage)
+ * [Using the browser extension]()
+ * [Printing the measures to console]()
+
+* [Phases](#phases)
+
+* [Implementation](#implementation)
+
+* [Contributing](#contributing)
+
+* [Closure](#closure)
+
+* [License](#license)
+
+
 ## Introduction
 
 **React Performance Devtool** is a browser extension for inspecting the performance of React Components. It statistically examines the performance of React components based on the measures which are collected by React using `window.performance` API.
@@ -92,7 +119,7 @@ Registering an observer hooks an object containing information about the **event
 [window](https://developer.mozilla.org/en-US/docs/Web/API/Window/window) object, which can then be accessed inside the inspected window using [eval()](https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/devtools.inspectedWindow/eval).
 
 With every re-render, this object is updated with new measures and events count.
-The extension takes care of clearing up the memory (required to store this object) and also the cache.
+The extension takes care of clearing up the memory and also the cache.
 
 You can also pass an **`option`** object and an optional **`callback`** which receives an argument containing the parsed and aggregated measures
 
@@ -100,7 +127,7 @@ You can also pass an **`option`** object and an optional **`callback`** which re
 
 An optional callback can also be passed to `registerObserver` which receives parsed measures as its argument.
 
-You can use this callback to inspect the parsed and aggregated measures, or you can integrate it with any other use case. You can also leverage these performance metrics using Google Analytics by sending these measures to analytics dashboard . This process is documented [here](https://developers.google.com/web/updates/2017/06/user-centric-performance-metrics).
+You can use this callback to inspect the parsed and aggregated measures, or you can integrate it with any other use case. You can also leverage these performance measures using Google Analytics by sending these measures to analytics dashboard . This process is documented [here](https://developers.google.com/web/updates/2017/06/user-centric-performance-metrics).
 
 Example -
 
@@ -124,8 +151,6 @@ After you've installed the extension successfully, you'll see a tab called **Rea
 
 <img src="./art/tab.png">
 
-You can also log and inspect the measures in the console. However, the process of logging the measures is not direct as you'll need to set a server to listen for performance measures.
-
 ### Printing the measures to the console
 
 The performance measures can also be logged to the console. However, the process of printing the measures is not direct. You'll need to set up a server which will listen the measures. For this, you can use [micro](https://github.com/zeit/micro) by [Zeit](https://zeit.co/) which is a HTTP microservice.
@@ -135,7 +160,7 @@ npm install --save micro
 ```
 
 
-Use **option** object which is an argument to `registerObserver` to enable logging and setting up a port number.
+You can pass an **option** object as an argument to `registerObserver` to enable logging and setting up a port number.
 
 **Using the option object**
 
@@ -309,6 +334,38 @@ This extension provides the performance measurements for the React components an
 
 You can read more about optimizing performance and profiling React components at React's [official documentation](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab).
 
+## Implementation
+
+In previous version of this devtool, performance metrics were being queried instead of listening for an event type. This required to comment the line inside the `react-dom` package (`react-dom.development.js`) so that these metrics can be captured by this tool.
+
+### Trade-offs
+  * Need to update the commonjs react-dom development bundle (commenting the line)
+  * No way of sending the measures from the app frame to the console
+  * Need to query measures rather than listening to an event once
+  * No control on how to inspect the measures for a particular use case (for eg - log only the render and update performance of a component)
+
+But now in version 2, with the help of [Performance Observer]() API, an observer can be registered to listen to an event of a particular type and get the entries (performance measures). `react-perf-devtool` provides an API on top of the performance observer, a function that registers an observer.
+
+```js
+const registerObserver = require('react-perf-devtool')
+
+registerObserver()
+```
+
+This observer listens to the React performance measurement event.
+It hooks an object containing information about the events and performance measures of React components to the window object which can then be accessed inside the inspected window using eval().
+
+With every re-render, this object is updated with new measures and events count. The extension takes care of clearing up the memory and also the cache.
+
+An `option` object and an optional `callback` can also be passed to `registerObserver`. The `option` object is useful when performance measures are to be logged to a console. The `callback` receives parsed and aggregated results (metrics) as its argument which can then be used for analyses.
+### Benefits
+
+Calculating and aggregating the results happens inside the app frame and not in the devtool. It has its own benefits.
+  * These measures can be send to a server for analyses
+  * Measures can be logged to a console
+  * Particular measures can be inspected in the console with the help of configuration object (not done with the API for it yet)
+  * This also gives control to the developer on how to manage and inspect the measures apart from using the extension
+
 ## Contributing
 
 [Read the contributing guide](./CONTRIBUTING.md)
@@ -316,24 +373,3 @@ You can read more about optimizing performance and profiling React components at
 ## License
 
 MIT
-
-
-## Table of contents
-
-* [Introduction](#introduction)
-
-* [Demo](#demo)
-
-* [Uses](#uses)
-
-* [Install](#install)
-
-* [Usage](#usage)
-
-* [Phases](#phases)
-
-* [Contributing](#contributing)
-
-* [Closure](#closure)
-
-* [License](#license)
