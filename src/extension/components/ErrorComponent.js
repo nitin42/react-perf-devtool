@@ -8,7 +8,10 @@ function ErrorComponent() {
       <ul>
         <li>
           Register a top level observer in your <b>index.js</b> file.{' '}
-          <a href="https://github.com/nitin42/react-perf-devtool/tree/v2#using-the-browser-extension" style={{ textDecoration: 'none' }}>
+          <a
+            href="https://github.com/nitin42/react-perf-devtool/tree/v2#using-the-browser-extension"
+            style={{ textDecoration: 'none' }}
+          >
             See the detailed documentation
           </a>{' '}
           on how to register a top level listener (an observer) in your React
