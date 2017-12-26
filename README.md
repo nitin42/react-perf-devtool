@@ -18,16 +18,16 @@
 * [Introduction](#introduction)
 
 * [Demo](#demo)
- * [Browser extension]()
- * [Log the measures to console]()
+  * [Browser extension]()
+  * [Log the measures to console]()
 
 * [Uses](#uses)
 
 * [Install](#install)
 
 * [Usage](#usage)
- * [Using the browser extension]()
- * [Printing the measures to console]()
+  * [Using the browser extension]()
+  * [Printing the measures to console]()
 
 * [Phases](#phases)
 
