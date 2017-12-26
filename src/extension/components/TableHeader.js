@@ -1,59 +1,28 @@
 var React = require('react')
 
+// NOTE: The order is important. Don't change it!
 var HEADERS = [
-  {
-    name: 'Components',
-    popup: 'Name of your React component'
-  },
-  {
-    name: 'Total time (ms)',
-    popup: 'Total time taken combining all the phases (ms)'
-  },
-  {
-    name: 'Count',
-    popup: 'Component instances'
-  },
-  {
-    name: 'Total time (%)',
-    popup: 'Total time taken combining all the phases (%)'
-  },
-  {
-    name: 'Mount (ms)',
-    popup: 'Component mount time'
-  },
-  {
-    name: 'Update (ms)',
-    popup: 'Component update time'
-  },
-  {
-    name: 'Render (ms)',
-    popup: 'Component render time'
-  },
-  {
-    name: 'Unmount (ms)',
-    popup: 'Component unmount time'
-  },
-  {
-    name: 'componentWillMount'
-  },
-  {
-    name: 'componentDidMount'
-  },
-  {
-    name: 'componentWillReceiveProps'
-  },
-  {
-    name: 'shouldComponentUpdate'
-  },
-  {
-    name: 'componentWillUpdate'
-  },
-  {
-    name: 'componentDidUpdate'
-  },
-  {
-    name: 'componentWillUnmount'
-  }
+  // Component list
+  'Components',
+  // Total time
+  'Total time (ms)',
+  // Instances
+  'Count',
+  // Percentage time
+  'Total time (%)',
+  // Phases
+  'Mount (ms)',
+  'Update (ms)',
+  'Render (ms)',
+  'Unmount (ms)',
+  // Lifecycle hooks
+  'componentWillMount (ms)',
+  'componentDidMount (ms)',
+  'componentWillReceiveProps (ms)',
+  'shouldComponentUpdate (ms)',
+  'componentWillUpdate (ms)',
+  'componentDidUpdate (ms)',
+  'componentWillUnmount (ms)'
 ]
 
 /**
@@ -63,14 +32,7 @@ function TableHeader() {
   return (
     <tr>
       {HEADERS.map((header, index) => {
-        return (
-          <th key={index}>
-            {header.name}
-            {header.popup !== undefined ? (
-              <div className="popup">{header.popup}</div>
-            ) : null}
-          </th>
-        )
+        return <th key={index}>{header}</th>
       })}
     </tr>
   )
