@@ -29,6 +29,8 @@
   * [Using the browser extension](#using-the-browser-extension)
   * [Printing the measures to console](#printing-the-measures-to-the-console)
 
+* [Description](#description)
+
 * [Phases](#phases)
 
 * [Implementation](#implementation)
@@ -58,7 +60,7 @@ A demo of the extension being used to examine the performance of React component
 
 ### Log the measures to a console
 
-This prints the performance measures to a console. With every re-render, measures are updated and logged to the console.
+Performance measures can also be logged to a console. With every re-render, measures are updated and logged to the console.
 
 <img src="http://g.recordit.co/YX44uaVr3I.gif">
 
@@ -182,7 +184,11 @@ You can pass two properties to the **`option`** object, `shouldLog` and `port`.
 ```js
 // index.js file in your React App
 
+var React = require('react')
+var ReactDOM = require('react-dom')
 var registerObserver = require('react-perf-devtool')
+
+var Component = require('./Component') // Some React Component
 
 var options = {
   shouldLog: true,
@@ -194,11 +200,13 @@ function callback(measures) {
 }
 
 registerObserver(options, callback)
+
+ReactDOM.render(<Component />, document.getElementById('root'))
 ```
 
 ```js
 // server.js
-const { json } = require('micro')
+var { json } = require('micro')
 
 module.exports = async req => {
   console.log(await json(req))
@@ -220,7 +228,7 @@ module.exports = async req => {
 
 **Schema of the measures**
 
-Below is the schema for the measures that are logged to the console.
+Below is the schema of the performance measures that are logged to the console.
 
 ```js
 {
@@ -302,15 +310,17 @@ Below is the schema for the measures that are logged to the console.
 
 **Table** - The table shows the time taken by a component in a phase, number of instances of a component and total time combining all the phases in **ms** and **%**.
 
-**Results** - This shows the following stats:
+**Results**
 
-* Time taken by all the components:
+<img src="https://i.gyazo.com/27a3fc562fba33a36ca7ea9568563990.png">
 
-* Time duration for committing changes
+* Time taken by all the components - Shows the time taken by all the components (combining all the phases).
 
-* Time duration for committing host effects
+* Time duration for committing changes - Shows the time spent in committing changes. Read more about this [here]()
 
-* Time duration for calling lifecycle methods
+* Time duration for committing host effects - Shows the time spent in committing host effects i.e committing when a new tree is inserted (update) and no. of host effects (effect count in commit).
+
+* Time duration for calling lifecycle methods - Reports the time duration of calling lifecycle hooks and total no of methods called, when a lifecycle hook schedules a cascading update.
 
 * Total time
 
