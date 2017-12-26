@@ -37,8 +37,6 @@
 
 * [Contributing](#contributing)
 
-* [Closure](#closure)
-
 * [License](#license)
 
 
@@ -335,12 +333,6 @@ Given below are the different phases for which React measures the performance:
 * **Commit host effects** - Host effects are committed whenever a new tree is inserted. With every new update that is scheduled, total host effects are calculated. This process is done in two phases, the first phase performs all the host node insertions, deletion, update and ref unmounts and the other phase performs all the lifecycle and ref callbacks.
 
 * **Commit lifecycle** - When the first pass was completed while committing the host effects, the work in progress tree became the current tree. So work in progress is current during **componentDidMount/update**. In this phase, all the lifecycles and ref callbacks are committed. **Committing lifecycles happen as a separate pass so that all the placements, updates and deletions in the entire tree have already been invoked**.
-
-## Closure
-
-This extension provides the performance measurements for the React components and supports only React 16 at the moment. However, you can profile your React components using Chrome devtools and reason about the performance by inspecting the user timeline. Also, you can see that the tool is very minimal. I've plans to extend this project further but I'm anticipating that React may provide an API for measuring the performance (which could ease the process) and also enable async rendering.
-
-You can read more about optimizing performance and profiling React components at React's [official documentation](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab).
 
 ## Implementation
 
