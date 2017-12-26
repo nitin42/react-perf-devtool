@@ -19,7 +19,7 @@
 
 * [Demo](#demo)
   * [Browser extension](#browser-extension)
-  * [Log the measures to console](#log-the-measures-to-console)
+  * [Log the measures to console](#log-the-measures-to-a-console)
 
 * [Uses](#uses)
 
@@ -27,7 +27,7 @@
 
 * [Usage](#usage)
   * [Using the browser extension](#using-the-browser-extension)
-  * [Printing the measures to console](#printing-the-measures-to-console)
+  * [Printing the measures to console](#printing-the-measures-to-the-console)
 
 * [Phases](#phases)
 
