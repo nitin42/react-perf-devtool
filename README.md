@@ -342,7 +342,7 @@ In previous version of this devtool, performance metrics were being queried inst
   * Need to query measures rather than listening to an event once
   * No control on how to inspect the measures for a particular use case (for eg - log only the render and update performance of a component)
 
-But now in version 2, with the help of [Performance Observer]() API, an observer can be registered to listen to an event of a particular type and get the entries (performance measures). `react-perf-devtool` provides an API on top of the performance observer, a function that registers an observer.
+But now in version 2, with the help of [Performance Observer](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver) API, an observer can be registered to listen to an event of a particular type and get the entries (performance measures). `react-perf-devtool` provides an API on top of the performance observer, a function that registers an observer.
 
 ```js
 const registerObserver = require('react-perf-devtool')
