@@ -18,16 +18,16 @@
 * [Introduction](#introduction)
 
 * [Demo](#demo)
-  * [Browser extension]()
-  * [Log the measures to console]()
+  * [Browser extension](browser-extension)
+  * [Log the measures to console](log-the-measures-to-console)
 
 * [Uses](#uses)
 
 * [Install](#install)
 
 * [Usage](#usage)
-  * [Using the browser extension]()
-  * [Printing the measures to console]()
+  * [Using the browser extension](using-the-browser-extension)
+  * [Printing the measures to console](printing-the-measures-to-console)
 
 * [Phases](#phases)
 
@@ -50,13 +50,13 @@ This project started with a purpose of extending the work done by [Will Chen](ht
 
 ## Demo
 
-**Browser extension**
+### Browser extension
 
 A demo of the extension being used to examine the performance of React components on my website.
 
 <img src="./art/Demo.gif">
 
-**Log the measures to a console**
+### Log the measures to a console
 
 This prints the performance measures to a console. With every re-render, measures are updated and logged to the console.
 
