@@ -366,6 +366,13 @@ Calculating and aggregating the results happens inside the app frame and not in 
   * Particular measures can be inspected in the console with the help of configuration object (not done with the API for it yet)
   * This also gives control to the developer on how to manage and inspect the measures apart from using the extension
 
+## Todos / Ideas / Improvements
+
+- [ ] New UI for devtool
+- [ ] Make the implementation of measures generator more concrete
+- [ ] Add support for older versions of React
+- [ ] Make the tool more comprehensible
+
 ## Contributing
 
 [Read the contributing guide](./CONTRIBUTING.md)
