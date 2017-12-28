@@ -6,7 +6,7 @@
   "files": ["src"],
   "author": "Nitin Tulswani",
   "license": "MIT",
-  "dependencies": {
+  "peerDependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
@@ -22,7 +22,9 @@
     "prop-types": "^15.6.0",
     "react-test-renderer": "^16.2.0",
     "uglifyjs-webpack-plugin": "^1.1.2",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "scripts": {
     "test": "jest",
