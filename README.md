@@ -90,6 +90,8 @@ The below extensions represent the current stable release.
 npm install react-perf-devtool
 ```
 
+> This extension and package also depends on react. Please make sure you have those installed as well.
+
 > Note - The npm module is important and required to use the devtool. So make sure you've installed it before using the browser extension.
 
 ## Usage
