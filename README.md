@@ -11,7 +11,7 @@
 <br/>
 
 <p align="center">
-  <img src="./art/RPLogo.png" height="200" width="200">
+  <img src="https://i.gyazo.com/332f573872d396e4f665d58e491a8ccd.png">
 </p>
 
 <br/>
