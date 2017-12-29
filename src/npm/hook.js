@@ -31,7 +31,7 @@ var generateDataFromMeasures = require('../shared/generate')
 */
 function registerObserver(params, callback) {
   params = params || {}
-  var { shouldLog, port } = params
+  var { shouldLog, port, components } = params
   var observer = new window.PerformanceObserver(list => {
     var measures = generateDataFromMeasures(
       getReactPerformanceData(list.getEntries())
@@ -49,7 +49,7 @@ function registerObserver(params, callback) {
 
     // For logging to console
     if (shouldLog) {
-      logToConsole(port, measures)
+      logToConsole(params, measures)
     }
   })
 
@@ -62,7 +62,17 @@ function registerObserver(params, callback) {
   This function logs the measures to the console. Requires a server running on a specified port. Default port number is 8080.
   TODO: Change this behaviour if Chrome lands the support for recording performance when inspecting the node apps.
 */
-function logToConsole(port, measures) {
+function logToConsole({ port, components }, measures) {
+  if (!components) {
+    logMeasures(port, measures)
+  } else if (typeof components !== undefined && Array.isArray(components)) {
+    var requiredMeasures = getRequiredMeasures(components, measures)
+
+    logMeasures(port, requiredMeasures)
+  }
+}
+
+function logMeasures(port, measures) {
   measures.forEach(
     ({
       componentName,
@@ -114,6 +124,22 @@ function send(data, port) {
     }`,
     JSON.stringify(data, null, 2)
   )
+}
+
+function getRequiredMeasures(components, measures) {
+  var requiredMeasures = []
+
+  if (!Array.isArray(components)) {
+    components = [components]
+  }
+
+  measures.forEach(measure => {
+    if (components.includes(measure.componentName)) {
+      requiredMeasures.push(measure)
+    }
+  })
+
+  return requiredMeasures
 }
 
 module.exports = registerObserver
