@@ -297,6 +297,28 @@ Below is the schema of the performance measures that are logged to the console.
 }
 ```
 
+**components**
+
+You can also inspect the performance of specific components using options through **`components`** property.
+
+<img src="http://g.recordit.co/sAQGSOrCA7.gif">
+
+Example -
+
+```js
+var options = {
+  shouldLog: true,
+  port: 3000,
+  components: ['App', 'Main'] // Assuming you've these components in your project
+}
+
+function callback(measures) {
+  // do something with measures
+}
+
+registerObserver(options, callback)
+```
+
 ## Description
 
 <p align="center">
