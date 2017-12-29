@@ -1,6 +1,6 @@
 {
   "name": "react-perf-devtool",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A devtool for inspecting the performance of React Components",
   "main": "src/npm/index.js",
   "files": ["src"],
