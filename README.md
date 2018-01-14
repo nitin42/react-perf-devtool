@@ -45,7 +45,7 @@
 
 **React Performance Devtool** is a browser extension for inspecting the performance of React Components. It statistically examines the performance of React components based on the measures which are collected by React using `window.performance` API.
 
-Along with the browser extension, the measures can also be inspected in a console. See the [usage]() section for more details.
+Along with the browser extension, the measures can also be inspected in a console. See the [usage](#usage) section for more details.
 
 This project started with a purpose of extending the work done by [Will Chen](https://github.com/wwwillchen) on a proposal for React performance table. You can read more about it [here](https://github.com/facebook/react-devtools/issues/801#issuecomment-350919145).
 
