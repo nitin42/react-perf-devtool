@@ -1,7 +1,7 @@
 var React = require('react')
 var ReactTestRenderer = require('react-test-renderer')
 
-var Table = require('../src/extension/components/Table')
+var Table = require('../src/extension/components/Metrics')
 
 var rawMeasures = require('../samples/measures')
 

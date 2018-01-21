@@ -1,15 +1,14 @@
-var React = require('react')
-var Metrics = require('./Metrics')
-var Results = require('./Results')
-var ErrorComponent = require('./ErrorComponent')
-
-var Measures = require('./Measures')
+const React = require('react')
+const Metrics = require('./Metrics')
+const Results = require('./Results')
+const ErrorComponent = require('./ErrorComponent')
+const Measures = require('./Measures')
 
 // Stores the measures
-var store = []
+let store = []
 
 // These fields are evaluated in the inspectedWindow to get information about measures.
-var queries = {
+let queries = {
   measuresLength: 'JSON.stringify(__REACT_PERF_DEVTOOL_GLOBAL_STORE__.length)',
   measures: 'JSON.stringify(__REACT_PERF_DEVTOOL_GLOBAL_STORE__.measures)',
   rawMeasures:
@@ -30,9 +29,10 @@ var queries = {
 class ReactPerfDevtool extends React.Component {
   timer = null
   evaluate = chrome.devtools.inspectedWindow.eval
-  refresh = chrome.devtools.inspectedWindow.reload
   panelStyles = {
-    color: chrome.devtools.panels.themeName === 'dark' ? 'white' : 'black'
+    color: chrome.devtools.panels.themeName === 'dark' ? 'white' : 'black',
+    fontFamily: 'Metrophobic, Georgia, Serif',
+    fontSize: '15px'
   }
 
   constructor(props) {
@@ -47,7 +47,19 @@ class ReactPerfDevtool extends React.Component {
     }
   }
 
+  reloadInspectedWindow = () => chrome.devtools.inspectedWindow.reload()
+
+  componentWillMount() {
+    // When the devtool is launched first, measures may not be available.
+    // Reload the window again to get the new measures and then display them.
+    // TODO: Remove this hack (possible architecture change)
+    if (store.length === 0) {
+      this.reloadInspectedWindow()
+    }
+  }
+
   componentDidMount() {
+    // Display the loading indicator
     this.setState({ loading: true })
 
     // Get the total measures and flush them if the store is empty.
@@ -60,7 +72,9 @@ class ReactPerfDevtool extends React.Component {
 
   getMeasuresLength = () => {
     this.evaluate(queries['measuresLength'], (count, err) => {
-      if (err) {
+      // TODO: Inspect this behaviour (possibly a bug)
+      // We need to check the measures count also because it may happen that a user reloads the page and see no results.
+      if (err && count === 0) {
         this.setState({ hasError: true })
         return
       }
@@ -128,8 +142,6 @@ class ReactPerfDevtool extends React.Component {
   }
 
   // TODO: This is not an accurate way to clear the shared state (store on the window object).
-  // When the task from the queue is executed (this.getMeasures), it checks for the internal state (perf. measures)
-  // For documents that use React, measures are rendered immediately but in other cases, this will cause an error.
   clearMeasures = () => this.evaluate(queries['clear'])
 
   // Clear the panel content.
@@ -157,21 +169,43 @@ class ReactPerfDevtool extends React.Component {
     // This avoids a flash when the inspected window is reloaded.
     this.setState({ loading: true })
 
-    chrome.devtools.inspectedWindow.reload()
+    this.reloadInspectedWindow()
+  }
+
+  showDocLink = () => {
+    if (this.state.perfData.length > 0) {
+      return (
+        <a
+          className="doc-link"
+          style={{
+            textDecoration: 'none',
+            paddingBottom: '10px',
+            color: chrome.devtools.panels.themeName === 'dark' ? 'blue' : null
+          }}
+          target="_blank"
+          href="https://github.com/nitin42/react-perf-devtool"
+        >
+          👉 &nbsp;Check the documentation to learn more about how these stats
+          are calculated and different phases.
+        </a>
+      )
+    }
   }
 
   render() {
-    // loading
     if (this.state.loading) {
       return (
         <div>
           <div className="loader-container">
             <div className="loader" />
           </div>
-          <p className="loading-text">Connecting...</p>
+          <p className="loading-text">
+            Connecting to React Performance Devtool...
+          </p>
         </div>
       )
     }
+
     return (
       <div style={this.panelStyles}>
         <div style={{ display: 'inlineBlock' }}>
@@ -179,9 +213,9 @@ class ReactPerfDevtool extends React.Component {
             Clear
           </button>
           <button className="btn" onClick={this.reload}>
-            Reload the inspected page
+            Reload
           </button>
-          <span style={{ fontWeight: 500, padding: '8px' }}>
+          <span style={{ fontWeight: 'bold', padding: '8px' }}>
             Pending Events: {this.state.pendingEvents}
           </span>
         </div>
@@ -196,6 +230,7 @@ class ReactPerfDevtool extends React.Component {
               loading={this.state.loading}
             />
             <Measures measures={this.state.perfData} />
+            {this.showDocLink()}
           </React.Fragment>
         )}
       </div>

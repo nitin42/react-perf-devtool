@@ -1,26 +1,36 @@
-var React = require('react')
-var ProgressLoader = require('./ProgressLoader')
+const React = require('react')
+
+const ProgressLoader = require('./ProgressLoader')
+
+// Align the overview pane
+const calign = {
+  margin: '0',
+  paddingLeft: '10',
+  paddingRight: '10',
+  paddingTop: '10',
+  textAlign: 'center',
+  cursor: 'pointer',
+  fontFamily: 'Metrophobic, Georgia, Serif',
+  fontSize: '13px'
+}
+
+// Style links for components
+const setHrefStyles = theme =>
+  theme === 'dark'
+    ? { textDecoration: 'none', color: '#eff1f4' }
+    : { textDecoration: 'none', color: 'black' }
 
 function ComponentTime(props) {
-  const calign = {
-    margin: '0',
-    paddingLeft: '10',
-    paddingRight: '10',
-    paddingTop: '10',
-    textAlign: 'center',
-    cursor: 'pointer'
-  }
-  const hrefStyle = {
-    textDecoration: 'none',
-    color: 'black'
-  }
+  const theme = chrome.devtools.panels.themeName
+
   return (
     <div style={calign}>
-      <a style={hrefStyle} href={`#${props.componentname}`}>
+      <a style={setHrefStyles(theme)} href={`#${props.componentname}`}>
         <ProgressLoader
           strokeWidth="2"
           sqSize="50"
           percentage={props.percentage}
+          theme={props.theme}
         />
         <p>
           {props.componentname} - {props.msec} ms

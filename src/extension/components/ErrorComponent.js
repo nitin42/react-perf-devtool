@@ -1,4 +1,4 @@
-var React = require('react')
+const React = require('react')
 
 function ErrorComponent() {
   return (
@@ -7,7 +7,7 @@ function ErrorComponent() {
       try these solutions:
       <ul>
         <li>
-          Register a top level observer in your <b>index.js</b> file.{' '}
+          Make sure you have registered a top level observer in your project.{' '}
           <a
             href="https://github.com/nitin42/react-perf-devtool/tree/v2#using-the-browser-extension"
             style={{ textDecoration: 'none' }}
@@ -15,13 +15,10 @@ function ErrorComponent() {
             See the detailed documentation
           </a>{' '}
           on how to register a top level listener (an observer) in your React
-          app.
+          project app.
         </li>
         <br />
-        <li>
-          Refresh the the page or reload the inspected window if you've
-          registered the observer.
-        </li>
+        <li>Refresh the the page or reload the inspected window.</li>
       </ul>
     </div>
   )

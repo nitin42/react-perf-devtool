@@ -1,14 +1,15 @@
 html {
-    font-family: "Times New Roman", Georgia, Serif;
+    font-family: "Metrophobic", Georgia, Serif;
   }
 table {
-    font-family: arial, sans-serif;
+    font-family: "Metrophobic", Georgia, Serif;
     border-collapse: collapse;
     width: 100%;
 }
+
 tr td:last-child {text-align:right}
 td, th {
-    font-size: 14px;
+    font-size: 15px;
     border-bottom: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
@@ -25,6 +26,18 @@ td, th {
     font-size: 10px;
     font-weight: bolder;
   }
+  .overview {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f3f3f3;
+  }
+  .results {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f3f3f3;
+  }
   .loader-container{
     margin-top: 5%;
     display: flex;
@@ -39,13 +52,13 @@ td, th {
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
   }
-  
+
   /* Safari */
   @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
   }
-  
+
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -53,28 +66,44 @@ td, th {
   .loading-text{
     text-align:center;
     color:#3F51B5;
-    font-size:13px;
+    font-size:17px;
   }
- 
+
  .circle-background,
   .circle-progress {
     fill: none;
   }
-  
+
   .circle-background {
     stroke: #ddd;
   }
-  
+
   .circle-progress {
-    stroke: red;
+    stroke: #3F51B5;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-  
+
+  .circle-black-progress {
+    stroke: #ddd;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .circle-black-background {
+    stroke: black;
+  }
+
   .circle-text {
     font-size: 1.4em;
-    fill: red;
+    fill: #3F51B5;
   }
+
+  .circle-black-text {
+    font-size: 1.4em;
+    fill: #ddd;
+  }
+
   .ctime li{
     display: inline-block;
     margin-bottom: 0 !important;
@@ -88,10 +117,9 @@ td, th {
   }
   .component-progress-container{
     margin-bottom: 0 !important;
-    border-bottom: 1px solid #ccc;
   }
   .container{
-    width: 50%;
+    width: 60%;
   }
   .component-result {
     margin-top: 2%;
@@ -102,4 +130,8 @@ td, th {
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #f3f3f3;
+  }
+  .events {
+    font-size: 20px;
+    padding: 8px;
   }

@@ -1,6 +1,6 @@
-var React = require('react')
+const React = require('react')
 
-var ComponentTime = require('./ComponentTime')
+const ComponentTime = require('./ComponentTime')
 
 /**
  This component contains the performance measures of React components in Circular loader .
@@ -9,6 +9,7 @@ function Metrics(props) {
   return (
     <React.Fragment>
       <div className="component-progress-container">
+        <h1 className="overview">Overview</h1>
         <ul className="ctime">
           {props.measures.map((measure, index) => {
             return (

@@ -1,12 +1,16 @@
-var React = require('react')
-var ProgressLoader = require('./ProgressLoader')
+const React = require('react')
+
+const ProgressLoader = require('./ProgressLoader')
+
 /**
   This component renders the data (measures of each component)
 */
 function Measures(props) {
+  const theme = chrome.devtools.panels.themeName
+
   return (
-    <React.Fragment>
-      <h3 className="component-text">Components</h3>
+    <div>
+      <h1 className="component-text">Components</h1>
       {props.measures.map((measure, index) => {
         return (
           <div
@@ -14,69 +18,105 @@ function Measures(props) {
             id={measure.componentName}
             className="container component-result"
           >
-            <h3>{measure.componentName}</h3>
-            <table>
+            <h2>{measure.componentName}</h2>
+            <table style={theme === 'dark' ? { color: '#eff1f4' } : null}>
               <tr>
                 <td>Total time (ms)</td>
-                <td>{Number(measure.totalTimeSpent.toFixed(2))}</td>
+                <td>
+                  <strong>{Number(measure.totalTimeSpent.toFixed(2))}</strong>
+                </td>
               </tr>
               <tr>
-                <td>Count</td>
-                <td>{measure.numberOfInstances}</td>
+                <td>Instances</td>
+                <td>
+                  <strong>{measure.numberOfInstances}</strong>
+                </td>
               </tr>
               <tr>
                 <td>Total time (%)</td>
-                <td>{measure.percentTimeSpent}</td>
+                <td>
+                  <strong>{measure.percentTimeSpent}</strong>
+                </td>
               </tr>
               <tr>
                 <td>Mount (ms)</td>
-                <td>{measure.mount.totalTimeSpentMs}</td>
+                <td>
+                  <strong>{measure.mount.totalTimeSpentMs}</strong>
+                </td>
               </tr>
               <tr>
                 <td>Update (ms)</td>
-                <td>{measure.update.totalTimeSpentMs}</td>
+                <td>
+                  <strong>{measure.update.totalTimeSpentMs}</strong>
+                </td>
               </tr>
               <tr>
                 <td>Render (ms)</td>
-                <td>{measure.render.totalTimeSpentMs}</td>
+                <td>
+                  <strong>{measure.render.totalTimeSpentMs}</strong>
+                </td>
               </tr>
               <tr>
                 <td>Unmount (ms)</td>
-                <td>{measure.unmount.totalTimeSpentMs}</td>
+                <td>
+                  <strong>{measure.unmount.totalTimeSpentMs}</strong>
+                </td>
               </tr>
               <tr>
                 <td>componentWillMount (ms)</td>
-                <td>{measure.componentWillMount.totalTimeSpentMs}</td>
+                <td>
+                  <strong>{measure.componentWillMount.totalTimeSpentMs}</strong>
+                </td>
               </tr>
               <tr>
                 <td>componentDidMount (ms)</td>
-                <td>{measure.componentDidMount.totalTimeSpentMs}</td>
+                <td>
+                  <strong>{measure.componentDidMount.totalTimeSpentMs}</strong>
+                </td>
               </tr>
               <tr>
                 <td>componentWillReceiveProps (ms)</td>
-                <td>{measure.componentWillReceiveProps.totalTimeSpentMs}</td>
+                <td>
+                  <strong>
+                    {measure.componentWillReceiveProps.totalTimeSpentMs}
+                  </strong>
+                </td>
               </tr>
               <tr>
                 <td>shouldComponentUpdate (ms)</td>
-                <td>{measure.shouldComponentUpdate.totalTimeSpentMs}</td>
+                <td>
+                  <strong>
+                    {measure.shouldComponentUpdate.totalTimeSpentMs}
+                  </strong>
+                </td>
               </tr>
               <tr>
                 <td>componentWillUpdate (ms)</td>
-                <td>{measure.componentWillUpdate.totalTimeSpentMs}</td>
+                <td>
+                  <strong>
+                    {measure.componentWillUpdate.totalTimeSpentMs}
+                  </strong>
+                </td>
               </tr>
               <tr>
                 <td>componentDidUpdate (ms)</td>
-                <td>{measure.componentDidUpdate.totalTimeSpentMs}</td>
+                <td>
+                  <strong>{measure.componentDidUpdate.totalTimeSpentMs}</strong>
+                </td>
               </tr>
               <tr>
                 <td>componentWillUnmount (ms)</td>
-                <td>{measure.componentWillUnmount.totalTimeSpentMs}</td>
+                <td>
+                  <strong>
+                    {measure.componentWillUnmount.totalTimeSpentMs}
+                  </strong>
+                </td>
               </tr>
             </table>
           </div>
         )
       })}
-    </React.Fragment>
+    </div>
   )
 }
 

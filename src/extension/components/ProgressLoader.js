@@ -1,4 +1,4 @@
-var React = require('react')
+const React = require('react')
 
 // inspired from https://codepen.io/bbrady/pen/ozrjKE
 
@@ -18,17 +18,23 @@ function ProgressLoader(props) {
 
   const percentage = props.percentage
 
+  const theme = chrome.devtools.panels.themeName
+
   return (
     <svg width={sqSize} height={sqSize} viewBox={viewBox}>
       <circle
-        className="circle-background"
+        className={
+          theme === 'dark' ? 'circle-black-background' : 'circle-background'
+        }
         cx={sqSize / 2}
         cy={sqSize / 2}
         r={radius}
         strokeWidth={`${strokeWidth}px`}
       />
       <circle
-        className="circle-progress"
+        className={
+          theme === 'dark' ? 'circle-black-progress' : 'circle-progress'
+        }
         cx={sqSize / 2}
         cy={sqSize / 2}
         r={radius}
@@ -41,13 +47,13 @@ function ProgressLoader(props) {
         }}
       />
       <text
-        className="circle-text"
+        className={theme === 'dark' ? 'circle-black-text' : 'circle-text'}
         x="50%"
         y="50%"
         dy=".3em"
         textAnchor="middle"
       >
-        {`${percentage}`}
+        {`${percentage} %`}
       </text>
     </svg>
   )
