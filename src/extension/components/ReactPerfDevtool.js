@@ -1,8 +1,9 @@
 var React = require('react')
-
-var Table = require('./Table')
+var Metrics = require('./Metrics')
 var Results = require('./Results')
 var ErrorComponent = require('./ErrorComponent')
+
+var Measures = require('./Measures')
 
 // Stores the measures
 var store = []
@@ -160,26 +161,41 @@ class ReactPerfDevtool extends React.Component {
   }
 
   render() {
+    // loading
+    if (this.state.loading) {
+      return (
+        <div>
+          <div className="loader-container">
+            <div className="loader" />
+          </div>
+          <p className="loading-text">Connecting...</p>
+        </div>
+      )
+    }
     return (
       <div style={this.panelStyles}>
         <div style={{ display: 'inlineBlock' }}>
-          <button onClick={this.clear}>Clear</button>
-          <button onClick={this.reload}>Reload the inspected page</button>
-        </div>
-
-        <div style={{ fontWeight: 500, padding: '8px' }}>
-          Pending Events: {this.state.pendingEvents}
+          <button className="btn" onClick={this.clear}>
+            Clear
+          </button>
+          <button className="btn" onClick={this.reload}>
+            Reload the inspected page
+          </button>
+          <span style={{ fontWeight: 500, padding: '8px' }}>
+            Pending Events: {this.state.pendingEvents}
+          </span>
         </div>
         {this.state.hasError ? (
           <ErrorComponent />
         ) : (
           <React.Fragment>
-            <Table measures={this.state.perfData} />
+            <Metrics measures={this.state.perfData} />
             <Results
               rawMeasures={this.state.rawMeasures}
               totalTime={this.state.totalTime}
               loading={this.state.loading}
             />
+            <Measures measures={this.state.perfData} />
           </React.Fragment>
         )}
       </div>

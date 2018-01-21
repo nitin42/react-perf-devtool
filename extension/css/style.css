@@ -1,0 +1,105 @@
+html {
+    font-family: "Times New Roman", Georgia, Serif;
+  }
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+tr td:last-child {text-align:right}
+td, th {
+    font-size: 14px;
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+  #measures tr:nth-child(even){
+    background-color: rgba(100, 100, 100, 0.2);
+  }
+
+  button {
+    margin: 5px;
+    padding: 6px;
+    border: 0.5px solid rgba(100, 100, 100, 0.2);
+    font-size: 10px;
+    font-weight: bolder;
+  }
+  .loader-container{
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+  }
+  .loader {
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid #3F51B5;
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .loading-text{
+    text-align:center;
+    color:#3F51B5;
+    font-size:13px;
+  }
+ 
+ .circle-background,
+  .circle-progress {
+    fill: none;
+  }
+  
+  .circle-background {
+    stroke: #ddd;
+  }
+  
+  .circle-progress {
+    stroke: red;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  
+  .circle-text {
+    font-size: 1.4em;
+    fill: red;
+  }
+  .ctime li{
+    display: inline-block;
+    margin-bottom: 0 !important;
+  }
+  .btn {
+    background-color: #3F51B5;
+    color: white;
+    font-size: 14px;
+    border-radius: 4%;
+    cursor: pointer;
+  }
+  .component-progress-container{
+    margin-bottom: 0 !important;
+    border-bottom: 1px solid #ccc;
+  }
+  .container{
+    width: 50%;
+  }
+  .component-result {
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+  .component-text{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f3f3f3;
+  }

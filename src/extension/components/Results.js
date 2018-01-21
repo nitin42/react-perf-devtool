@@ -43,53 +43,57 @@ function getResults(measures) {
 */
 function Results(props) {
   return (
-    <div>
-      {props.loading ? (
-        <h1
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: '20px'
-          }}
-        >
-          Collecting measures...
-        </h1>
-      ) : (
-        <div style={{ padding: '8px' }}>
-          <p>
-            Time taken by all the components:{' '}
+    <div className="container result">
+      <h3>Result</h3>
+      <table>
+        <tr>
+          <td>Time taken by all the components</td>
+          <td>
             <strong>{props.totalTime} ms</strong>
-          </p>
-          <p>
-            Committing changes took:{' '}
+          </td>
+        </tr>
+        <tr>
+          <td>Committing changes took</td>
+          <td>
             <strong>
               {getResults(props.rawMeasures).commitChangesTime} ms
             </strong>
-          </p>
-          <p>
+          </td>
+        </tr>
+        <tr>
+          <td>
             Committing{' '}
-            <strong>{getResults(props.rawMeasures).totalEffects}</strong> host
-            effects took:{' '}
+            <strong> {getResults(props.rawMeasures).totalEffects} </strong> host
+            effects took
+          </td>
+          <td>
             <strong>{getResults(props.rawMeasures).hostEffectsTime} ms</strong>
-          </p>
-          <p>
+          </td>
+        </tr>
+        <tr>
+          <td>
             Calling{' '}
             <strong>
-              {getResults(props.rawMeasures).totalLifecycleMethods}
+              {' '}
+              {getResults(props.rawMeasures).totalLifecycleMethods}{' '}
             </strong>{' '}
-            lifecycle methods took:{' '}
+            lifecycle methods took
+          </td>
+          <td>
             <strong>{getResults(props.rawMeasures).lifecycleTime} ms</strong>
-          </p>
-          <p>
-            Total time:{' '}
+          </td>
+        </tr>
+        <tr>
+          <td>Total time</td>
+          <td>
+            {' '}
             <strong>
               {computeTotalTime(props.rawMeasures, props.totalTime).toFixed(2)}{' '}
               ms
             </strong>
-          </p>
-        </div>
-      )}
+          </td>
+        </tr>
+      </table>
     </div>
   )
 }
