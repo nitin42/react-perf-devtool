@@ -2,6 +2,8 @@ const React = require('react')
 
 const ProgressLoader = require('./ProgressLoader')
 
+const theme = require('../theme')
+
 // Align the overview pane
 const calign = {
   margin: '0',
@@ -21,8 +23,6 @@ const setHrefStyles = theme =>
     : { textDecoration: 'none', color: 'black' }
 
 function ComponentTime(props) {
-  const theme = chrome.devtools.panels.themeName
-
   return (
     <div style={calign}>
       <a style={setHrefStyles(theme)} href={`#${props.componentname}`}>

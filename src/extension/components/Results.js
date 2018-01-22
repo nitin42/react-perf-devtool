@@ -9,6 +9,8 @@ const { getLifecycleTime, getTotalMethods } = require('../../shared/lifecycle')
 
 const getTotalTime = require('../../shared/totalTime')
 
+const theme = require('../theme')
+
 // Compute the total time
 function computeTotalTime(measures, componentTotalTime) {
   let total = 0
@@ -38,7 +40,16 @@ function getResults(measures) {
 }
 
 function show(props) {
-  const theme = chrome.devtools.panels.themeName
+  const totalEffects = getResults(props.rawMeasures).totalEffects
+  const hostEffects = getResults(props.rawMeasures).hostEffectsTime
+  const commitChanges = getResults(props.rawMeasures).commitChangesTime
+  const totalLifecycleMethods = getResults(props.rawMeasures)
+    .totalLifecycleMethods
+  const lifecycleTime = getResults(props.rawMeasures).lifecycleTime
+  const totalTime = computeTotalTime(
+    props.rawMeasures,
+    props.totalTime
+  ).toFixed(2)
 
   return (
     <table style={theme === 'dark' ? { color: '#eff1f4' } : null}>
@@ -51,39 +62,32 @@ function show(props) {
       <tr>
         <td>Committing changes took</td>
         <td>
-          <strong>{getResults(props.rawMeasures).commitChangesTime} ms</strong>
+          <strong>{commitChanges} ms</strong>
         </td>
       </tr>
       <tr>
         <td>
-          Committing{' '}
-          <strong> {getResults(props.rawMeasures).totalEffects} </strong> host
-          effects took
+          Committing <strong> {totalEffects} </strong> host
+          {totalEffects === 1 ? 'effect' : 'effects'} took
         </td>
         <td>
-          <strong>{getResults(props.rawMeasures).hostEffectsTime} ms</strong>
+          <strong>{hostEffects} ms</strong>
         </td>
       </tr>
       <tr>
         <td>
-          Calling{' '}
-          <strong>
-            {' '}
-            {getResults(props.rawMeasures).totalLifecycleMethods}{' '}
-          </strong>{' '}
-          lifecycle methods took
+          Calling <strong> {totalLifecycleMethods} </strong> lifecycle{' '}
+          {totalLifecycleMethods === 1 ? 'method' : 'methods'} took
         </td>
         <td>
-          <strong>{getResults(props.rawMeasures).lifecycleTime} ms</strong>
+          <strong>{lifecycleTime} ms</strong>
         </td>
       </tr>
       <tr>
         <td>Total time</td>
         <td>
           {' '}
-          <strong>
-            {computeTotalTime(props.rawMeasures, props.totalTime).toFixed(2)} ms
-          </strong>
+          <strong>{totalTime} ms</strong>
         </td>
       </tr>
     </table>

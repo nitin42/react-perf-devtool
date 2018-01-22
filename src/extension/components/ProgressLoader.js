@@ -1,5 +1,7 @@
 const React = require('react')
 
+const theme = require('../theme')
+
 // inspired from https://codepen.io/bbrady/pen/ozrjKE
 
 function ProgressLoader(props) {
@@ -17,8 +19,6 @@ function ProgressLoader(props) {
   const dashOffset = dashArray - dashArray * props.percentage / 100
 
   const percentage = props.percentage
-
-  const theme = chrome.devtools.panels.themeName
 
   return (
     <svg width={sqSize} height={sqSize} viewBox={viewBox}>

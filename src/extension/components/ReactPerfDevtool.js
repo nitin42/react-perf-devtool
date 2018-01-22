@@ -4,6 +4,8 @@ const Results = require('./Results')
 const ErrorComponent = require('./ErrorComponent')
 const Measures = require('./Measures')
 
+const theme = require('../theme')
+
 // Stores the measures
 let store = []
 
@@ -30,7 +32,7 @@ class ReactPerfDevtool extends React.Component {
   timer = null
   evaluate = chrome.devtools.inspectedWindow.eval
   panelStyles = {
-    color: chrome.devtools.panels.themeName === 'dark' ? 'white' : 'black',
+    color: theme === 'dark' ? 'white' : 'black',
     fontFamily: 'Metrophobic, Georgia, Serif',
     fontSize: '15px'
   }
@@ -180,7 +182,7 @@ class ReactPerfDevtool extends React.Component {
           style={{
             textDecoration: 'none',
             paddingBottom: '10px',
-            color: chrome.devtools.panels.themeName === 'dark' ? 'blue' : null
+            color: theme === 'dark' ? 'blue' : null
           }}
           target="_blank"
           href="https://github.com/nitin42/react-perf-devtool"
@@ -197,9 +199,11 @@ class ReactPerfDevtool extends React.Component {
       return (
         <div>
           <div className="loader-container">
-            <div className="loader" />
+            <div className={theme === 'dark' ? 'dark-loader' : 'loader'} />
           </div>
-          <p className="loading-text">
+          <p
+            className={theme === 'dark' ? 'dark-loading-text' : 'loading-text'}
+          >
             Connecting to React Performance Devtool...
           </p>
         </div>
@@ -209,10 +213,16 @@ class ReactPerfDevtool extends React.Component {
     return (
       <div style={this.panelStyles}>
         <div style={{ display: 'inlineBlock' }}>
-          <button className="btn" onClick={this.clear}>
+          <button
+            className={theme === 'dark' ? 'dark-btn' : 'btn'}
+            onClick={this.clear}
+          >
             Clear
           </button>
-          <button className="btn" onClick={this.reload}>
+          <button
+            className={theme === 'dark' ? 'dark-btn' : 'btn'}
+            onClick={this.reload}
+          >
             Reload
           </button>
           <span style={{ fontWeight: 'bold', padding: '8px' }}>

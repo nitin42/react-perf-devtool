@@ -2,12 +2,12 @@ const React = require('react')
 
 const ProgressLoader = require('./ProgressLoader')
 
+const theme = require('../theme')
+
 /**
   This component renders the data (measures of each component)
 */
 function Measures(props) {
-  const theme = chrome.devtools.panels.themeName
-
   return (
     <div>
       <h1 className="component-text">Components</h1>
