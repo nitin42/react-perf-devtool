@@ -57,7 +57,7 @@ This project started with a purpose of extending the work done by [Will Chen](ht
 
 A demo of the extension being used to examine the performance of React components on my website.
 
-<img src="./art/Demo.gif">
+<img src="http://g.recordit.co/m8Yv1RTR6v.gif">
 
 ### Log the measures to a console
 
@@ -323,21 +323,19 @@ registerObserver(options, callback)
 
 ## Description
 
+### Overview section
+
 <p align="center">
-  <img src="./art/Tool.png">
+  <img src="https://i.gyazo.com/bae8420649749a5be0a2a7e589cdbc65.png">
 </p>
 
-**clear** - The clear button clears the measures from the tables and also wipes the results.
+Overview section represents an overview of total time (%) taken by all the components in your application.
 
-**Reload the inspected window** - This button reloads the inspected window and displays the new measures.
+### Results section
 
-**Pending events** - This indicates the pending measures (React performance data).
-
-**Table** - The table shows the time taken by a component in a phase, number of instances of a component and total time combining all the phases in **ms** and **%**.
-
-**Results**
-
-<img src="https://i.gyazo.com/27a3fc562fba33a36ca7ea9568563990.png">
+<p align="center">
+  <img src="https://i.gyazo.com/74a96461182539f9866db630ab645719.png">
+</p>
 
 * Time taken by all the components - Shows the time taken by all the components (combining all the phases).
 
@@ -348,6 +346,27 @@ registerObserver(options, callback)
 * Time duration for calling lifecycle methods - Reports the time duration of calling lifecycle hooks and total no of methods called, when a lifecycle hook schedules a cascading update.
 
 * Total time
+
+### Top section
+
+<p align="center">
+  <img src="https://i.gyazo.com/3728c55035bdcdc40b68919fe095e549.png" />
+</p>
+
+**clear** - The clear button clears the measures from the tables and also wipes the results.
+
+**Reload the inspected window** - This button reloads the inspected window and displays the new measures.
+
+**Pending events** - This indicates the pending measures (React performance data).
+
+
+### Components section
+
+<p align="center">
+  <img src="https://i.gyazo.com/ac983b28ac614fb13d980ae681ffd049.png">
+</p>
+
+This section shows the time taken by a component in a phase, number of instances of a component and total time combining all the phases in **ms** and **%**
 
 ## Phases
 
