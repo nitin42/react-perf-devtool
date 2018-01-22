@@ -68,7 +68,7 @@ function show(props) {
       <tr>
         <td>
           Committing <strong> {totalEffects} </strong> host
-          {totalEffects === 1 ? 'effect' : 'effects'} took
+          {totalEffects === 1 ? ' effect' : ' effects'} took
         </td>
         <td>
           <strong>{hostEffects} ms</strong>
