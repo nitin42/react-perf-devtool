@@ -412,10 +412,11 @@ Calculating and aggregating the results happens inside the app frame and not in 
 
 ## Todos / Ideas / Improvements
 
-- [ ] New UI for devtool
-- [ ] Make the implementation of measures generator more concrete
+- [x] New UI for devtool
+- [x] Make the implementation of measures generator more concrete
 - [ ] Add support for older versions of React
-- [ ] Make the tool more comprehensible
+- [x] Make the tool more comprehensible
+> I have improved the documentation to make the tool more approachable and understand how the stats are calculated and what they mean.
 
 ## Contributing
 
