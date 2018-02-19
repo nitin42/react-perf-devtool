@@ -4,7 +4,7 @@ var {
   getCommitHostEffectsTime,
   getTotalEffects
 } = require('../src/shared/hostEffects')
-var getTotalTime = require('../src/shared/totalTime')
+var { getTotalTime } = require('../src/shared/totalTime')
 
 describe('Committing Host Effects', () => {
   test('Sanity', () => {

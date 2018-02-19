@@ -1,5 +1,5 @@
-var generateDataFromMeasures = require('../src/shared/generate')
-var getReactPerformanceData = require('../src/shared/parse')
+var { generateDataFromMeasures } = require('../src/shared/generate')
+var { getReactPerformanceData } = require('../src/shared/parse')
 var MEASURES = require('../samples/measures')
 
 describe('Map Data from React Performance Data', () => {

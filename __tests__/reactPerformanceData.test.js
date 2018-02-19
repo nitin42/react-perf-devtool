@@ -1,4 +1,4 @@
-var getReactPerformanceData = require('../src/shared/parse')
+var { getReactPerformanceData } = require('../src/shared/parse')
 var MEASURES = require('../samples/measures')
 
 describe('React Performance Data', () => {

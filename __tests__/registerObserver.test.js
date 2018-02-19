@@ -1,4 +1,4 @@
-var registerObserver = require('../src/npm/hook')
+var { registerObserver } = require('../src/npm/hook')
 
 describe('Register Observer', () => {
   describe('The register observer function shouldnt crash', () => {

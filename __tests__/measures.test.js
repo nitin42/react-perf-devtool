@@ -1,4 +1,4 @@
-var getComponentAndPhaseName = require('../src/shared/parseMeasures')
+var { getComponentAndPhaseName } = require('../src/shared/parseMeasures')
 
 describe('Measure names', () => {
   test('Component name and phase name', () => {
