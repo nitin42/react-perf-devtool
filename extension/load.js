@@ -1,15 +1,15 @@
 require.config({
   paths: {
-    react: "./dependencies/react",
-    "react-dom": "./dependencies/react-dom"
+    react: './dependencies/react',
+    'react-dom': './dependencies/react-dom'
   }
-});
+})
 
-requirejs(["react", "react-dom", "../build/ReactPerfDevtool"], function(
+requirejs(['react', 'react-dom', '../build/ReactPerfDevtool'], function(
   React,
   ReactDOM,
-  ReactPerfDevtool
+  { ReactPerfDevtool }
 ) {
-  const root = document.getElementById("root");
-  ReactDOM.render(React.createElement(ReactPerfDevtool), root);
-});
+  const root = document.getElementById('root')
+  ReactDOM.render(React.createElement(ReactPerfDevtool), root)
+})
