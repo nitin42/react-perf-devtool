@@ -1,13 +1,13 @@
-const React = require('react')
+import React from 'react'
 
-const getCommitChangesTime = require('../../shared/commitChanges')
-const {
+import { getCommitChangesTime } from '../../shared/commitChanges'
+import {
   getCommitHostEffectsTime,
   getTotalEffects
-} = require('../../shared/hostEffects')
-const { getLifecycleTime, getTotalMethods } = require('../../shared/lifecycle')
+} from '../../shared/hostEffects'
+import { getLifecycleTime, getTotalMethods } from '../../shared/lifecycle'
 
-const getTotalTime = require('../../shared/totalTime')
+import { getTotalTime } from '../../shared/totalTime'
 
 const theme = require('../theme')
 
@@ -98,7 +98,7 @@ function show(props) {
  This component renders the total time taken combining all the phases of a component,
  committing the changes, host effects and calling all the lifecycle methods.
 */
-function Results(props) {
+export function Results(props) {
   return (
     <div className="container result">
       <h1 className="results">Results</h1>
@@ -106,5 +106,3 @@ function Results(props) {
     </div>
   )
 }
-
-module.exports = Results

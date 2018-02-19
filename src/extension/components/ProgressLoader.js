@@ -1,10 +1,10 @@
-const React = require('react')
+import React from 'react'
 
 const theme = require('../theme')
 
 // inspired from https://codepen.io/bbrady/pen/ozrjKE
 
-function ProgressLoader(props) {
+export function ProgressLoader(props) {
   // Size of the enclosing square
   const sqSize = props.sqSize
   // SVG centers the stroke width on the radius, subtract out so circle fits in square
@@ -58,5 +58,3 @@ function ProgressLoader(props) {
     </svg>
   )
 }
-
-module.exports = ProgressLoader

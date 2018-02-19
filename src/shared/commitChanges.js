@@ -1,9 +1,9 @@
-var { add } = require('./math')
+import { add } from './math'
 
 // Update the store with the time spent while committing the changes
-function updateStore(store, measure, delimiter) {
+const updateStore = (store, measure, delimiter) => {
   if (measure.name.includes(delimiter)) {
-    var measureName = measure.name.split(delimiter).join('')
+    const measureName = measure.name.split(delimiter).join('')
 
     if (measureName.includes('(Committing Changes)')) {
       if (!store['Committing Changes']) {
@@ -19,10 +19,10 @@ function updateStore(store, measure, delimiter) {
   }
 }
 
-function getCommitChangesTime(measures) {
-  var store = {}
+const getCommitChangesTime = measures => {
+  let store = {}
 
-  for (let measure of measures) {
+  for (const measure of measures) {
     updateStore(store, measure, '⚛')
     updateStore(store, measure, '⛔')
   }
@@ -30,4 +30,4 @@ function getCommitChangesTime(measures) {
   return store
 }
 
-module.exports = getCommitChangesTime
+export { getCommitChangesTime }

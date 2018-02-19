@@ -13,8 +13,4 @@ function percent(num) {
   return Math.round(num * 100) + '%'
 }
 
-module.exports = {
-  add,
-  average,
-  percent
-}
+export { add, average, percent }

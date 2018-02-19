@@ -1,49 +1,47 @@
-var getComponentAndPhaseName = require('./parseMeasures')
+import { getComponentAndPhaseName } from './parseMeasures'
 
 // Schema for storing the time duration of each phase of a React component
-function createSchema() {
-  return {
-    // Phases
-    mount: {
-      timeSpent: []
-    },
-    unmount: {
-      timeSpent: []
-    },
-    update: {
-      timeSpent: []
-    },
-    render: {
-      timeSpent: []
-    },
+const createSchema = () => ({
+  // Phases
+  mount: {
+    timeSpent: []
+  },
+  unmount: {
+    timeSpent: []
+  },
+  update: {
+    timeSpent: []
+  },
+  render: {
+    timeSpent: []
+  },
 
-    // Lifecycle hooks
-    componentWillMount: {
-      timeSpent: []
-    },
-    componentDidMount: {
-      timeSpent: []
-    },
-    componentWillReceiveProps: {
-      timeSpent: []
-    },
-    shouldComponentUpdate: {
-      timeSpent: []
-    },
-    componentWillUpdate: {
-      timeSpent: []
-    },
-    componentDidUpdate: {
-      timeSpent: []
-    },
-    componentWillUnmount: {
-      timeSpent: []
-    }
+  // Lifecycle hooks
+  componentWillMount: {
+    timeSpent: []
+  },
+  componentDidMount: {
+    timeSpent: []
+  },
+  componentWillReceiveProps: {
+    timeSpent: []
+  },
+  shouldComponentUpdate: {
+    timeSpent: []
+  },
+  componentWillUpdate: {
+    timeSpent: []
+  },
+  componentDidUpdate: {
+    timeSpent: []
+  },
+  componentWillUnmount: {
+    timeSpent: []
   }
-}
+})
 
 // Update the time duration of each phase
-function updateTime(store, componentName, phase, measure) {
+const updateTime = (store, componentName, phase, measure) => {
   if (phase === '[mount]') {
     store[componentName].mount.timeSpent.push(measure.duration)
   }
@@ -92,12 +90,12 @@ function updateTime(store, componentName, phase, measure) {
 }
 
 // Get data from the performance measures
-function getReactPerformanceData(measures) {
-  var store = {}
+const getReactPerformanceData = measures => {
+  let store = {}
 
-  for (let measure of measures) {
+  for (const measure of measures) {
     if (getComponentAndPhaseName(measure) !== null) {
-      var { componentName, phase } = getComponentAndPhaseName(measure)
+      const { componentName, phase } = getComponentAndPhaseName(measure)
       if (!store[componentName]) {
         store[componentName] = createSchema()
       }
@@ -109,4 +107,4 @@ function getReactPerformanceData(measures) {
   return store
 }
 
-module.exports = getReactPerformanceData
+export { getReactPerformanceData }

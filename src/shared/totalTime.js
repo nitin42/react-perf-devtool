@@ -1,10 +1,10 @@
-var { add } = require('./math')
+import { add } from './math'
 
 // Computes the total time of each measure (commit changes, host effects and lifecycle methods)
-function getTotalTime(store) {
-  var totalTime = 0
+const getTotalTime = store => {
+  let totalTime = 0
 
-  for (let measure in store) {
+  for (const measure in store) {
     totalTime = totalTime || 0
     totalTime += add(store[measure].timeSpent)
   }
@@ -12,4 +12,4 @@ function getTotalTime(store) {
   return totalTime
 }
 
-module.exports = getTotalTime
+export { getTotalTime }

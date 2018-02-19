@@ -1,13 +1,13 @@
-const React = require('react')
+import React from 'react'
 
-const ProgressLoader = require('./ProgressLoader')
+import { ProgressLoader } from './ProgressLoader'
 
 const theme = require('../theme')
 
 /**
   This component renders the data (measures of each component)
 */
-function Measures(props) {
+export function Measures(props) {
   return (
     <div>
       <h1 className="component-text">Components</h1>
@@ -119,5 +119,3 @@ function Measures(props) {
     </div>
   )
 }
-
-module.exports = Measures

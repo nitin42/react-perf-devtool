@@ -1,6 +1,6 @@
-const React = require('react')
+import React from 'react'
 
-const ProgressLoader = require('./ProgressLoader')
+import { ProgressLoader } from './ProgressLoader'
 
 const theme = require('../theme')
 
@@ -22,7 +22,7 @@ const setHrefStyles = theme =>
     ? { textDecoration: 'none', color: '#eff1f4' }
     : { textDecoration: 'none', color: 'black' }
 
-function ComponentTime(props) {
+export function ComponentTime(props) {
   return (
     <div style={calign}>
       <a style={setHrefStyles(theme)} href={`#${props.componentname}`}>
@@ -39,5 +39,3 @@ function ComponentTime(props) {
     </div>
   )
 }
-
-module.exports = ComponentTime

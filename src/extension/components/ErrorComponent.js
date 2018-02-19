@@ -1,6 +1,6 @@
-const React = require('react')
+import React from 'react'
 
-function ErrorComponent() {
+export function ErrorComponent() {
   return (
     <div style={{ fontWeight: 500, padding: '8px' }}>
       An error occurred while collecting the measures. To resolve this error,
@@ -23,5 +23,3 @@ function ErrorComponent() {
     </div>
   )
 }
-
-module.exports = ErrorComponent

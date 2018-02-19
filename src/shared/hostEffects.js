@@ -1,9 +1,9 @@
-var { add } = require('./math')
+import { add } from './math'
 
 // Update the store with the time spent while committing host effects
-function updateStore(store, measure) {
+const updateStore = (store, measure) => {
   if (measure.name.includes('⚛')) {
-    var measureName = measure.name.split('⚛ ').join('')
+    const measureName = measure.name.split('⚛ ').join('')
 
     if (measureName.includes('Committing Host Effects')) {
       var totalEffects = Number(measureName.split(':')[1].split(' ')[1])
@@ -24,10 +24,10 @@ function updateStore(store, measure) {
   return {}
 }
 
-function getCommitHostEffectsTime(measures) {
-  var store = {}
+const getCommitHostEffectsTime = measures => {
+  let store = {}
 
-  for (let measure of measures) {
+  for (const measure of measures) {
     updateStore(store, measure)
   }
 
@@ -35,10 +35,10 @@ function getCommitHostEffectsTime(measures) {
 }
 
 // Get total number of host effects
-function getTotalEffects(store) {
+const getTotalEffects = store => {
   let totalEffects = 0
 
-  for (let measure in store) {
+  for (const measure in store) {
     totalEffects = totalEffects || 0
     totalEffects += add(store[measure].totalEffects)
   }
@@ -46,7 +46,4 @@ function getTotalEffects(store) {
   return Number(totalEffects.toFixed(2))
 }
 
-module.exports = {
-  getTotalEffects,
-  getCommitHostEffectsTime
-}
+export { getTotalEffects, getCommitHostEffectsTime }

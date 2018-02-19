@@ -1,5 +1,5 @@
-var getReactPerformanceData = require('../shared/parse')
-var generateDataFromMeasures = require('../shared/generate')
+import { getReactPerformanceData } from '../shared/parse'
+import { generateDataFromMeasures } from '../shared/generate'
 
 /**
   This registers an observer that listens to the React performance measurement event.
@@ -29,11 +29,13 @@ var generateDataFromMeasures = require('../shared/generate')
 
   NOTE: This should only be used in development mode.
 */
-function registerObserver(params, callback) {
+const registerObserver = (params, callback) => {
   params = params || {}
-  var { shouldLog, port, components } = params
-  var observer = new window.PerformanceObserver(list => {
-    var measures = generateDataFromMeasures(
+
+  const { shouldLog, port, components } = params
+
+  let observer = new window.PerformanceObserver(list => {
+    const measures = generateDataFromMeasures(
       getReactPerformanceData(list.getEntries())
     )
 
@@ -62,17 +64,17 @@ function registerObserver(params, callback) {
   This function logs the measures to the console. Requires a server running on a specified port. Default port number is 8080.
   TODO: Change this behaviour if Chrome lands the support for recording performance when inspecting the node apps.
 */
-function logToConsole({ port, components }, measures) {
+const logToConsole = ({ port, components }, measures) => {
   if (!components) {
     logMeasures(port, measures)
   } else if (typeof components !== undefined && Array.isArray(components)) {
-    var requiredMeasures = getRequiredMeasures(components, measures)
+    const requiredMeasures = getRequiredMeasures(components, measures)
 
     logMeasures(port, requiredMeasures)
   }
 }
 
-function logMeasures(port, measures) {
+const logMeasures = (port, measures) => {
   measures.forEach(
     ({
       componentName,
@@ -117,7 +119,7 @@ function logMeasures(port, measures) {
 }
 
 // Send the data to a specified port
-function send(data, port) {
+const send = (data, port) => {
   window.navigator.sendBeacon(
     `http://127.0.0.1:${
       port !== undefined && typeof port === 'number' ? port : 8080
@@ -126,8 +128,8 @@ function send(data, port) {
   )
 }
 
-function getRequiredMeasures(components, measures) {
-  var requiredMeasures = []
+const getRequiredMeasures = (components, measures) => {
+  let requiredMeasures = []
 
   if (!Array.isArray(components)) {
     components = [components]
@@ -142,4 +144,4 @@ function getRequiredMeasures(components, measures) {
   return requiredMeasures
 }
 
-module.exports = registerObserver
+export { registerObserver }

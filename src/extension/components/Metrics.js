@@ -1,11 +1,11 @@
-const React = require('react')
+import React from 'react'
 
-const ComponentTime = require('./ComponentTime')
+import { ComponentTime } from './ComponentTime'
 
 /**
  This component contains the performance measures of React components in Circular loader .
 */
-function Metrics(props) {
+export function Metrics(props) {
   return (
     <React.Fragment>
       <div className="component-progress-container">
@@ -27,5 +27,3 @@ function Metrics(props) {
     </React.Fragment>
   )
 }
-
-module.exports = Metrics

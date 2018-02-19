@@ -1,8 +1,8 @@
-const React = require('react')
-const Metrics = require('./Metrics')
-const Results = require('./Results')
-const ErrorComponent = require('./ErrorComponent')
-const Measures = require('./Measures')
+import React from 'react'
+import { Metrics } from './Metrics'
+import { Results } from './Results'
+import { ErrorComponent } from './ErrorComponent'
+import { Measures } from './Measures'
 
 const theme = require('../theme')
 
@@ -28,7 +28,7 @@ let queries = {
   It also renders the total time taken while committing the changes, host effects
   and calling all the lifecycle methods.
 */
-class ReactPerfDevtool extends React.Component {
+export class ReactPerfDevtool extends React.Component {
   timer = null
   evaluate = chrome.devtools.inspectedWindow.eval
   panelStyles = {
@@ -247,5 +247,3 @@ class ReactPerfDevtool extends React.Component {
     )
   }
 }
-
-module.exports = ReactPerfDevtool

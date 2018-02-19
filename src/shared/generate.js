@@ -1,12 +1,11 @@
-var { add, average, percent } = require('./math')
+import { add, average, percent } from './math'
 
 // Sort the all components by total time
-function sortComponents(components) {
-  return components.sort((a, b) => b.totalTime - a.totalTime)
-}
+const sortComponents = components =>
+  components.sort((a, b) => b.totalTime - a.totalTime)
 
 // Align the components by their name and total time
-function alignComponents(totalTime) {
+const alignComponents = totalTime => {
   return Object.keys(totalTime).reduce((acc, name) => {
     acc.push({ name, totalTime: totalTime[name] })
     return acc
@@ -14,61 +13,56 @@ function alignComponents(totalTime) {
 }
 
 // Get the total time taken combining all the phases
-function getTotalTime(components) {
-  return components.reduce((acc, component) => (acc += component.totalTime), 0)
-}
+const getTotalTime = components =>
+  components.reduce((acc, component) => (acc += component.totalTime), 0)
 
 // Plot the timings (average time in ms, component instances, total time in ms)
-function plotTimings(nums) {
-  return {
-    averageTimeSpentMs: average(nums),
-    numberOfTimes: nums.length,
-    totalTimeSpentMs: add(nums)
-  }
-}
+const plotTimings = nums => ({
+  averageTimeSpentMs: average(nums),
+  numberOfTimes: nums.length,
+  totalTimeSpentMs: add(nums)
+})
 
 // Create a schema for each component
-function createSchema(store, component, totalTime) {
-  return {
-    componentName: component.name,
-    totalTimeSpent: component.totalTime,
-    numberOfInstances:
-      store[component.name].mount.timeSpent.length -
-      store[component.name].unmount.timeSpent.length,
-    percentTimeSpent: percent(component.totalTime / totalTime),
-    render: plotTimings(store[component.name].render.timeSpent),
-    mount: plotTimings(store[component.name].mount.timeSpent),
-    update: plotTimings(store[component.name].update.timeSpent),
-    unmount: plotTimings(store[component.name].unmount.timeSpent),
-    componentWillMount: plotTimings(
-      store[component.name].componentWillMount.timeSpent
-    ),
-    componentDidMount: plotTimings(
-      store[component.name].componentDidMount.timeSpent
-    ),
-    componentWillReceiveProps: plotTimings(
-      store[component.name].componentWillReceiveProps.timeSpent
-    ),
-    shouldComponentUpdate: plotTimings(
-      store[component.name].shouldComponentUpdate.timeSpent
-    ),
-    componentWillUpdate: plotTimings(
-      store[component.name].componentWillUpdate.timeSpent
-    ),
-    componentDidUpdate: plotTimings(
-      store[component.name].componentDidUpdate.timeSpent
-    ),
-    componentWillUnmount: plotTimings(
-      store[component.name].componentWillUnmount.timeSpent
-    )
-  }
-}
+const createSchema = (store, component, totalTime) => ({
+  componentName: component.name,
+  totalTimeSpent: component.totalTime,
+  numberOfInstances:
+    store[component.name].mount.timeSpent.length -
+    store[component.name].unmount.timeSpent.length,
+  percentTimeSpent: percent(component.totalTime / totalTime),
+  render: plotTimings(store[component.name].render.timeSpent),
+  mount: plotTimings(store[component.name].mount.timeSpent),
+  update: plotTimings(store[component.name].update.timeSpent),
+  unmount: plotTimings(store[component.name].unmount.timeSpent),
+  componentWillMount: plotTimings(
+    store[component.name].componentWillMount.timeSpent
+  ),
+  componentDidMount: plotTimings(
+    store[component.name].componentDidMount.timeSpent
+  ),
+  componentWillReceiveProps: plotTimings(
+    store[component.name].componentWillReceiveProps.timeSpent
+  ),
+  shouldComponentUpdate: plotTimings(
+    store[component.name].shouldComponentUpdate.timeSpent
+  ),
+  componentWillUpdate: plotTimings(
+    store[component.name].componentWillUpdate.timeSpent
+  ),
+  componentDidUpdate: plotTimings(
+    store[component.name].componentDidUpdate.timeSpent
+  ),
+  componentWillUnmount: plotTimings(
+    store[component.name].componentWillUnmount.timeSpent
+  )
+})
 
 // Generate the data from React performance measures
-function generateDataFromMeasures(store) {
-  var componentsByTotalTime = {}
+const generateDataFromMeasures = store => {
+  let componentsByTotalTime = {}
 
-  for (let componentName in store) {
+  for (const componentName in store) {
     // Default
     componentsByTotalTime[componentName] =
       componentsByTotalTime[componentName] || 0
@@ -119,13 +113,13 @@ function generateDataFromMeasures(store) {
     )
   }
 
-  var components = alignComponents(componentsByTotalTime)
+  const components = alignComponents(componentsByTotalTime)
 
-  var totalTime = getTotalTime(components)
+  const totalTime = getTotalTime(components)
 
   return sortComponents(components).map(component =>
     createSchema(store, component, totalTime)
   )
 }
 
-module.exports = generateDataFromMeasures
+export { generateDataFromMeasures }

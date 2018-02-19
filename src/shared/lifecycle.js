@@ -1,12 +1,12 @@
-var { add } = require('./math')
+import { add } from './math'
 
 // Update the time spent while calling all the lifcycle methods
-function updateStore(store, measure) {
+const updateStore = (store, measure) => {
   if (measure.name.includes('⚛')) {
-    var measureName = measure.name.split('⚛ ').join('')
+    const measureName = measure.name.split('⚛ ').join('')
 
     if (measureName.includes('Calling Lifecycle Methods')) {
-      var totalMethods = Number(measureName.split(':')[1].split(' ')[1])
+      const totalMethods = Number(measureName.split(':')[1].split(' ')[1])
       if (!store['Calling Lifecycle Methods']) {
         store['Calling Lifecycle Methods'] = {
           timeSpent: [],
@@ -24,10 +24,10 @@ function updateStore(store, measure) {
   return {}
 }
 
-function getLifecycleTime(measures) {
-  var store = {}
+const getLifecycleTime = measures => {
+  let store = {}
 
-  for (let measure of measures) {
+  for (const measure of measures) {
     updateStore(store, measure)
   }
 
@@ -35,10 +35,10 @@ function getLifecycleTime(measures) {
 }
 
 // Get the total number of lifecycle methods that were called
-function getTotalMethods(store) {
+const getTotalMethods = store => {
   let totalMethods = 0
 
-  for (let measure in store) {
+  for (const measure in store) {
     totalMethods = totalMethods || 0
     totalMethods += add(store[measure].totalMethods)
   }
@@ -46,7 +46,4 @@ function getTotalMethods(store) {
   return Number(totalMethods.toFixed(2))
 }
 
-module.exports = {
-  getTotalMethods,
-  getLifecycleTime
-}
+export { getTotalMethods, getLifecycleTime }
