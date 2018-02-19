@@ -391,7 +391,7 @@ In previous version of this devtool, performance metrics were being queried inst
 But now, with the help of [Performance Observer](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver) API, an observer can be registered to listen to an event of a particular type and get the entries (performance measures). `react-perf-devtool` provides an API on top of the performance observer, a function that registers an observer.
 
 ```js
-const registerObserver = require('react-perf-devtool')
+const { registerObserver } = require('react-perf-devtool')
 
 registerObserver()
 ```
