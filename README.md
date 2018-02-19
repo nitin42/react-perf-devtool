@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/nitin42/react-perf-devtool.svg?branch=master)](https://travis-ci.org/nitin42/react-perf-devtool)
 ![Release Status](https://img.shields.io/badge/status-stable-brightgreen.svg)
 ![Author](https://img.shields.io/badge/author-Nitin%20Tulswani-lightgrey.svg)
+![current-version](https://img.shields.io/badge/version-3.0.4-blue.svg)
 
 > A devtool for inspecting the performance of React Components
 
@@ -108,9 +109,8 @@ To use this devtool extension, you'll need to register an observer in your app w
 Registering an observer is very simple and is only one function call away. Let's see how!
 
 ```js
-var registerObserver = require('react-perf-devtool')
+const { registerObserver } = require('react-perf-devtool')
 
-// Simple, no?
 registerObserver()
 ```
 
@@ -135,7 +135,7 @@ You can use this callback to inspect the parsed and aggregated measures, or you 
 Example -
 
 ```js
-const registerObserver = require('react-perf-devtool')
+const { registerObserver } = require('react-perf-devtool')
 
 function callback(measures) {
   // do something with the measures
@@ -185,13 +185,13 @@ You can pass two properties to the **`option`** object, `shouldLog` and `port`.
 ```js
 // index.js file in your React App
 
-var React = require('react')
-var ReactDOM = require('react-dom')
-var registerObserver = require('react-perf-devtool')
+const React = require('react')
+const ReactDOM = require('react-dom')
+const { registerObserver } = require('react-perf-devtool')
 
-var Component = require('./Component') // Some React Component
+const Component = require('./Component') // Some React Component
 
-var options = {
+const options = {
   shouldLog: true,
   port: 8080
 }
@@ -207,7 +207,7 @@ ReactDOM.render(<Component />, document.getElementById('root'))
 
 ```js
 // server.js
-var { json } = require('micro')
+const { json } = require('micro')
 
 module.exports = async req => {
   console.log(await json(req))
@@ -306,7 +306,7 @@ You can also inspect the performance of specific components using options throug
 Example -
 
 ```js
-var options = {
+const options = {
   shouldLog: true,
   port: 3000,
   components: ['App', 'Main'] // Assuming you've these components in your project
