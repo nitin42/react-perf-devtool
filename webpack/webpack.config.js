@@ -2,6 +2,9 @@ const path = require('path')
 const webpack = require('webpack')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
+const getMode = () =>
+  process.env.NODE_ENV === 'production' ? 'production' : 'development'
+
 const output = () => ({
   filename: 'ReactPerfDevtool.js',
   path: path.resolve(__dirname, '../extension/build'),
@@ -36,6 +39,7 @@ module.exports = {
   entry: path.resolve(__dirname, '../src/index.js'),
   output: output(),
   target: 'web',
+  mode: getMode(),
   externals: externals(),
   module: {
     rules: [jsLoader()]
