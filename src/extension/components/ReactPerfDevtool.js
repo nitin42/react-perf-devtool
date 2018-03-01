@@ -1,8 +1,12 @@
 import React from 'react'
+
 import { Metrics } from './Metrics'
-import { Results } from './Results'
 import { ErrorComponent } from './ErrorComponent'
 import { Measures } from './Measures'
+import { Buttons } from './Buttons'
+import { Stats } from './Stats'
+
+import { computeTotalTime, getResults } from '../util'
 
 const theme = require('../theme')
 
@@ -45,16 +49,16 @@ export class ReactPerfDevtool extends React.Component {
       pendingEvents: 0, // Pending event count.
       rawMeasures: [], // Raw measures output. It is used for rendering the overall results.
       loading: false, // To show the loading output while collecting the results.
-      hasError: false // Track errors, occurred when collecting the measures.
+      hasError: false, // Track errors, occurred when collecting the measures.
+      showChart: false
     }
   }
-
-  reloadInspectedWindow = () => chrome.devtools.inspectedWindow.reload()
 
   componentWillMount() {
     // When the devtool is launched first, measures may not be available.
     // Reload the window again to get the new measures and then display them.
-    // TODO: Remove this hack (possible architecture change)
+    // Why ? We rely on the observer hook that the user has installed in his/her project.
+    // This chrome plugin is just way to interpret the results derived from the observer's API
     if (store.length === 0) {
       this.reloadInspectedWindow()
     }
@@ -66,18 +70,94 @@ export class ReactPerfDevtool extends React.Component {
 
     // Get the total measures and flush them if the store is empty.
     this.timer = setInterval(() => this.getMeasuresLength(), 2000)
+
+    // Show the chart when we have the measures
+    this.setState({ showChart: true })
   }
 
   componentWillUnmount() {
     clearInterval(this.timer)
   }
 
+  reloadInspectedWindow = () => chrome.devtools.inspectedWindow.reload()
+
+  chartOptions = ({
+    totalTime,
+    commitChanges,
+    hostEffects,
+    lifecycleTime,
+    totalComponents,
+    totalEffects,
+    totalLifecycleMethods
+  }) => ({
+    type: 'doughnut',
+    data: {
+      datasets: [
+        {
+          data: [totalTime, commitChanges, hostEffects, lifecycleTime],
+          backgroundColor: ['#ff9999', '#99ffdd', '#d98cb3', '#ffff4d']
+        }
+      ],
+
+      // These labels appear in the legend and in the tooltips when hovering different arcs
+      labels: [
+        `${totalComponents} components (ms)`,
+        'Committing changes (ms)',
+        `Committing ${totalEffects} host ${
+          totalEffects === 1 || totalEffects === 0 ? 'effect' : 'effects'
+        } (ms)`,
+        `Calling ${totalLifecycleMethods} ${
+          totalLifecycleMethods === 1 || totalLifecycleMethods === 0
+            ? 'lifecycle hook'
+            : 'lifecycle hooks'
+        } (ms)`
+      ]
+    },
+    options: {
+      responsive: false,
+      maintainAspectRatio: false
+    }
+  })
+
+  getChartData = props => {
+    const totalEffects = getResults(props.rawMeasures).totalEffects
+    const hostEffects = getResults(props.rawMeasures).hostEffectsTime
+    const commitChanges = getResults(props.rawMeasures).commitChangesTime
+    const totalLifecycleMethods = getResults(props.rawMeasures)
+      .totalLifecycleMethods
+    const lifecycleTime = getResults(props.rawMeasures).lifecycleTime
+    const totalTime = computeTotalTime(
+      props.rawMeasures,
+      props.totalTime
+    ).toFixed(2)
+
+    return {
+      totalEffects,
+      hostEffects,
+      commitChanges,
+      totalLifecycleMethods,
+      lifecycleTime,
+      totalTime,
+      totalComponents: props.totalComponents
+    }
+  }
+
+  drawChart = props => {
+    const contex = document.getElementById('myChart')
+    const Chart = this.props.Graphics
+
+    const statsChart = new Chart(
+      contex,
+      this.chartOptions(this.getChartData(props))
+    )
+  }
+
+  setErrorState = () => this.setState({ hasError: true, loading: false })
+
   getMeasuresLength = () => {
     this.evaluate(queries['measuresLength'], (count, err) => {
-      // TODO: Inspect this behaviour (possibly a bug)
-      // We need to check the measures count also because it may happen that a user reloads the page and see no results.
-      if (err && count === 0) {
-        this.setState({ hasError: true })
+      if (err || count === 0) {
+        this.setErrorState()
         return
       }
 
@@ -104,16 +184,16 @@ export class ReactPerfDevtool extends React.Component {
   }
 
   getMeasures = () => {
-    // Returns the performance entries which are not parsed and not aggregated (required for generating the overall result)
+    // Returns the performance entries which are not parsed and not aggregated
+    // These measures are required for creating the chart.
     this.getRawMeasures()
 
     this.evaluate(queries['measures'], (measures, err) => {
       if (err) {
-        this.setState({ hasError: true })
+        this.setErrorState()
         return
       }
 
-      // Update the state.
       this.updateMeasures(JSON.parse(measures))
     })
   }
@@ -121,9 +201,10 @@ export class ReactPerfDevtool extends React.Component {
   getRawMeasures = () => {
     this.evaluate(queries['rawMeasures'], (measures, err) => {
       if (err) {
-        this.setState({ hasError: true })
+        this.setErrorState()
         return
       }
+
       this.setState({
         rawMeasures: JSON.parse(measures)
       })
@@ -133,6 +214,14 @@ export class ReactPerfDevtool extends React.Component {
   updateMeasures = measures => {
     store = store.concat(measures)
 
+    this.drawChart({
+      totalTime: store
+        .reduce((acc, comp) => acc + comp.totalTimeSpent, 0)
+        .toFixed(2),
+      rawMeasures: this.state.rawMeasures,
+      totalComponents: store.length
+    })
+
     this.setState({
       perfData: store,
       totalTime: store
@@ -140,10 +229,10 @@ export class ReactPerfDevtool extends React.Component {
         .toFixed(2)
     })
 
+    // Clear the shared state, so that new measures can be appended (and they don't override)
     this.clearMeasures()
   }
 
-  // TODO: This is not an accurate way to clear the shared state (store on the window object).
   clearMeasures = () => this.evaluate(queries['clear'])
 
   // Clear the panel content.
@@ -154,7 +243,8 @@ export class ReactPerfDevtool extends React.Component {
       perfData: store,
       totalTime: 0,
       rawMeasures: [],
-      pendingEvents: 0
+      pendingEvents: 0,
+      showChart: false
     })
 
     this.clearMeasures()
@@ -174,26 +264,6 @@ export class ReactPerfDevtool extends React.Component {
     this.reloadInspectedWindow()
   }
 
-  showDocLink = () => {
-    if (this.state.perfData.length > 0) {
-      return (
-        <a
-          className="doc-link"
-          style={{
-            textDecoration: 'none',
-            paddingBottom: '10px',
-            color: theme === 'dark' ? 'blue' : null
-          }}
-          target="_blank"
-          href="https://github.com/nitin42/react-perf-devtool"
-        >
-          👉 &nbsp;Check the documentation to learn more about how these stats
-          are calculated and different phases.
-        </a>
-      )
-    }
-  }
-
   render() {
     if (this.state.loading) {
       return (
@@ -204,7 +274,7 @@ export class ReactPerfDevtool extends React.Component {
           <p
             className={theme === 'dark' ? 'dark-loading-text' : 'loading-text'}
           >
-            Connecting to React Performance Devtool...
+            Collecting React performance measures...
           </p>
         </div>
       )
@@ -213,20 +283,9 @@ export class ReactPerfDevtool extends React.Component {
     return (
       <div style={this.panelStyles}>
         <div style={{ display: 'inlineBlock' }}>
-          <button
-            className={theme === 'dark' ? 'dark-btn' : 'btn'}
-            onClick={this.clear}
-          >
-            Clear
-          </button>
-          <button
-            className={theme === 'dark' ? 'dark-btn' : 'btn'}
-            onClick={this.reload}
-          >
-            Reload
-          </button>
+          <Buttons theme={theme} clear={this.clear} reload={this.reload} />
           <span style={{ fontWeight: 'bold', padding: '8px' }}>
-            Pending Events: {this.state.pendingEvents}
+            Pending events: {this.state.pendingEvents}
           </span>
         </div>
         {this.state.hasError ? (
@@ -234,13 +293,11 @@ export class ReactPerfDevtool extends React.Component {
         ) : (
           <React.Fragment>
             <Metrics measures={this.state.perfData} />
-            <Results
-              rawMeasures={this.state.rawMeasures}
+            <Stats
+              showChart={this.state.showChart}
               totalTime={this.state.totalTime}
-              loading={this.state.loading}
             />
             <Measures measures={this.state.perfData} />
-            {this.showDocLink()}
           </React.Fragment>
         )}
       </div>
