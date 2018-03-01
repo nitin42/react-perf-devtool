@@ -1,6 +1,6 @@
 {
   "name": "react-perf-devtool",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "A devtool for inspecting the performance of React Components",
   "main": "index.js",
   "files": ["lib/shared", "lib/npm"],
@@ -18,26 +18,24 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "babel-preset-react-app": "^3.1.0",
-    "chart.js": "^2.7.1",
     "husky": "^0.14.3",
     "jest": "^21.2.1",
     "lint-staged": "^6.0.0",
     "prettier": "^1.9.2",
-    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0",
     "uglifyjs-webpack-plugin": "^1.1.2",
-    "webpack": "^3.10.0"
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.9"
   },
   "scripts": {
     "test": "jest",
     "build:babel": "rm -rf lib && babel src --out-dir lib",
     "build:watch":
-      "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack --watch --config ./webpack/webpack.config.js --progress",
+      "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack-cli --watch --config ./webpack/webpack.config.js --progress",
     "build":
-      "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack --config ./webpack/webpack.config.js --progress && yarn build:babel",
+      "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack-cli --config ./webpack/webpack.config.js --progress && yarn build:babel",
     "precommit": "lint-staged",
     "format":
       "find src -name '*.js' | xargs ./node_modules/.bin/prettier --write --no-semi --single-quote",
