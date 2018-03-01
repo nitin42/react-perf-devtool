@@ -32,9 +32,7 @@ export function ComponentTime(props) {
           percentage={props.percentage}
           theme={props.theme}
         />
-        <p>
-          {props.componentname} - {props.msec} ms
-        </p>
+        <p>{props.componentname}</p>
       </a>
     </div>
   )
