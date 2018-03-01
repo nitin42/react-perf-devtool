@@ -101,13 +101,17 @@ export class ReactPerfDevtool extends React.Component {
 
       // These labels appear in the legend and in the tooltips when hovering different arcs
       labels: [
-        `${totalComponents} components (ms)`,
+        `${totalComponents} ${
+          totalComponents === 0 || totalComponents === 1
+            ? 'component'
+            : 'components'
+        } (ms)`,
         'Committing changes (ms)',
         `Committing ${totalEffects} host ${
-          totalEffects === 1 || totalEffects === 0 ? 'effect' : 'effects'
+          totalEffects === 0 || totalEffects === 1 ? 'effect' : 'effects'
         } (ms)`,
         `Calling ${totalLifecycleMethods} ${
-          totalLifecycleMethods === 1 || totalLifecycleMethods === 0
+          totalLifecycleMethods === 0 || totalLifecycleMethods === 1
             ? 'lifecycle hook'
             : 'lifecycle hooks'
         } (ms)`
