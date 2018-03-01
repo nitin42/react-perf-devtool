@@ -68,12 +68,10 @@ const getTotalComponentTimeSpent = componentPhases => {
 }
 
 const generateDataFromMeasures = store => {
-  const componentsWithTotalTime = Object.entries(store).map(
-    ([componentName, componentPhases]) => ({
-      name: componentName,
-      totalTime: getTotalComponentTimeSpent(componentPhases)
-    })
-  )
+  const componentsWithTotalTime = Object.keys(store).map(componentName => ({
+    name: componentName,
+    totalTime: getTotalComponentTimeSpent(store[componentName])
+  }))
   const totalTime = getSummarisedTotalTime(componentsWithTotalTime)
   return componentsWithTotalTime
     .map(componentWithTotalTime =>
