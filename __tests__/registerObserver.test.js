@@ -1,4 +1,7 @@
-var { registerObserver, getRequiredMeasures } = require('../src/npm/hook')
+var {
+  registerObserver,
+  getMeasuresByComponentName
+} = require('../src/npm/hook')
 
 describe('Register Observer', () => {
   describe('The register observer function shouldnt crash', () => {
@@ -37,7 +40,7 @@ describe('utils', () => {
   let componentNames
   let measures
   let requiredMeasures
-  describe('getRequiredMeasures', () => {
+  describe('getMeasuresByComponentName', () => {
     describe('with matching `componentNames`', () => {
       beforeEach(() => {
         componentNames = ['foo']
@@ -46,7 +49,7 @@ describe('utils', () => {
             componentName: 'foo'
           }
         ]
-        requiredMeasures = getRequiredMeasures(componentNames, measures)
+        requiredMeasures = getMeasuresByComponentName(componentNames, measures)
       })
       it('should return a list of required measure', () => {
         expect(requiredMeasures).toEqual([
@@ -64,7 +67,7 @@ describe('utils', () => {
             componentName: 'bar'
           }
         ]
-        requiredMeasures = getRequiredMeasures(componentNames, measures)
+        requiredMeasures = getMeasuresByComponentName(componentNames, measures)
       })
       it('should return a list of empty measure', () => {
         expect(requiredMeasures).toEqual([])
