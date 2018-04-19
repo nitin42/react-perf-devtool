@@ -107,7 +107,7 @@ To use this devtool extension, you'll need to register an observer in your app w
 Registering an observer is very simple and is only one function call away. Let's see how!
 
 ```js
-var registerObserver = require('react-perf-devtool')
+var {registerObserver} = require('react-perf-devtool')
 
 // Simple, no?
 registerObserver()
