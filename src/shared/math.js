@@ -4,7 +4,7 @@ function add(nums) {
 
 function average(nums) {
   if (nums.length === 0) {
-    return '-'
+    return 0
   }
   return (nums.reduce((acc, v) => (acc += v), 0) / nums.length).toFixed(2)
 }

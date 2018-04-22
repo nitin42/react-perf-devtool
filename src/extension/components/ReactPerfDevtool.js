@@ -1,10 +1,11 @@
 import React from 'react'
-
 import { Metrics } from './Metrics'
 import { ErrorComponent } from './ErrorComponent'
 import { Measures } from './Measures'
 import { Buttons } from './Buttons'
 import { Stats } from './Stats'
+import { getReactPerformanceData } from '../../shared/parse'
+import { generateDataFromMeasures } from '../../shared/generate'
 
 import { computeTotalTime, getResults } from '../util'
 
@@ -51,16 +52,6 @@ export class ReactPerfDevtool extends React.Component {
       loading: false, // To show the loading output while collecting the results.
       hasError: false, // Track errors, occurred when collecting the measures.
       showChart: false
-    }
-  }
-
-  componentWillMount() {
-    // When the devtool is launched first, measures may not be available.
-    // Reload the window again to get the new measures and then display them.
-    // Why ? We rely on the observer hook that the user has installed in his/her project.
-    // This chrome plugin is just way to interpret the results derived from the observer's API
-    if (store.length === 0) {
-      this.reloadInspectedWindow()
     }
   }
 
@@ -114,8 +105,8 @@ export class ReactPerfDevtool extends React.Component {
       ]
     },
     options: {
-      responsive: false,
-      maintainAspectRatio: false
+      responsive: true,
+      maintainAspectRatio: true
     }
   })
 
@@ -142,92 +133,159 @@ export class ReactPerfDevtool extends React.Component {
     }
   }
 
-  drawChart = props => {
-    const contex = document.getElementById('myChart')
-    const Chart = this.props.Graphics
-
-    const statsChart = new Chart(
-      contex,
-      this.chartOptions(this.getChartData(props))
-    )
+  drawChart = (props, contex) => {
+    if (contex) {
+      return new this.props.Graphics(
+        contex,
+        this.chartOptions(this.getChartData(props))
+      )
+    }
   }
 
   setErrorState = () => this.setState({ hasError: true, loading: false })
 
-  getMeasuresLength = () => {
+  getMeasuresLength = (force = false) => {
     this.evaluate(queries['measuresLength'], (count, err) => {
-      if (err || count === 0) {
+      if (err) {
+        // || count === 0
         this.setErrorState()
         return
       }
+      const parsed = JSON.parse(count)
 
       // Update the event count.
-      this.updateEventsCount(JSON.parse(count))
+      if (this.state.pendingEvents !== parsed || force)
+        return this.updateEventsCount(parsed)
     })
+  }
+
+  update = () => {
+    this.getMeasuresLength(true)
   }
 
   updateEventsCount = count => {
-    this.setState({
-      pendingEvents: count,
-      loading: false
-    })
-
-    // Render the measures if the store is empty.
-    this.shouldRenderMeasures()
+    this.shouldRenderMeasures(count)
   }
 
-  shouldRenderMeasures = () => {
+  getAllMeasures = () => {
+    // TODO
+  }
+  shouldRenderMeasures = count => {
     if (this.state.perfData.length === 0) {
       // Get the performance measures.
-      this.getMeasures()
+      this.getMeasures(count)
+    } else {
+      this.evaluate(queries['rawMeasures'], (rawMeasures, err) => {
+        if (err) {
+          this.setErrorState()
+          return
+        }
+
+        this.evaluate(queries['measures'], (measures, err2) => {
+          if (err2) {
+            this.setErrorState()
+            return
+          }
+          const newMeasures = JSON.parse(measures)
+          if (newMeasures.length) {
+            const newRawMeasures = this.state.rawMeasures.concat(
+              JSON.parse(rawMeasures)
+            )
+            store = [
+              ...generateDataFromMeasures(
+                getReactPerformanceData(newRawMeasures)
+              )
+            ]
+
+            this.setState(
+              {
+                pendingEvents: count,
+                loading: false,
+                rawMeasures: newRawMeasures,
+                perfData: store,
+                totalTime: store
+                  .reduce((acc, comp) => acc + comp.totalTimeSpent, 0)
+                  .toFixed(2)
+              },
+              () => {
+                const contex = document.getElementById('myChart')
+                if (contex) {
+                  this.drawChart(
+                    {
+                      totalTime: store
+                        .reduce((acc, comp) => acc + comp.totalTimeSpent, 0)
+                        .toFixed(2),
+                      rawMeasures: newRawMeasures,
+                      totalComponents: store.length
+                    },
+                    contex
+                  )
+                  this.clearMeasures()
+                }
+              }
+            )
+          } else this.setState({ pendingEvents: count })
+        })
+      })
     }
   }
 
-  getMeasures = () => {
+  getMeasures = count => {
     // Returns the performance entries which are not parsed and not aggregated
     // These measures are required for creating the chart.
-    this.getRawMeasures()
-
-    this.evaluate(queries['measures'], (measures, err) => {
-      if (err) {
-        this.setErrorState()
-        return
-      }
-
-      this.updateMeasures(JSON.parse(measures))
-    })
+    this.getRawMeasures(count)
   }
 
-  getRawMeasures = () => {
-    this.evaluate(queries['rawMeasures'], (measures, err) => {
+  getRawMeasures = count => {
+    this.evaluate(queries['rawMeasures'], (rawMeasures, err) => {
       if (err) {
         this.setErrorState()
         return
       }
+      const newRawMeasures = this.state.rawMeasures.concat(
+        JSON.parse(rawMeasures)
+      )
 
-      this.setState({
-        rawMeasures: JSON.parse(measures)
+      this.evaluate(queries['measures'], (measures, err) => {
+        if (err) {
+          this.setErrorState()
+          return
+        }
+        this.updateMeasures(JSON.parse(measures), newRawMeasures, count)
       })
     })
   }
 
-  updateMeasures = measures => {
-    store = store.concat(measures)
+  updateMeasures = (measures, raw, count) => {
+    store = [...generateDataFromMeasures(getReactPerformanceData(raw))]
+    // store = this.mergeStore(measures, store);
 
-    this.drawChart({
-      totalTime: store
-        .reduce((acc, comp) => acc + comp.totalTimeSpent, 0)
-        .toFixed(2),
-      rawMeasures: this.state.rawMeasures,
-      totalComponents: store.length
-    })
-
-    this.setState({
-      perfData: store,
-      totalTime: store
-        .reduce((acc, comp) => acc + comp.totalTimeSpent, 0)
-        .toFixed(2)
-    })
+    this.setState(
+      {
+        pendingEvents: count,
+        loading: false,
+        rawMeasures: raw,
+        perfData: store,
+        totalTime: store
+          .reduce((acc, comp) => acc + comp.totalTimeSpent, 0)
+          .toFixed(2)
+      },
+      () => {
+        const contex = document.getElementById('myChart')
+        if (contex) {
+          this.drawChart(
+            {
+              totalTime: store
+                .reduce((acc, comp) => acc + comp.totalTimeSpent, 0)
+                .toFixed(2),
+              rawMeasures: raw,
+              totalComponents: store.length
+            },
+            contex
+          )
+        }
+      }
+    )
 
     // Clear the shared state, so that new measures can be appended (and they don't override)
     this.clearMeasures()
@@ -240,7 +298,7 @@ export class ReactPerfDevtool extends React.Component {
     store = []
 
     this.setState({
-      perfData: store,
+      perfData: [],
       totalTime: 0,
       rawMeasures: [],
       pendingEvents: 0,
@@ -283,7 +341,12 @@ export class ReactPerfDevtool extends React.Component {
     return (
       <div style={this.panelStyles}>
         <div style={{ display: 'inlineBlock' }}>
-          <Buttons theme={theme} clear={this.clear} reload={this.reload} />
+          <Buttons
+            theme={theme}
+            clear={this.clear}
+            reload={this.reload}
+            update={this.update}
+          />
           <span style={{ fontWeight: 'bold', padding: '8px' }}>
             Pending events: {this.state.pendingEvents}
           </span>

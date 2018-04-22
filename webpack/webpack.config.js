@@ -32,7 +32,13 @@ const plugins = () => [
     'process.env.NODE_ENV': JSON.stringify('production')
   }),
   new webpack.optimize.ModuleConcatenationPlugin(),
-  new UglifyJSPlugin()
+  new UglifyJSPlugin({
+    uglifyOptions: {
+      compress: false,
+      mangle: false,
+      keep_fnames: true
+    }
+  })
 ]
 
 module.exports = {
