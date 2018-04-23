@@ -29,23 +29,25 @@ import { generateDataFromMeasures } from '../shared/generate'
 
   NOTE: This should only be used in development mode.
 */
-const registerObserver = (params, callback) => {
-  params = params || {}
-  let observer = null
+const registerObserver = (params = {}, callback) => {
   window.__REACT_PERF_DEVTOOL_GLOBAL_STORE__ = {
     measures: [],
     length: 0,
-    rawMeasures: []
+    rawMeasures: [],
+    newMeasures: 0,
+    aggregate: params.aggregate
   }
-
   // TODO: Is there any way to polyfill this API ?
   if (window.PerformanceObserver) {
     const { shouldLog, port, components } = params
 
-    observer = new window.PerformanceObserver(list => {
+    window.observer = new window.PerformanceObserver(list => {
       const newRawMeasures = list
         .getEntries()
         .concat(window.__REACT_PERF_DEVTOOL_GLOBAL_STORE__.rawMeasures)
+      const newMeasures =
+        newRawMeasures.length -
+        window.__REACT_PERF_DEVTOOL_GLOBAL_STORE__.rawMeasures.length
 
       const measures = generateDataFromMeasures(
         getReactPerformanceData(newRawMeasures)
@@ -56,8 +58,10 @@ const registerObserver = (params, callback) => {
       }
 
       window.__REACT_PERF_DEVTOOL_GLOBAL_STORE__ = {
-        measures,
+        aggregate: params.aggregate,
         length: newRawMeasures.length,
+        measures,
+        newMeasures,
         rawMeasures: newRawMeasures
       }
 
@@ -67,12 +71,12 @@ const registerObserver = (params, callback) => {
       }
     })
 
-    observer.observe({
+    window.observer.observe({
       entryTypes: ['measure']
     })
-  }
 
-  return observer
+    return window.observer
+  }
 }
 
 /**
@@ -93,39 +97,43 @@ const logMeasures = (port, measures) => {
   measures.forEach(
     ({
       componentName,
-      mount,
-      render,
-      update,
-      unmount,
-      totalTimeSpent,
-      percentTimeSpent,
-      numberOfInstances,
-      componentWillMount,
       componentDidMount,
-      componentWillReceiveProps,
-      shouldComponentUpdate,
-      componentWillUpdate,
       componentDidUpdate,
-      componentWillUnmount
+      componentWillMount,
+      componentWillReceiveProps,
+      componentWillUnmount,
+      componentWillUpdate,
+      getChildContext,
+      getSnapshotBeforeUpdate,
+      mount,
+      numberOfInstances,
+      percentTimeSpent,
+      shouldComponentUpdate,
+      totalTimeSpent,
+      unmount,
+      update,
+      wastedRendersGuess
     }) => {
       // The time is in millisecond (ms)
       // TODO: The data generated is generalized. Make it concrete!
       const data = {
         component: componentName,
-        mount,
-        render,
-        update,
-        unmount,
-        totalTimeSpent,
-        percentTimeSpent,
-        numberOfInstances,
-        componentWillMount,
-        componentDidMount,
-        componentWillReceiveProps,
-        shouldComponentUpdate,
-        componentWillUpdate,
+        omponentDidMount,
         componentDidUpdate,
-        componentWillUnmount
+        componentWillMount,
+        componentWillReceiveProps,
+        componentWillUnmount,
+        componentWillUpdate,
+        getChildContext,
+        getSnapshotBeforeUpdate,
+        mount,
+        numberOfInstances,
+        percentTimeSpent,
+        shouldComponentUpdate,
+        totalTimeSpent,
+        unmount,
+        update,
+        wastedRendersGuess
       }
 
       send(data, port)
