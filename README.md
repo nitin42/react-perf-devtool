@@ -416,7 +416,6 @@ Calculating and aggregating the results happens inside the app frame and not in 
 - [x] Make the implementation of measures generator more concrete
 - [ ] Add support for older versions of React
 - [x] Make the tool more comprehensible
-> I have improved the documentation to make the tool more approachable and understand how the stats are calculated and what they mean.
 
 ## Contributing
 
