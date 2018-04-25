@@ -32,7 +32,7 @@ interface IMeasure {
 
 declare module 'react-perf-devtool' {
     function registerObserver(
-        options: IOptions,
+        options?: IOptions,
         callback?: (measures: Array<IMeasure>) => void
     ): void
 }
