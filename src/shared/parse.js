@@ -91,19 +91,17 @@ const updateTime = (store, componentName, phase, measure) => {
 
 // Get data from the performance measures
 const getReactPerformanceData = measures => {
-  let store = {}
-
-  for (const measure of measures) {
-    if (getComponentAndPhaseName(measure) !== null) {
+  const store = {}
+  measures
+    .filter(measure => getComponentAndPhaseName(measure) !== null)
+    .forEach(measure => {
       const { componentName, phase } = getComponentAndPhaseName(measure)
       if (!store[componentName]) {
         store[componentName] = createSchema()
       }
 
       updateTime(store, componentName, phase, measure)
-    }
-  }
-
+    })
   return store
 }
 
