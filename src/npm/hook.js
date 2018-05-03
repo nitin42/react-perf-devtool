@@ -65,7 +65,6 @@ const registerObserver = (params, callback) => {
 
 /**
   This function logs the measures to the console. Requires a server running on a specified port. Default port number is 8080.
-  TODO: Change this behaviour if Chrome lands the support for recording performance when inspecting the node apps.
 */
 const logToConsole = ({ port, components }, measures) => {
   if (!components) {
@@ -95,7 +94,6 @@ const logMeasures = (port, measures) => {
       componentWillUnmount
     }) => {
       // The time is in millisecond (ms)
-      // TODO: The data generated is generalized. Make it concrete!
       const data = {
         component: componentName,
         mount,

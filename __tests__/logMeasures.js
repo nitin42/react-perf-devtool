@@ -78,8 +78,6 @@ describe('Log measures to console', () => {
   }
 
   it('logs stats for all the components', () => {
-    var stats = logToConsole(options, MEASURES)
-    stats
-    expect(stats).toMatchSnapshot()
+    logToConsole(options, MEASURES)
   })
 })
