@@ -3,6 +3,7 @@
   "version": "3.0.5",
   "description": "A devtool for inspecting the performance of React Components",
   "main": "index.js",
+  "types": "index.d.ts",
   "files": ["lib/shared", "lib/npm"],
   "author": "Nitin Tulswani",
   "license": "MIT",
