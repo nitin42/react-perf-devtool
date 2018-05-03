@@ -1,4 +1,7 @@
-var { registerObserver } = require('../src/npm/hook')
+var {
+  registerObserver,
+  getMeasuresByComponentName
+} = require('../src/npm/hook')
 
 describe('Register Observer', () => {
   describe('The register observer function shouldnt crash', () => {
@@ -29,6 +32,46 @@ describe('Register Observer', () => {
       const callback = () => {}
       expect(registerObserver(undefined, callback)).toBeUndefined()
       expect(window.PerformanceObserver).toHaveBeenCalled()
+    })
+  })
+})
+
+describe('utils', () => {
+  let componentNames
+  let measures
+  let requiredMeasures
+  describe('getMeasuresByComponentName', () => {
+    describe('with matching `componentNames`', () => {
+      beforeEach(() => {
+        componentNames = ['foo']
+        measures = [
+          {
+            componentName: 'foo'
+          }
+        ]
+        requiredMeasures = getMeasuresByComponentName(componentNames, measures)
+      })
+      it('should return a list of required measure', () => {
+        expect(requiredMeasures).toEqual([
+          {
+            componentName: 'foo'
+          }
+        ])
+      })
+    })
+    describe('without matching `componentNames`', () => {
+      beforeEach(() => {
+        componentNames = ['foo']
+        measures = [
+          {
+            componentName: 'bar'
+          }
+        ]
+        requiredMeasures = getMeasuresByComponentName(componentNames, measures)
+      })
+      it('should return a list of empty measure', () => {
+        expect(requiredMeasures).toEqual([])
+      })
     })
   })
 })

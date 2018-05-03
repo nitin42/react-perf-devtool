@@ -49,13 +49,13 @@ function logToConsole({ port, components }, measures) {
   if (!components) {
     logMeasures(measures)
   } else if (typeof components !== undefined && Array.isArray(components)) {
-    var stats = getRequiredMeasures(components, measures)
+    var stats = getMeasuresByComponentName(components, measures)
 
     logMeasures(stats)
   }
 }
 
-function getRequiredMeasures(components, measures) {
+function getMeasuresByComponentName(components, measures) {
   var requiredMeasures = []
 
   if (!Array.isArray(components)) {

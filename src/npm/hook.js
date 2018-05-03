@@ -71,9 +71,7 @@ const logToConsole = ({ port, components }, measures) => {
   if (!components) {
     logMeasures(port, measures)
   } else if (typeof components !== undefined && Array.isArray(components)) {
-    const requiredMeasures = getRequiredMeasures(components, measures)
-
-    logMeasures(port, requiredMeasures)
+    logMeasures(port, getMeasuresByComponentName(components, measures))
   }
 }
 
@@ -131,20 +129,7 @@ const send = (data, port) => {
   )
 }
 
-const getRequiredMeasures = (components, measures) => {
-  let requiredMeasures = []
+const getMeasuresByComponentName = (componentNames, measures) =>
+  measures.filter(measure => componentNames.includes(measure.componentName))
 
-  if (!Array.isArray(components)) {
-    components = [components]
-  }
-
-  measures.forEach(measure => {
-    if (components.includes(measure.componentName)) {
-      requiredMeasures.push(measure)
-    }
-  })
-
-  return requiredMeasures
-}
-
-export { registerObserver }
+export { registerObserver, getMeasuresByComponentName }
