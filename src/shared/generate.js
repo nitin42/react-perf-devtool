@@ -17,9 +17,9 @@ const createSchema = (store, component, totalTime) => ({
   totalTimeSpent: component.totalTime,
   numberOfInstances:
     store[component.name].mount.timeSpent.length -
-    store[component.name].unmount.timeSpent.length,
+      store[component.name].unmount.timeSpent.length || 1,
   percentTimeSpent: percent(component.totalTime / totalTime),
-  render: plotTimings(store[component.name].render.timeSpent),
+  cascadingUpdate: plotTimings(store[component.name].cascadingUpdate.timeSpent),
   mount: plotTimings(store[component.name].mount.timeSpent),
   update: plotTimings(store[component.name].update.timeSpent),
   unmount: plotTimings(store[component.name].unmount.timeSpent),
@@ -41,6 +41,11 @@ const createSchema = (store, component, totalTime) => ({
   componentDidUpdate: plotTimings(
     store[component.name].componentDidUpdate.timeSpent
   ),
+
+  getSnapshotBeforeUpdate: plotTimings(
+    store[component.name].getSnapshotBeforeUpdate.timeSpent
+  ),
+  getChildContext: plotTimings(store[component.name].getChildContext.timeSpent),
   componentWillUnmount: plotTimings(
     store[component.name].componentWillUnmount.timeSpent
   )
@@ -48,18 +53,21 @@ const createSchema = (store, component, totalTime) => ({
 
 const getTotalComponentTimeSpent = componentPhases => {
   const phases = [
-    'mount',
-    'unmount',
-    'update',
-    'render',
-    'componentWillMount',
     'componentDidMount',
-    'componentWillReceiveProps',
-    'shouldComponentUpdate',
-    'componentWillUpdate',
     'componentDidUpdate',
-    'componentWillUnmount'
+    'componentWillMount',
+    'componentWillReceiveProps',
+    'componentWillUnmount',
+    'componentWillUpdate',
+    'getChildContext',
+    'getSnapshotBeforeUpdate',
+    'mount',
+    'cascadingUpdate',
+    'shouldComponentUpdate',
+    'unmount',
+    'update'
   ]
+
   return phases.reduce(
     (totalTimeSpent, phase) =>
       (totalTimeSpent += add(componentPhases[phase].timeSpent)),
@@ -77,7 +85,19 @@ const generateDataFromMeasures = store => {
     .map(componentWithTotalTime =>
       createSchema(store, componentWithTotalTime, totalTime)
     )
-    .sort((a, b) => b.totalTimeSpent - a.totalTimeSpent)
+    .sort((a, b) => {
+      const nameA = a.componentName.toUpperCase() // ignore upper and lowercase
+      const nameB = b.componentName.toUpperCase() // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1
+      }
+      if (nameA > nameB) {
+        return 1
+      }
+
+      // names must be equal
+      return 0
+    })
 }
 
 export { generateDataFromMeasures }

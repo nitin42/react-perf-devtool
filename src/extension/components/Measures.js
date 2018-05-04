@@ -7,6 +7,7 @@ const theme = require('../theme')
 /**
   This component renders the data (measures of each component)
 */
+
 export function Measures(props) {
   return (
     <div>
@@ -14,7 +15,7 @@ export function Measures(props) {
       {props.measures.map((measure, index) => {
         return (
           <div
-            key={index}
+            key={measure.componentName}
             id={measure.componentName}
             className="container component-result"
           >
@@ -51,11 +52,50 @@ export function Measures(props) {
                 </td>
               </tr>
               <tr>
-                <td>Render (ms)</td>
+                <td>Cascading Updates (ms)</td>
                 <td>
-                  <strong>{measure.render.totalTimeSpentMs}</strong>
+                  <strong>{measure.cascadingUpdate.totalTimeSpentMs}</strong>
                 </td>
               </tr>
+              <tr>
+                <td>Cascading Updates (total)</td>
+                <td>
+                  <strong>{measure.cascadingUpdate.numberOfTimes}</strong>
+                </td>
+              </tr>
+
+              <tr>
+                <td> getSnapshotBeforeUpdate (total)</td>
+                <td>
+                  <strong>
+                    {measure.getSnapshotBeforeUpdate.numberOfTimes}
+                  </strong>
+                </td>
+              </tr>
+
+              <tr>
+                <td> getSnapshotBeforeUpdate (ms)</td>
+                <td>
+                  <strong>
+                    {measure.getSnapshotBeforeUpdate.totalTimeSpentMs}
+                  </strong>
+                </td>
+              </tr>
+
+              <tr>
+                <td>getChildContext (total)</td>
+                <td>
+                  <strong>{measure.getChildContext.numberOfTimes}</strong>
+                </td>
+              </tr>
+
+              <tr>
+                <td>getChildContext (ma)</td>
+                <td>
+                  <strong>{measure.getChildContext.totalTimeSpentMs}</strong>
+                </td>
+              </tr>
+
               <tr>
                 <td>Unmount (ms)</td>
                 <td>

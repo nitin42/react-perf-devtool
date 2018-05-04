@@ -13,7 +13,7 @@ export function Metrics(props) {
         <ul className="ctime">
           {props.measures.map((measure, index) => {
             return (
-              <li key={index}>
+              <li key={measure.componentName}>
                 <ComponentTime
                   componentname={measure.componentName}
                   percentage={parseInt(measure.percentTimeSpent)}
