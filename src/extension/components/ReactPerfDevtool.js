@@ -76,7 +76,7 @@ export class ReactPerfDevtool extends React.Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer)
+    this.timer && clearInterval(this.timer)
   }
 
   reloadInspectedWindow = () => chrome.devtools.inspectedWindow.reload()
@@ -252,6 +252,9 @@ export class ReactPerfDevtool extends React.Component {
     })
 
     this.clearMeasures()
+
+    // Makes sure that we are not batching calls for example - setting chart state here false and batching drawChart may result in an error because the canvas may not render.
+    this.timer && clearInterval(this.timer)
   }
 
   browserReload = () =>
