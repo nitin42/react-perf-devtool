@@ -1,1 +1,1 @@
-module.exports = require('./lib/npm/hook')
+module.exports = require('./lib/devtool-hook.js')

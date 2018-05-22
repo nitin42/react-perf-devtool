@@ -1,10 +1,10 @@
 {
   "name": "react-perf-devtool",
-  "version": "3.0.7",
+  "version": "3.0.9-beta.1",
   "description": "A devtool for inspecting the performance of React Components",
   "main": "index.js",
   "types": "index.d.ts",
-  "files": ["lib/shared", "lib/npm"],
+  "files": ["src", "lib"],
   "author": "Nitin Tulswani",
   "license": "MIT",
   "peerDependencies": {
@@ -32,7 +32,8 @@
   },
   "scripts": {
     "test": "jest",
-    "build:babel": "rm -rf lib && babel src --out-dir lib",
+    "build:hook":
+      "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack-cli --config ./webpack/webpack.config.hook.js --progress",
     "build:watch":
       "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack-cli --watch --config ./webpack/webpack.config.js --progress",
     "build":

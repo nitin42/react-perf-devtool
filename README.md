@@ -92,6 +92,12 @@ The below extensions represent the current stable release.
 npm install react-perf-devtool
 ```
 
+A `umd` build is also available via [unpkg](https://www.unpkg.com)
+
+```js
+<script crossorigin src="https://unpkg.com/react-perf-devtool@3.0.8-beta/lib/npm/hook.js"></script>
+```
+
 > This extension and package also depends on react. Please make sure you have those installed as well.
 
 > Note - The npm module is important and required to use the devtool. So make sure you've installed it before using the browser extension.
