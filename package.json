@@ -37,7 +37,7 @@
     "build:watch":
       "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack-cli --watch --config ./webpack/webpack.config.js --progress",
     "build":
-      "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack-cli --config ./webpack/webpack.config.js --progress && yarn build:babel",
+      "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack-cli --config ./webpack/webpack.config.js --progress",
     "precommit": "lint-staged",
     "format":
       "find src -name '*.js' | xargs ./node_modules/.bin/prettier --write --no-semi --single-quote",
