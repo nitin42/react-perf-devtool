@@ -160,7 +160,7 @@ export class ReactPerfDevtool extends React.Component {
 
   getMeasuresLength = () => {
     this.evaluate(queries['measuresLength'], (count, err) => {
-      if (err || count === 0) {
+      if (err) {
         this.setErrorState()
         return
       }
