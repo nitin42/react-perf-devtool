@@ -1,33 +1,28 @@
 import { add } from './math'
 
-// Update the store with the time spent while committing the changes
-const updateStore = (store, measure, delimiter) => {
-  if (measure.name.includes(delimiter)) {
-    const measureName = measure.name.split(delimiter).join('')
+const COMMITTING_CHANGES = 'Committing Changes'
+const LIFE_CYCLE_NOTICE = '⚛'
+const RECONCILIATION_NOTICE = '⛔'
 
-    if (measureName.includes('(Committing Changes)')) {
-      if (!store['Committing Changes']) {
-        store['Committing Changes'] = {
-          timeSpent: []
-        }
-      }
+const getMeasurmentsByDelimiter = (measurments, delimiter) =>
+  measurments
+    .filter(
+      measurment =>
+        measurment.name.includes(delimiter) &&
+        measurment.name
+          .split(delimiter)
+          .join('')
+          .includes(COMMITTING_CHANGES)
+    )
+    .map(measurment => Number(measurment.duration.toFixed(2)))
 
-      store['Committing Changes'].timeSpent.push(
-        Number(measure.duration.toFixed(2))
-      )
-    }
+const getCommitChangesTime = measurements => ({
+  [COMMITTING_CHANGES]: {
+    timeSpent: [
+      ...getMeasurmentsByDelimiter(measurements, LIFE_CYCLE_NOTICE),
+      ...getMeasurmentsByDelimiter(measurements, RECONCILIATION_NOTICE)
+    ]
   }
-}
-
-const getCommitChangesTime = measures => {
-  let store = {}
-
-  for (const measure of measures) {
-    updateStore(store, measure, '⚛')
-    updateStore(store, measure, '⛔')
-  }
-
-  return store
-}
+})
 
 export { getCommitChangesTime }
