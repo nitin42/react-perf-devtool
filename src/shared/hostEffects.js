@@ -1,49 +1,39 @@
 import { add } from './math'
 
+const COMMITTING_HOST_EFFECTS = 'Committing Host Effects'
+
 // Update the store with the time spent while committing host effects
-const updateStore = (store, measure) => {
-  if (measure.name.includes('⚛')) {
-    const measureName = measure.name.split('⚛ ').join('')
+const getCommitHostEffectsTime = measures => {
+  const measurementsByMatchingName = measures.filter(
+    measure =>
+      measure.name.includes('⚛') &&
+      measure.name
+        .split('⚛ ')
+        .join('')
+        .includes(COMMITTING_HOST_EFFECTS)
+  )
 
-    if (measureName.includes('Committing Host Effects')) {
-      var totalEffects = Number(measureName.split(':')[1].split(' ')[1])
-      if (!store['Committing Host Effects']) {
-        store['Committing Host Effects'] = {
-          timeSpent: [],
-          totalEffects: []
+  return {
+    [COMMITTING_HOST_EFFECTS]: {
+      totalEffects: measurementsByMatchingName.map(
+        measurementByMatchingName => {
+          const measurementName = measurementByMatchingName.name
+            .split('⚛ ')
+            .join('')
+          const effectValue = measurementName.split(':')[1].split(' ')[1]
+          return Number(effectValue)
         }
-      }
-
-      store['Committing Host Effects'].timeSpent.push(
-        Number(measure.duration.toFixed(2))
-      )
-      store['Committing Host Effects'].totalEffects.push(totalEffects)
+      ),
+      timeSpent: measurementsByMatchingName.map(measurementByMatchingName => {
+        const durationValue = measurementByMatchingName.duration.toFixed(2)
+        return Number(durationValue)
+      })
     }
   }
-
-  return {}
-}
-
-const getCommitHostEffectsTime = measures => {
-  let store = {}
-
-  for (const measure of measures) {
-    updateStore(store, measure)
-  }
-
-  return store
 }
 
 // Get total number of host effects
-const getTotalEffects = store => {
-  let totalEffects = 0
-
-  for (const measure in store) {
-    totalEffects = totalEffects || 0
-    totalEffects += add(store[measure].totalEffects)
-  }
-
-  return Number(totalEffects.toFixed(2))
-}
+const getTotalEffects = store =>
+  Number(add(store[COMMITTING_HOST_EFFECTS].totalEffects))
 
 export { getTotalEffects, getCommitHostEffectsTime }
