@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Committing Host Effects Sanity 1`] = `
+Object {
+  "Committing Host Effects": Object {
+    "timeSpent": Array [
+      1.14,
+      0.09,
+    ],
+    "totalEffects": Array [
+      7,
+      1,
+    ],
+  },
+}
+`;
+
+exports[`Committing Host Effects Total effects 1`] = `8`;
+
+exports[`Committing Host Effects Total time taken in committing host effects 1`] = `1.23`;

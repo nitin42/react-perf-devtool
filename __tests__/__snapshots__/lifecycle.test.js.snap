@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Calling Lifecycle Methods Sanity 1`] = `
+Object {
+  "Calling Lifecycle Methods": Object {
+    "timeSpent": Array [
+      4.38,
+      0.89,
+    ],
+    "totalMethods": Array [
+      6,
+      1,
+    ],
+  },
+}
+`;
+
+exports[`Calling Lifecycle Methods Total effects 1`] = `7`;
+
+exports[`Calling Lifecycle Methods Total time taken in calling lifecycle methods 1`] = `5.27`;

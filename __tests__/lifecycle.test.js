@@ -5,14 +5,14 @@ var { getTotalTime } = require('../src/shared/totalTime')
 
 describe('Calling Lifecycle Methods', () => {
   test('Sanity', () => {
-    console.log(getLifecycleTime(MEASURES))
+    expect(getLifecycleTime(MEASURES)).toMatchSnapshot()
   })
 
   test('Total time taken in calling lifecycle methods', () => {
-    console.log(getTotalTime(getLifecycleTime(MEASURES)))
+    expect(getTotalTime(getLifecycleTime(MEASURES))).toMatchSnapshot()
   })
 
   test('Total effects', () => {
-    console.log(getTotalMethods(getLifecycleTime(MEASURES)))
+    expect(getTotalMethods(getLifecycleTime(MEASURES))).toMatchSnapshot()
   })
 })

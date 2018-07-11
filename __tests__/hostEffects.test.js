@@ -8,14 +8,16 @@ var { getTotalTime } = require('../src/shared/totalTime')
 
 describe('Committing Host Effects', () => {
   test('Sanity', () => {
-    console.log(getCommitHostEffectsTime(MEASURES))
+    expect(getCommitHostEffectsTime(MEASURES)).toMatchSnapshot()
   })
 
   test('Total time taken in committing host effects', () => {
-    console.log(getTotalTime(getCommitHostEffectsTime(MEASURES)))
+    expect(getTotalTime(getCommitHostEffectsTime(MEASURES))).toMatchSnapshot()
   })
 
   test('Total effects', () => {
-    console.log(getTotalEffects(getCommitHostEffectsTime(MEASURES)))
+    expect(
+      getTotalEffects(getCommitHostEffectsTime(MEASURES))
+    ).toMatchSnapshot()
   })
 })
