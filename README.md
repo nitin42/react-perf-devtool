@@ -3,8 +3,8 @@
 [![Build Status](https://travis-ci.org/nitin42/react-perf-devtool.svg?branch=master)](https://travis-ci.org/nitin42/react-perf-devtool)
 ![Release Status](https://img.shields.io/badge/status-stable-brightgreen.svg)
 ![Author](https://img.shields.io/badge/author-Nitin%20Tulswani-lightgrey.svg)
-![current-version](https://img.shields.io/badge/version-3.0.7-blue.svg)
-
+![current-version](https://img.shields.io/badge/version-3.0.8-blue.svg)
+![extension](https://img.shields.io/badge/extension-5.3-ff69b4.svg)
 > A devtool for inspecting the performance of React Components
 
 <br/>
