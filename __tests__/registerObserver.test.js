@@ -3,35 +3,60 @@ var {
   getMeasuresByComponentName
 } = require('../src/npm/hook')
 
-describe('Register Observer', () => {
-  describe('The register observer function shouldnt crash', () => {
+describe('`registerObserver`', () => {
+  let observer
+  let callback
+  let params
+  let observerReference
+  describe('with `window.PerformanceObserver`', () => {
     beforeEach(() => {
-      window.PerformanceObserver = jest.fn(callback => ({
-        observe: () =>
-          callback({
-            getEntries: () => []
-          })
-      }))
+      observerReference = {
+        observe: jest.fn()
+      }
+      window.PerformanceObserver = jest.fn(() => observerReference)
+      callback = jest.fn()
+      observer = registerObserver(params, callback)
     })
-    test('Call register without params', () => {
-      expect(registerObserver()).toBeUndefined()
-      expect(window.PerformanceObserver).toHaveBeenCalled()
+    it('should return `observer`', () => {
+      expect(observer).toEqual(observerReference)
     })
-    test('Call register with params', () => {
-      const callback = () => {}
-      expect(
-        registerObserver({ shouldLog: true, port: 8080 }, callback)
-      ).toBeUndefined()
-      expect(window.PerformanceObserver).toHaveBeenCalled()
+    it('should call `observer.observe`', () => {
+      expect(observerReference.observe).toHaveBeenCalledTimes(1)
     })
-    test('Call register with params but without callback', () => {
-      expect(registerObserver({ shouldLog: true, port: 8080 })).toBeUndefined()
-      expect(window.PerformanceObserver).toHaveBeenCalled()
+    describe('without `params`', () => {
+      beforeEach(() => {
+        params = undefined
+      })
+      it('should call `observer.observe` with `entryTypes`', () => {
+        expect(observerReference.observe).toHaveBeenCalledWith({
+          entryTypes: ['measure']
+        })
+      })
     })
-    test('Call register without params but without callback', () => {
-      const callback = () => {}
-      expect(registerObserver(undefined, callback)).toBeUndefined()
-      expect(window.PerformanceObserver).toHaveBeenCalled()
+    describe('with `params.entryTypes`', () => {
+      beforeEach(() => {
+        params = {
+          entryTypes: ['mark']
+        }
+        callback = jest.fn()
+        observer = registerObserver(params, callback)
+      })
+      it('should call `observer.observe` with `entryTypes`', () => {
+        expect(observerReference.observe).toHaveBeenCalledWith({
+          entryTypes: ['mark']
+        })
+      })
+    })
+  })
+  describe('without `window.PerformanceObserver`', () => {
+    beforeEach(() => {
+      window.PerformanceObserver = undefined
+      callback = jest.fn()
+      params = undefined
+      observer = registerObserver(params, callback)
+    })
+    it('should return `undefined`', () => {
+      expect(observer).toEqual(undefined)
     })
   })
 })
