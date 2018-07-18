@@ -33,20 +33,6 @@ describe('`registerObserver`', () => {
         })
       })
     })
-    describe('with `params.entryTypes`', () => {
-      beforeEach(() => {
-        params = {
-          entryTypes: ['mark']
-        }
-        callback = jest.fn()
-        observer = registerObserver(params, callback)
-      })
-      it('should call `observer.observe` with `entryTypes`', () => {
-        expect(observerReference.observe).toHaveBeenCalledWith({
-          entryTypes: ['mark']
-        })
-      })
-    })
   })
   describe('without `window.PerformanceObserver`', () => {
     beforeEach(() => {

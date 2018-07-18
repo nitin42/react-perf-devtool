@@ -29,13 +29,7 @@ import { generateDataFromMeasures } from '../shared/generate'
 
   NOTE: This should only be used in development mode.
 */
-const registerObserver = (
-  params = {
-    entryTypes: ['measure'],
-    shouldLog: false
-  },
-  callback
-) => {
+const registerObserver = (params = { shouldLog: false }, callback) => {
   if (window.PerformanceObserver) {
     const observer = new window.PerformanceObserver(list => {
       const entries = list.getEntries()
@@ -50,7 +44,7 @@ const registerObserver = (
       }
       if (params.shouldLog) logToConsole(params, measures)
     })
-    observer.observe({ entryTypes: params.entryTypes })
+    observer.observe({ entryTypes: ['measure'] })
     return observer
   }
   return undefined
