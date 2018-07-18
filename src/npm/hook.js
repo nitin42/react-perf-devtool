@@ -45,8 +45,8 @@ const registerObserver = (
       if (typeof callback === 'function') callback(measures)
       window.__REACT_PERF_DEVTOOL_GLOBAL_STORE__ = {
         measures,
-        length: list.getEntries().length,
-        rawMeasures: list.getEntries()
+        length: entries.length,
+        rawMeasures: entries
       }
       if (params.shouldLog) logToConsole(params, measures)
     })
