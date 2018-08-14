@@ -239,7 +239,7 @@ Below is the schema of the performance measures that are logged to the console.
 
 ```js
 {
-  component, // Name of the component
+  componentName, // Name of the component
   mount: { // Mount time
     averageTimeSpentMs,
     numberOfTimes,
