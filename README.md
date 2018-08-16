@@ -150,9 +150,7 @@ function callback(measures) {
 registerObserver({}, callback)
 ```
 
-After you've registered the observer, start your local development server and go to `http://localhost:3000/?react_perf`.
-
-The query parameter `react_perf` is required so that React can measure the performance timings.
+After you've registered the observer, start your local development server and go to `http://localhost:3000/`.
 
 > Note - This extension works only for React 16 or above versions of it.
 
@@ -239,7 +237,7 @@ Below is the schema of the performance measures that are logged to the console.
 
 ```js
 {
-  componentName, // Name of the component
+  componentName, 
   mount: { // Mount time
     averageTimeSpentMs,
     numberOfTimes,
