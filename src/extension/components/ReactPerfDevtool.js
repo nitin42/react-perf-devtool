@@ -65,14 +65,10 @@ export class ReactPerfDevtool extends React.Component {
   }
 
   componentDidMount() {
-    // Display the loading indicator
-    this.setState({ loading: true })
+    this.setState({ loading: true, showChart: true })
 
     // Get the total measures and flush them if the store is empty.
     this.timer = setInterval(() => this.getMeasuresLength(), 2000)
-
-    // Show the chart when we have the measures
-    this.setState({ showChart: true })
   }
 
   componentWillUnmount() {
