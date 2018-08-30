@@ -1,6 +1,6 @@
 {
   "name": "react-perf-devtool",
-  "version": "3.0.8",
+  "version": "3.1.8-beta.1",
   "description": "A devtool for inspecting the performance of React Components",
   "main": "index.js",
   "types": "index.d.ts",

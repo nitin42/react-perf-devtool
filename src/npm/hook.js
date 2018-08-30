@@ -34,7 +34,7 @@ const registerObserver = (params, callback) => {
 
   // TODO: Is there any way to polyfill this API ?
   if (window.PerformanceObserver) {
-    const { shouldLog, port, components } = params
+    const { shouldLog, port, components, timeout = 2000 } = params
 
     let observer = new window.PerformanceObserver(list => {
       const measures = generateDataFromMeasures(
@@ -47,6 +47,7 @@ const registerObserver = (params, callback) => {
 
       window.__REACT_PERF_DEVTOOL_GLOBAL_STORE__ = {
         measures,
+        timeout,
         length: list.getEntries().length,
         rawMeasures: list.getEntries()
       }

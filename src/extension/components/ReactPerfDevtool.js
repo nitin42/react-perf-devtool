@@ -19,12 +19,17 @@ let queries = {
   measures: 'JSON.stringify(__REACT_PERF_DEVTOOL_GLOBAL_STORE__.measures)',
   rawMeasures:
     'JSON.stringify(__REACT_PERF_DEVTOOL_GLOBAL_STORE__.rawMeasures)',
+  getTimeoutValue:
+    'JSON.stringify(__REACT_PERF_DEVTOOL_GLOBAL_STORE__.timeout)',
   clear: `__REACT_PERF_DEVTOOL_GLOBAL_STORE__ = {
           length: 0,
           measures: [],
           rawMeasures: [],
+          timeout: __REACT_PERF_DEVTOOL_GLOBAL_STORE__.timeout
         }`
 }
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 /**
   This is the main component that renders the table, containing information about
@@ -67,8 +72,26 @@ export class ReactPerfDevtool extends React.Component {
   componentDidMount() {
     this.setState({ loading: true, showChart: true })
 
-    // Get the total measures and flush them if the store is empty.
-    this.timer = setInterval(() => this.getMeasuresLength(), 2000)
+    // Defer the initialization of the extension until the application loads. Why ?
+    // Because some of the applications may be huge in size and take a lot of time to load.
+    // If the extension initialization process kicks-in before the app loads, we are trapped inside the error state.
+    // With this, users can configure a timeout value for initialization of the extension using the observer hook
+    // Default value for the timeout is 2 sec.
+
+    // We need to resolve the promise after one sec. to make sure we have the updated __REACT_PERF_DEVTOOL_GLOBAL_STORE__ object otherwise we might end up with null
+    sleep(1000).then(res => {
+      this.evaluate(queries['getTimeoutValue'], (timeout, err) => {
+        if (err) {
+          this.setErrorState()
+          return
+        }
+
+        this.timer = setInterval(
+          () => this.getMeasuresLength(),
+          JSON.parse(timeout)
+        )
+      })
+    })
   }
 
   componentWillUnmount() {
