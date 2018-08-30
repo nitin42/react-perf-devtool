@@ -70,10 +70,12 @@ export class ReactPerfDevtool extends React.Component {
   }
 
   componentDidMount() {
+    // Show the loader while the measures get resolved.
+    // showChart, when set to true, render the canvas required for Chart.js.
     this.setState({ loading: true, showChart: true })
 
     // Defer the initialization of the extension until the application loads. Why ?
-    // Because some of the applications may be huge in size and take a lot of time to load.
+    // Because some of the applications are huge in size and may take a lot of time to load.
     // If the extension initialization process kicks-in before the app loads, we are trapped inside the error state.
     // With this, users can configure a timeout value for initialization of the extension using the observer hook
     // Default value for the timeout is 2 sec.
@@ -86,9 +88,10 @@ export class ReactPerfDevtool extends React.Component {
           return
         }
 
+        // This is also backward compatible with older versions of observer hook
         this.timer = setInterval(
           () => this.getMeasuresLength(),
-          JSON.parse(timeout)
+          timeout !== undefined ? JSON.parse(timeout) : 2000
         )
       })
     })
