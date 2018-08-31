@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/nitin42/react-perf-devtool.svg?branch=master)](https://travis-ci.org/nitin42/react-perf-devtool)
 ![Release Status](https://img.shields.io/badge/status-stable-brightgreen.svg)
 ![Author](https://img.shields.io/badge/author-Nitin%20Tulswani-lightgrey.svg)
-![current-version](https://img.shields.io/badge/version-3.0.8-blue.svg)
+![current-version](https://img.shields.io/badge/version-3.1.8-blue.svg)
 ![extension](https://img.shields.io/badge/extension-5.3-ff69b4.svg)
 > A devtool for inspecting the performance of React Components
 
@@ -175,14 +175,19 @@ You can pass an **option** object as an argument to `registerObserver` to enable
 {
   shouldLog: boolean, // default value: false
   port: number // default value: 8080
+  timeout: number // default value: 2000
 }
 ```
 
-You can pass two properties to the **`option`** object, `shouldLog` and `port`.
+You can pass three properties to the **`option`** object, `shouldLog` and `port`.
 
 * `shouldLog` - It takes a **boolean** value. If set to true, measures will be logged to the console.
 
 * `port` - Port number for the server where the measures will be send
+
+* `timeout` - A timeout value to defer the initialisation of the extension.
+
+If your application takes time to load, it's better to defer the initialisation of extension by specifying the timeout value through `timeout` property. This ensures that the extension will load only after your application has properly loaded in the browser so that the updated measures can be rendered. However, you can skip this property if your application is in small size.
 
 **Example**
 
@@ -197,7 +202,8 @@ const Component = require('./Component') // Some React Component
 
 const options = {
   shouldLog: true,
-  port: 8080
+  port: 8080,
+  timeout: 12000 // Load the extension after 12 sec.
 }
 
 function callback(measures) {
