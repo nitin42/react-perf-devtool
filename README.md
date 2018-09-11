@@ -108,6 +108,9 @@ A `umd` build is also available via [unpkg](https://www.unpkg.com)
 
 This section of the documentation explain the usage of devtool and the API for registering an observer in a React app.
 
+### Browser Compatibility
+`react-perf-devtool` relies on the native `window.PerformanceObserver` API that got added in **Chrome v52** and **Firefox v57**. For further information, see the official Mozilla Docs [here](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver#Browser_compatibility).
+
 ### Using the browser extension
 
 To use this devtool extension, you'll need to register an observer in your app which will observe a collection of data (performance measures) over a time.
