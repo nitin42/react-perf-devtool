@@ -122,7 +122,7 @@ Registering an observer is very simple and is only one function call away. Let's
 ```js
 const { registerObserver } = require('react-perf-devtool')
 
-registerObserver()
+window.observer = registerObserver()
 ```
 
 You can place this code inside your `index.js` file (recommended) or any other file in your app.
@@ -152,7 +152,7 @@ function callback(measures) {
   // do something with the measures
 }
 
-registerObserver({}, callback)
+window.observer = registerObserver({}, callback)
 ```
 
 After you've registered the observer, start your local development server and go to `http://localhost:3000/`.
@@ -215,7 +215,7 @@ function callback(measures) {
   // do something with the measures
 }
 
-registerObserver(options, callback)
+window.observer = registerObserver(options, callback)
 
 ReactDOM.render(<Component />, document.getElementById('root'))
 ```
