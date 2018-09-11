@@ -32,6 +32,12 @@ yarn build
 
 Running this command will create a build directory in `./extension` folder.
 
+
+You can also automatically rebuild the extension on every file change using the watch command:
+```
+yarn build:watch
+```
+
 **Test**
 
 To test your changes, simply run `jest --watch` if you've installed Jest globally on your system or run `yarn test`.
