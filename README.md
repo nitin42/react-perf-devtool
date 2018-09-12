@@ -7,6 +7,8 @@
 ![Author](https://img.shields.io/badge/author-Nitin%20Tulswani-lightgrey.svg)
 ![current-version](https://img.shields.io/badge/version-3.1.8-blue.svg)
 ![extension](https://img.shields.io/badge/extension-5.3-ff69b4.svg)
+[![npm downloads](https://img.shields.io/npm/dt/react-perf-devtool.svg)](https://www.npmjs.com/package/react-perf-devtool)
+
 > A devtool for inspecting the performance of React Components
 
 <br/>
