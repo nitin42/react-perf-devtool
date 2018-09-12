@@ -41,6 +41,8 @@
     "precommit": "lint-staged",
     "format":
       "find src -name '*.js' | xargs ./node_modules/.bin/prettier --write --no-semi --single-quote",
+    "format:nowrite":
+      "find src -name '*.js' | xargs ./node_modules/.bin/prettier --no-semi --single-quote",
     "generate":
       "yarn build && rm -rf ./extension/extension.zip && zip -r ./extension/extension.zip ./extension",
     "build:extension": "yarn format && yarn test && yarn generate"
