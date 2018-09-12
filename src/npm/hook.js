@@ -68,11 +68,11 @@ const registerObserver = (params, callback) => {
   This function logs the measures to the console. Requires a server running on a specified port. Default port number is 8080.
 */
 const logToConsole = ({ port, components }, measures) => {
-  if (!components) {
+  if (typeof components === 'undefined' || !Array.isArray(components)) {
     logMeasures(port, measures)
-  } else if (typeof components !== undefined && Array.isArray(components)) {
-    logMeasures(port, getMeasuresByComponentName(components, measures))
+    return
   }
+  logMeasures(port, getMeasuresByComponentName(components, measures))
 }
 
 const logMeasures = (port, measures) => {
