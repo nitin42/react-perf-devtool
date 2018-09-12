@@ -31,18 +31,21 @@ import { generateDataFromMeasures } from '../shared/generate'
 */
 const registerObserver = (params = { shouldLog: false }, callback) => {
   if (window.PerformanceObserver) {
+    const { shouldLog, timeout = 2000 } = params
     const observer = new window.PerformanceObserver(list => {
       const entries = list.getEntries()
+
       const measures = generateDataFromMeasures(
         getReactPerformanceData(entries)
       )
       if (typeof callback === 'function') callback(measures)
       window.__REACT_PERF_DEVTOOL_GLOBAL_STORE__ = {
         measures,
+        timeout,
         length: entries.length,
         rawMeasures: entries
       }
-      if (params.shouldLog) logToConsole(params, measures)
+      if (shouldLog) logToConsole(params, measures)
     })
     observer.observe({ entryTypes: ['measure'] })
     return observer

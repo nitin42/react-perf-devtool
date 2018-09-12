@@ -5,7 +5,7 @@
   "short_name": "react-perf-devtool",
   "description":
     "A devtool extension for inspecting the performance of React components.",
-  "version": "5.3",
+  "version": "5.5",
   "devtools_page": "devtools.html",
 
   "icons": {

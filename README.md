@@ -1,9 +1,11 @@
+**Looking for maintainers**
+
 # React Performance Devtool
 
 [![Build Status](https://travis-ci.org/nitin42/react-perf-devtool.svg?branch=master)](https://travis-ci.org/nitin42/react-perf-devtool)
 ![Release Status](https://img.shields.io/badge/status-stable-brightgreen.svg)
 ![Author](https://img.shields.io/badge/author-Nitin%20Tulswani-lightgrey.svg)
-![current-version](https://img.shields.io/badge/version-3.0.8-blue.svg)
+![current-version](https://img.shields.io/badge/version-3.1.8-blue.svg)
 ![extension](https://img.shields.io/badge/extension-5.3-ff69b4.svg)
 > A devtool for inspecting the performance of React Components
 
@@ -106,6 +108,9 @@ A `umd` build is also available via [unpkg](https://www.unpkg.com)
 
 This section of the documentation explain the usage of devtool and the API for registering an observer in a React app.
 
+### Browser Compatibility
+`react-perf-devtool` relies on the native `window.PerformanceObserver` API that got added in **Chrome v52** and **Firefox v57**. For further information, see the official Mozilla Docs [here](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver#Browser_compatibility).
+
 ### Using the browser extension
 
 To use this devtool extension, you'll need to register an observer in your app which will observe a collection of data (performance measures) over a time.
@@ -150,9 +155,7 @@ function callback(measures) {
 registerObserver({}, callback)
 ```
 
-After you've registered the observer, start your local development server and go to `http://localhost:3000/?react_perf`.
-
-The query parameter `react_perf` is required so that React can measure the performance timings.
+After you've registered the observer, start your local development server and go to `http://localhost:3000/`.
 
 > Note - This extension works only for React 16 or above versions of it.
 
@@ -177,14 +180,19 @@ You can pass an **option** object as an argument to `registerObserver` to enable
 {
   shouldLog: boolean, // default value: false
   port: number // default value: 8080
+  timeout: number // default value: 2000
 }
 ```
 
-You can pass two properties to the **`option`** object, `shouldLog` and `port`.
+You can pass three properties to the **`option`** object, `shouldLog` and `port`.
 
 * `shouldLog` - It takes a **boolean** value. If set to true, measures will be logged to the console.
 
 * `port` - Port number for the server where the measures will be send
+
+* `timeout` - A timeout value to defer the initialisation of the extension.
+
+If your application takes time to load, it's better to defer the initialisation of extension by specifying the timeout value through `timeout` property. This ensures that the extension will load only after your application has properly loaded in the browser so that the updated measures can be rendered. However, you can skip this property if your application is in small size.
 
 **Example**
 
@@ -199,7 +207,8 @@ const Component = require('./Component') // Some React Component
 
 const options = {
   shouldLog: true,
-  port: 8080
+  port: 8080,
+  timeout: 12000 // Load the extension after 12 sec.
 }
 
 function callback(measures) {
@@ -239,7 +248,7 @@ Below is the schema of the performance measures that are logged to the console.
 
 ```js
 {
-  component, // Name of the component
+  componentName, 
   mount: { // Mount time
     averageTimeSpentMs,
     numberOfTimes,

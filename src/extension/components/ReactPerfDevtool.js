@@ -19,12 +19,17 @@ let queries = {
   measures: 'JSON.stringify(__REACT_PERF_DEVTOOL_GLOBAL_STORE__.measures)',
   rawMeasures:
     'JSON.stringify(__REACT_PERF_DEVTOOL_GLOBAL_STORE__.rawMeasures)',
+  getTimeoutValue:
+    'JSON.stringify(__REACT_PERF_DEVTOOL_GLOBAL_STORE__.timeout)',
   clear: `__REACT_PERF_DEVTOOL_GLOBAL_STORE__ = {
           length: 0,
           measures: [],
           rawMeasures: [],
+          timeout: __REACT_PERF_DEVTOOL_GLOBAL_STORE__.timeout
         }`
 }
+
+const sleep = timeout => new Promise(resolve => setTimeout(resolve, timeout))
 
 /**
   This is the main component that renders the table, containing information about
@@ -54,25 +59,32 @@ export class ReactPerfDevtool extends React.Component {
     }
   }
 
-  componentWillMount() {
-    // When the devtool is launched first, measures may not be available.
-    // Reload the window again to get the new measures and then display them.
-    // Why ? We rely on the observer hook that the user has installed in his/her project.
-    // This chrome plugin is just way to interpret the results derived from the observer's API
-    if (store.length === 0) {
-      this.reloadInspectedWindow()
-    }
-  }
-
   componentDidMount() {
-    // Display the loading indicator
-    this.setState({ loading: true })
+    // Show the loader while the measures get resolved.
+    // showChart, when set to true, render the canvas required for Chart.js.
+    this.setState({ loading: true, showChart: true })
 
-    // Get the total measures and flush them if the store is empty.
-    this.timer = setInterval(() => this.getMeasuresLength(), 2000)
+    // Defer the initialization of the extension until the application loads. Why ?
+    // Because some of the applications are huge in size and may take a lot of time to load.
+    // If the extension initialization process kicks-in before the app loads, we are trapped inside the error state.
+    // With this, users can configure a timeout value for initialization of the extension using the observer hook like this `registerObserver({ timeout: 4000 })`
+    // Default value for the timeout is 2 sec.
 
-    // Show the chart when we have the measures
-    this.setState({ showChart: true })
+    // We need to resolve the promise after one sec. to make sure we have the updated __REACT_PERF_DEVTOOL_GLOBAL_STORE__ object otherwise we might end up with null
+    sleep(1000).then(res => {
+      this.evaluate(queries['getTimeoutValue'], (timeout, err) => {
+        if (err) {
+          this.setErrorState()
+          return
+        }
+
+        // This is also backward compatible with older versions of observer hook (for versions <= @3.0.8)
+        this.timer = setInterval(
+          () => this.getMeasuresLength(),
+          timeout !== undefined ? JSON.parse(timeout) : 2000
+        )
+      })
+    })
   }
 
   componentWillUnmount() {
