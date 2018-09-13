@@ -124,7 +124,8 @@ Registering an observer is very simple and is only one function call away. Let's
 ```js
 const { registerObserver } = require('react-perf-devtool')
 
-registerObserver()
+// assign the observer to the global scope, as the GC will delete it otherwise
+window.observer = registerObserver()
 ```
 
 You can place this code inside your `index.js` file (recommended) or any other file in your app.
@@ -154,7 +155,8 @@ function callback(measures) {
   // do something with the measures
 }
 
-registerObserver({}, callback)
+// assign the observer to the global scope, as the GC will delete it otherwise
+window.observer = registerObserver({}, callback)
 ```
 
 After you've registered the observer, start your local development server and go to `http://localhost:3000/`.
@@ -217,7 +219,8 @@ function callback(measures) {
   // do something with the measures
 }
 
-registerObserver(options, callback)
+// assign the observer to the global scope, as the GC will delete it otherwise
+window.observer = registerObserver(options, callback)
 
 ReactDOM.render(<Component />, document.getElementById('root'))
 ```
@@ -333,7 +336,8 @@ function callback(measures) {
   // do something with measures
 }
 
-registerObserver(options, callback)
+// assign the observer to the global scope, as the GC will delete it otherwise
+window.observer = registerObserver(options, callback)
 ```
 
 ## Description
@@ -410,7 +414,8 @@ But now, with the help of [Performance Observer](https://developer.mozilla.org/e
 ```js
 const { registerObserver } = require('react-perf-devtool')
 
-registerObserver()
+// assign the observer to the global scope, as the GC will delete it otherwise
+window.observer = registerObserver()
 ```
 
 This observer listens to the React performance measurement event.

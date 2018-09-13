@@ -29,39 +29,28 @@ import { generateDataFromMeasures } from '../shared/generate'
 
   NOTE: This should only be used in development mode.
 */
-const registerObserver = (params, callback) => {
-  params = params || {}
-
-  // TODO: Is there any way to polyfill this API ?
+const registerObserver = (params = { shouldLog: false }, callback) => {
   if (window.PerformanceObserver) {
-    const { shouldLog, port, components, timeout = 2000 } = params
+    const { shouldLog, timeout = 2000 } = params
+    const observer = new window.PerformanceObserver(list => {
+      const entries = list.getEntries()
 
-    let observer = new window.PerformanceObserver(list => {
       const measures = generateDataFromMeasures(
-        getReactPerformanceData(list.getEntries())
+        getReactPerformanceData(entries)
       )
-
-      if (callback && typeof callback === 'function') {
-        callback(measures)
-      }
-
+      if (typeof callback === 'function') callback(measures)
       window.__REACT_PERF_DEVTOOL_GLOBAL_STORE__ = {
         measures,
         timeout,
-        length: list.getEntries().length,
-        rawMeasures: list.getEntries()
+        length: entries.length,
+        rawMeasures: entries
       }
-
-      // For logging to console
-      if (shouldLog) {
-        logToConsole(params, measures)
-      }
+      if (shouldLog) logToConsole(params, measures)
     })
-
-    observer.observe({
-      entryTypes: ['measure']
-    })
+    observer.observe({ entryTypes: ['measure'] })
+    return observer
   }
+  return undefined
 }
 
 /**
