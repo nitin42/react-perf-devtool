@@ -120,6 +120,10 @@ const send = (data, port) => {
 }
 
 const getMeasuresByComponentNames = (componentNames, measures) =>
-  measures.filter(measure => componentNames.includes(measure.componentName))
+  measures.filter(measure =>
+    componentNames.some(componentName =>
+      new Regex(componentName).test(measure.componentName)
+    )
+  )
 
 export { registerObserver, getMeasuresByComponentNames }
