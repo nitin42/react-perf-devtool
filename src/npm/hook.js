@@ -22,8 +22,9 @@ import { generateDataFromMeasures } from '../shared/generate'
     * No control on how to inspect the measures for a particular use case (for eg - render and update performance of a component)
 
   Options, passed to listener:
-    * log (log to console)
+    * shouldLog (log to console)
     * port (port number to send the data to console)
+    * components (array of components to measure)
 
   Callback (optional): A callback can also be passed. The callback receives the parsed and aggregated results of the performance measures.
 
@@ -35,9 +36,14 @@ const registerObserver = (params = { shouldLog: false }, callback) => {
     const observer = new window.PerformanceObserver(list => {
       const entries = list.getEntries()
 
-      const measures = generateDataFromMeasures(
+      const generatedMeasures = generateDataFromMeasures(
         getReactPerformanceData(entries)
       )
+      const measures =
+        typeof components !== 'undefined' && Array.isArray(components)
+          ? getMeasuresByComponentNames(components, generatedMeasures)
+          : generatedMeasures
+
       if (typeof callback === 'function') callback(measures)
       window.__REACT_PERF_DEVTOOL_GLOBAL_STORE__ = {
         measures,
@@ -56,15 +62,7 @@ const registerObserver = (params = { shouldLog: false }, callback) => {
 /**
   This function logs the measures to the console. Requires a server running on a specified port. Default port number is 8080.
 */
-const logToConsole = ({ port, components }, measures) => {
-  if (typeof components === 'undefined' || !Array.isArray(components)) {
-    logMeasures(port, measures)
-    return
-  }
-  logMeasures(port, getMeasuresByComponentName(components, measures))
-}
-
-const logMeasures = (port, measures) => {
+const logToConsole = ({ port }, measures) => {
   measures.forEach(
     ({
       componentName,
@@ -109,12 +107,16 @@ const logMeasures = (port, measures) => {
 
 // Send the data to a specified port
 const send = (data, port) => {
-  window.navigator.sendBeacon(
-    `http://127.0.0.1:${
-      port !== undefined && typeof port === 'number' ? port : 8080
-    }`,
-    JSON.stringify(data, null, 2)
-  )
+  const normalizedPort =
+    port !== undefined && typeof port === 'number' ? port : 8080
+  try {
+    window.navigator.sendBeacon(
+      `http://127.0.0.1:${normalizedPort}`,
+      JSON.stringify(data, null, 2)
+    )
+  } catch (err) {
+    console.error(`Failed to send data to port ${normalizedPort}`)
+  }
 }
 
 const getMeasuresByComponentNames = (componentNames, measures) =>
@@ -124,4 +126,4 @@ const getMeasuresByComponentNames = (componentNames, measures) =>
     )
   )
 
-export { registerObserver, getMeasuresByComponentName }
+export { registerObserver, getMeasuresByComponentNames }
