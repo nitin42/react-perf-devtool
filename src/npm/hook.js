@@ -22,8 +22,9 @@ import { generateDataFromMeasures } from '../shared/generate'
     * No control on how to inspect the measures for a particular use case (for eg - render and update performance of a component)
 
   Options, passed to listener:
-    * log (log to console)
+    * shouldLog (log to console)
     * port (port number to send the data to console)
+    * components (components to measure)
 
   Callback (optional): A callback can also be passed. The callback receives the parsed and aggregated results of the performance measures.
 
@@ -109,12 +110,16 @@ const logMeasures = (port, measures) => {
 
 // Send the data to a specified port
 const send = (data, port) => {
-  window.navigator.sendBeacon(
-    `http://127.0.0.1:${
-      port !== undefined && typeof port === 'number' ? port : 8080
-    }`,
-    JSON.stringify(data, null, 2)
-  )
+  const normalizedPort =
+    port !== undefined && typeof port === 'number' ? port : 8080
+  try {
+    window.navigator.sendBeacon(
+      `http://127.0.0.1:${normalizedPort}`,
+      JSON.stringify(data, null, 2)
+    )
+  } catch (err) {
+    console.error(`Failed to send data to port ${normalizedPort}`)
+  }
 }
 
 const getMeasuresByComponentName = (componentNames, measures) =>
