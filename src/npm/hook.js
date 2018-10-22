@@ -24,7 +24,7 @@ import { generateDataFromMeasures } from '../shared/generate'
   Options, passed to listener:
     * shouldLog (log to console)
     * port (port number to send the data to console)
-    * components (components to measure)
+    * components (array of components to measure)
 
   Callback (optional): A callback can also be passed. The callback receives the parsed and aggregated results of the performance measures.
 
@@ -36,9 +36,14 @@ const registerObserver = (params = { shouldLog: false }, callback) => {
     const observer = new window.PerformanceObserver(list => {
       const entries = list.getEntries()
 
-      const measures = generateDataFromMeasures(
+      const generatedMeasures = generateDataFromMeasures(
         getReactPerformanceData(entries)
       )
+      const measures =
+        typeof components !== 'undefined' && Array.isArray(components)
+          ? getMeasuresByComponentNames(components, generatedMeasures)
+          : generatedMeasures
+
       if (typeof callback === 'function') callback(measures)
       window.__REACT_PERF_DEVTOOL_GLOBAL_STORE__ = {
         measures,
@@ -57,15 +62,7 @@ const registerObserver = (params = { shouldLog: false }, callback) => {
 /**
   This function logs the measures to the console. Requires a server running on a specified port. Default port number is 8080.
 */
-const logToConsole = ({ port, components }, measures) => {
-  if (typeof components === 'undefined' || !Array.isArray(components)) {
-    logMeasures(port, measures)
-    return
-  }
-  logMeasures(port, getMeasuresByComponentName(components, measures))
-}
-
-const logMeasures = (port, measures) => {
+const logToConsole = ({ port }, measures) => {
   measures.forEach(
     ({
       componentName,
@@ -122,7 +119,7 @@ const send = (data, port) => {
   }
 }
 
-const getMeasuresByComponentName = (componentNames, measures) =>
+const getMeasuresByComponentNames = (componentNames, measures) =>
   measures.filter(measure => componentNames.includes(measure.componentName))
 
 export { registerObserver, getMeasuresByComponentName }
