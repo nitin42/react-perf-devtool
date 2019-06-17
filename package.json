@@ -3,8 +3,11 @@
   "version": "3.1.8",
   "description": "A devtool for inspecting the performance of React Components",
   "main": "index.js",
-  "types": "index.d.ts",
-  "files": ["src", "lib"],
+  "typings": "index.d.ts",
+  "files": [
+    "src",
+    "lib"
+  ],
   "author": "Nitin Tulswani",
   "license": "MIT",
   "peerDependencies": {
@@ -32,19 +35,13 @@
   },
   "scripts": {
     "test": "jest",
-    "build:hook":
-      "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack-cli --config ./webpack/webpack.config.hook.js --progress",
-    "build:watch":
-      "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack-cli --watch --config ./webpack/webpack.config.js --progress",
-    "build":
-      "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack-cli --config ./webpack/webpack.config.js --progress",
+    "build:hook": "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack-cli --config ./webpack/webpack.config.hook.js --progress",
+    "build:watch": "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack-cli --watch --config ./webpack/webpack.config.js --progress",
+    "build": "rm -rf ./extension/build && NODE_ENV=production ./node_modules/.bin/webpack-cli --config ./webpack/webpack.config.js --progress",
     "precommit": "lint-staged",
-    "format":
-      "find src -name '*.js' | xargs ./node_modules/.bin/prettier --write --no-semi --single-quote",
-    "format:nowrite":
-      "find src -name '*.js' | xargs ./node_modules/.bin/prettier --no-semi --single-quote --list-different --loglevel error",
-    "generate":
-      "yarn build && rm -rf ./extension/extension.zip && zip -r ./extension/extension.zip ./extension",
+    "format": "find src -name '*.js' | xargs ./node_modules/.bin/prettier --write --no-semi --single-quote",
+    "format:nowrite": "find src -name '*.js' | xargs ./node_modules/.bin/prettier --no-semi --single-quote --list-different --loglevel error",
+    "generate": "yarn build && rm -rf ./extension/extension.zip && zip -r ./extension/extension.zip ./extension",
     "build:extension": "yarn format && yarn test && yarn generate"
   },
   "lint-staged": {
