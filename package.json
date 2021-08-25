@@ -11,6 +11,10 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nitin42/react-perf-devtool.git"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-jest": "^21.2.0",
